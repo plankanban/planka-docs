@@ -3,4 +3,4 @@ services:
     planka-docs:
         ports:
             - '3033:80'
-        image: 'ghcr.io/plankanban/documentation:latest'
+        image: 'ghcr.io/plankanban/planka-docs:latest'

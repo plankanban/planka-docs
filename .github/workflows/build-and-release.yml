@@ -30,4 +30,4 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: |
-            ghcr.io/plankanban/documentation:latest
+            ghcr.io/plankanban/planka-docs:latest
