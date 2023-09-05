@@ -1,9 +1,13 @@
 # Planka Documentation
 
+A more detailed description will be added later
 
 
+### Needed commands
 
-Command
+`npm install`
+    Installs all needed dependencies.
+
 `npm start`
     Starts the development server.
 
