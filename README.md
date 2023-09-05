@@ -2,8 +2,8 @@
 
 
 
-Command
 
+Command
 `npm start`
     Starts the development server.
 
@@ -13,12 +13,5 @@ Command
   `npm run serve`
     Serves the built website locally.
 
-  `npm deploy`
-    Publishes the website to GitHub pages.
 
-We recommend that you begin by typing:
-
-  `cd classic`
-  `npm start`
-
-This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
+This website is built using [Docusaurus 2](https://docusaurus.io/).
