@@ -1,0 +1,226 @@
+---
+sidebar_position: 3
+---
+In this installation Guide, we are only covering Debian 11 and Ubuntu 22.04.
+
+### System requirements
+ + PostgreSQL
+ + Nodejs
+ + Webserver(We are covering Apache2 and NGINX)
+
+
+
+### PostgreSQL
+###### Installing PostgreSQL
+
+To install PostgreSQL, first refresh your server’s local package index:
+```bash
+sudo apt update
+```
+
+Then, install the Postgres package along with a -contrib package that adds some additional utilities and functionality:
+
+
+```bash
+sudo apt install postgresql postgresql-contrib -y
+```
+
+If you are prompted to restart any services, press **ENTER** to accept the defaults and continue.
+
+##### Creating User and Database
+You need to create a User and a Database for Planka
+
+**Create the user**
+```bash
+sudo -u postgres createuser --interactive
+```
+
+
+The script will prompt you with some choices and, based on your responses, execute the correct Postgres commands to create a user to your specifications.
+
+```bash
+Output
+Enter name of role to add: planka
+Shall the new role be a superuser? (y/n) y
+```
+
+
+
+**Create the Database**
+
+Change directory to prevent a sudo permission error 
+```bash
+cd /tmp
+```
+
+Now create the database, you are not getting any response from this command.
+```bash
+sudo -u postgres createdb planka
+```
+
+
+
+##### Create a Unix User and test Database acceess and change the password
+We need this user later to run planka as non-root user too
+
+```bash
+sudo adduser planka
+```
+
+
+Login to the Database as user Planka 
+```bash
+sudo -u planka psql
+```
+
+Change the database password
+```bash
+ALTER USER planka PASSWORD 'YOUR_DATABASE_PASSWORD';
+```
+
+Cloese the database with
+
+```bash
+\q
+```
+
+
+### Nodejs
+Installing Node.js with Apt Using a NodeSource PPA
+
+```bash
+cd /tmp
+sudo curl -sL https://deb.nodesource.com/setup_18.x -o nodesource_setup.sh
+```
+
+
+You can inspect the contents of the downloaded script with nano (or your preferred text editor):
+```bash
+nano nodesource_setup.sh
+```
+
+Running third party shell scripts is not always considered a best practice, but in this case, NodeSource implements their own logic in order to ensure the correct commands are being passed to your package manager based on distro and version requirements. If you are satisfied that the script is safe to run, exit your editor, then run the script with sudo:
+```bash
+sudo bash nodesource_setup.sh
+```
+
+Then run 
+```bash
+sudo apt install nodejs
+```
+
+Verify that you’ve installed the new version by running node with the -v version flag:
+```bash
+node -v
+```
+```bash
+Output
+v18.X.X
+```
+
+### Install Planka
+First we have to prepare some stuff 
+our installation directory is `/vaw/www/planka`
+```bash
+sudo mkdir -p /var/www/planka
+sudo chown -R planka:planka /var/www/planka
+```
+
+Now we can work as user **Planka**
+
+```bash
+sudo -i -u planka
+```
+
+**Clone the repository into the directory.**
+```bash
+git clone https://github.com/plankanban/planka.git /var/www/planka
+```
+
+
+
+**Install dependencies for client and build it.**
+
+```bash
+cd /var/www/planka
+npm install
+
+cd client
+npm run build
+```
+
+**Symlink Fun**
+Normaly we have to copy everything from client/build to server/public and client/build/index.html to server/views/index.ejs, we don't want to go this way.
+instead we are using symlinks, this makes updating way easier and faster.
+
+
+```bash
+ln -s /var/www/planka/client/build/asset-manifest.json /var/www/planka/server/public/asset-manifest.json
+ln -s /var/www/planka/client/build/favicon.ico /var/www/planka/server/public/favicon.ico
+ln -s /var/www/planka/client/build/logo192.png /var/www/planka/server/public/logo192.png
+ln -s /var/www/planka/client/build/logo512.png /var/www/planka/server/public/logo512.png
+ln -s /var/www/planka/client/build/manifest.json /var/www/planka/server/public/manifest.json
+ln -s /var/www/planka/client/build/robots.txt /var/www/planka/server/public/robots.txt
+ln -s /var/www/planka/client/build/static /var/www/planka/server/public/static
+ln -s /var/www/planka/client/build/index.html /var/www/planka/server/views/index.ejs
+```
+
+
+
+
+
+```bash
+
+```
+
+#### Configure environment variables.
+Go into the ``server`` directory and edit the ``.env`` file
+
+First we have to copy the ``.env.sample`` file
+```bash
+cd /var/www/planka/server
+cp .env.sample .env
+```
+
+Before we open the .env file, we need a screct_key 
+you can generate one using the openssl command 
+
+```bash
+openssl rand -hex 64
+```
+**Note the output down**
+
+
+Edit ``.env`` file
+```bash
+nano .env
+```
+
+Your ``.env`` file should look like this 
+
+```bash
+## Required
+BASE_URL=YOUR_DOMAINNAME
+DATABASE_URL=postgresql://planka:YOUR_DATABASE_PASSWORD@localhost/planka
+SECRET_KEY=YOUR_GENERATED_KEY
+
+## Optional
+
+# TRUST_PROXY=0
+# TOKEN_EXPIRES_IN=365 # In days
+
+## Do not edit this
+
+TZ=UTC
+```
+
+
+
+#### Start Planka the first Time
+in the ``/var/www/planka/server`` directory just type 
+
+```bash
+npm run db:init && npm start --prod
+```
+
+Now you can browse to **http://YOUR_DOMAINNAME:1337** and login with ``demo@demo.demo`` with password ``demo``
