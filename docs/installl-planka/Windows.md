@@ -3,7 +3,7 @@ sidebar_position: 4
 ---
 
 ### System requirements
-* PostgreSQL (testet with v15.2) https://ww.postgresql.org/download/windows/
+* PostgreSQL (testet with v15.2) https://www.postgresql.org/download/windows/
 * Nodejs (testet with 18.14.2) https://nodejs.org/en/download/
 * Windows Powershell as **Administrator**
 ### Install Planka
