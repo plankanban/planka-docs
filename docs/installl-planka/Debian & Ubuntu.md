@@ -86,27 +86,24 @@ Cloese the database with
 
 
 ### Nodejs
-Installing Node.js with Apt Using a NodeSource PPA
+Installing Node.js with Apt Using a [NodeSource](https://github.com/nodesource/distributions#nodejs) PPA
 
 ```bash
-cd /tmp
-sudo curl -sL https://deb.nodesource.com/setup_18.x -o nodesource_setup.sh
+# Download and import the Nodesource GPG key
+sudo apt-get update
+sudo apt-get install -y ca-certificates curl gnupg
+sudo mkdir -p /etc/apt/keyrings
+curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
+
+# Create deb repository
+NODE_MAJOR=18
+echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
 ```
 
-
-You can inspect the contents of the downloaded script with nano (or your preferred text editor):
+Then run update and install
 ```bash
-nano nodesource_setup.sh
-```
-
-Running third party shell scripts is not always considered a best practice, but in this case, NodeSource implements their own logic in order to ensure the correct commands are being passed to your package manager based on distro and version requirements. If you are satisfied that the script is safe to run, exit your editor, then run the script with sudo:
-```bash
-sudo bash nodesource_setup.sh
-```
-
-Then run 
-```bash
-sudo apt install nodejs
+sudo apt-get update
+sudo apt-get install nodejs -y
 ```
 
 Verify that you’ve installed the new version by running node with the -v version flag:
