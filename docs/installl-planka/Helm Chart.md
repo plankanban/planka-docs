@@ -76,7 +76,7 @@ helm install planka . -f planka.yaml
 ```
 
 ### Access Planka
-Now you can browse to **http://YOUR_DOMAINNAME:YOUR_PORT** and login with ``demo@demo.demo`` with password ``demo``
+Now you can browse to **http://YOUR_DOMAIN_NAME:YOUR_PORT** and login as **YOUR_ADMIN_EMAIL** with password **YOUR_ADMIN_PASSWORD**
 
 
 

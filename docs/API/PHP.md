@@ -55,4 +55,3 @@ All necessary entrypoints are conveniently divided into controllers. You can vie
 in the `src/Controllers/` folder.
 
 Result data output is strongly typed and returned in Dto objects
-

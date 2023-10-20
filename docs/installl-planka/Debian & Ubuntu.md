@@ -197,7 +197,7 @@ Your ``.env`` file should look like this
 
 ```bash
 ## Required
-BASE_URL=YOUR_DOMAINNAME
+BASE_URL=http://YOUR_DOMAIN_NAME:YOUR_PORT
 DATABASE_URL=postgresql://planka:YOUR_DATABASE_PASSWORD@localhost/planka
 SECRET_KEY=YOUR_GENERATED_KEY
 
@@ -205,6 +205,26 @@ SECRET_KEY=YOUR_GENERATED_KEY
 
 # TRUST_PROXY=0
 # TOKEN_EXPIRES_IN=365 # In days
+
+# related: https://github.com/knex/knex/issues/2354
+# As knex does not pass query parameters from the connection string we
+# have to use environment variables in order to pass the desired values, e.g.
+# PGSSLMODE=<value>
+
+# Configure knex to accept SSL certificates
+# KNEX_REJECT_UNAUTHORIZED_SSL_CERTIFICATE=false
+
+DEFAULT_ADMIN_EMAIL=YOUR_ADMIN_EMAIL # Do not remove if you want to prevent this user from being edited/deleted
+DEFAULT_ADMIN_PASSWORD=YOUR_ADMIN_PASSWORD
+DEFAULT_ADMIN_NAME=YOUR_ADMIN_NAME
+DEFAULT_ADMIN_USERNAME=YOUR_ADMIN_USERNAME
+
+# OIDC_ISSUER=
+# OIDC_CLIENT_ID=
+# OIDC_CLIENT_SECRET=
+# OIDC_SCOPES=openid email profile
+# OIDC_ADMIN_ROLES=admin
+# OIDC_ROLES_ATTRIBUTE=groups
 
 ## Do not edit this
 
@@ -220,4 +240,4 @@ in the ``/var/www/planka/server`` directory just type
 npm run db:init && npm start --prod
 ```
 
-Now you can browse to **http://YOUR_DOMAINNAME:1337** and login with ``demo@demo.demo`` with password ``demo``
+Now you can browse to **http://YOUR_DOMAIN_NAME:YOUR_PORT** and login as **YOUR_ADMIN_EMAIL** with password **YOUR_ADMIN_PASSWORD**
