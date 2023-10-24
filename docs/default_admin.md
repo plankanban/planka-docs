@@ -3,7 +3,7 @@ sidebar_position: 2
 ---
 # Default Admin
 :::danger
-Starting with version 1.14, a default administrator is not created until you set the following variables
+Starting with version 1.13, a default administrator is not created until you set the following variables
 :::
 
 ## Informations
