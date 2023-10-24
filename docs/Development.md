@@ -1,7 +1,7 @@
 ---
 sidebar_position: 5
 ---
-
+# Development
 Clone the repository and install dependencies:
 
 ```
