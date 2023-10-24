@@ -1,7 +1,3 @@
----
-sidebar_position: 1
----
-
 # Python (plankapy)
 Thanks to [hwelch-fle](https://github.com/hwelch-fle) for the amazing work.
 

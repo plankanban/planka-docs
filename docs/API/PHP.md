@@ -1,7 +1,3 @@
----
-sidebar_position: 1
----
-
 # PHP REST API
 Thanks to [decole](https://github.com/decole) for the amazing work.
 For more information, see [Github Repo](https://github.com/decole/planka-php-sdk)
