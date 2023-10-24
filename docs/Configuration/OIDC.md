@@ -1,3 +1,4 @@
+# OIDC
 #### Single Sign on with OIDC
 
 Planka can be configured to use an OIDC provider for logging in. If a user doesn't exist it will be automatically created. If a user exists and the email claim matches the email stored in Planka the accounts will be linked.

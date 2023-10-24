@@ -1,16 +1,15 @@
----
-sidebar_position: 3
----
+# Planka service (Linux)
+
 ### Run Planka as service
 To run Planka reboot save, we are using PM2
 
-Install PM2
+**Install PM2**
 ```bash
 sudo npm install pm2@latest -g
 ```
 
 ```bash
-cd /var/www/planka/server
+cd /var/www/planka
 ```
 
 ```bash

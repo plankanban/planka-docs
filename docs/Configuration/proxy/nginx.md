@@ -1,3 +1,7 @@
+---
+sidebar_position: 1
+---
+# Nginx
 #### Nginx configuration sample
 
 Here is an example of Nginx configuration for Planka, make sure to replace ``domain`` with your domain name, and make sure to configure the SSL.
@@ -9,26 +13,12 @@ upstream planka {
 }
 
 server {
-    listen 443 ssl http2;
-    listen [::]:443 ssl http2;
+    listen 80;
+    listen [::]:80;
     server_name <domain>;
 
     access_log /var/log/nginx/planka-access.log;
     error_log  /var/log/nginx/planka-error.log error;
-
-    # SSL Configuration - Replace the example <domain> with your domain
-    ssl_certificate /etc/letsencrypt/live/<domain>/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/<domain>/privkey.pem;
-    ssl_session_cache shared:SSL:10m;
-    ssl_protocols TLSv1.2 TLSv1.3;
-    ssl_ciphers "ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384";
-    ssl_prefer_server_ciphers on;
-
-    client_max_body_size 120M;
-    add_header Access-Control-Allow-Origin *;
-    add_header Access-Control-Max-Age 3600;
-    add_header Access-Control-Expose-Headers Content-Length;
-    add_header Access-Control-Allow-Headers Range;
 
     # Make sure to allow socket.io connections
     location ~* \.io {

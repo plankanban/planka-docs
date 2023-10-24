@@ -28,4 +28,4 @@ Based on latest commit
 
 
 ### Development
-* [Manual Installation](development)
+* [Development](development)

@@ -1,8 +1,4 @@
----
-sidebar_position: 4
----
-
-### Logging
+# Logging
 
 Planka currently allows you to expose the application's logfile directory to the host machine via a shared volume. This feature is not enabled by default.
 

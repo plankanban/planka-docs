@@ -1,8 +1,4 @@
----
-sidebar_position: 5
----
-
-### Fail2ban
+# Fail2ban
 
 Fail2ban is a service that uses iptables to automatically drop connections for a pre-defined amount of time from IPs that continuously failed to authenticate to the configured services.
 
