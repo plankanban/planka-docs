@@ -14,7 +14,7 @@ npm install
 Either use a local database or start the provided development database:
 
 ```
-docker-compose -f docker-compose-dev.yml up
+docker-compose -f docker-compose-db.yml up
 ```
 
 Create `server/.env` based on `server/.env.sample` and edit `DATABASE_URL` if needed.\
