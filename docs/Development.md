@@ -1,5 +1,5 @@
 ---
-sidebar_position: 5
+sidebar_position: 98
 ---
 # Development
 Clone the repository and install dependencies:
