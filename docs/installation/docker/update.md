@@ -7,7 +7,7 @@ sidebar_position: 2
 :::note
 Please create a backup before updating
 
-This can be done with our provided **[scripts](Backup%20and%20restore)**
+This can be done with our provided **[scripts](backup_and_restore)**
 :::
 
 

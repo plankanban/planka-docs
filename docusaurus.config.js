@@ -85,16 +85,12 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: 'Docker Compose',
-                to: '/docs/installl-planka/Docker%20Compose',
+                label: 'Docker',
+                to: '/docs/category/docker',
               },
               {
-                label: 'Debian & Ubuntu',
-                to: '/docs/installl-planka/Debian%20&%20Ubuntu',
-              },
-              {
-                label: 'Automated Installation (coming soon)',
-                to: '/docs/installl-planka/Automated%20installation',
+                label: 'Automated Installation',
+                to: '/docs/category/automated-installation',
               },
             ],
           },
