@@ -79,6 +79,7 @@ DEFAULT_ADMIN_USERNAME=YOUR_ADMIN_USERNAME
 # OIDC_SCOPES=openid email profile
 # OIDC_ADMIN_ROLES=admin
 # OIDC_ROLES_ATTRIBUTE=groups
+# OIDC_IGNORE_ROLES=true
 
 ## Do not edit this
 
