@@ -7,10 +7,10 @@ Here we want to provide some usefull informations and installation guides
 We have a few installation options you can choose from
 
 ### Production ready
-* [Automated installation](/docs/installation/auromated_installation/getting_started.md)
+* [Automated installation](/docs/installation/automated_installation/getting_started.md)
 * [Docker Compose](/docs/installation/docker/production_version.md)
 * [Kubernetes (Helm)](/docs/installation/kubernetes/helm_chart.md)
-* [Manual Installation](category/manual-installation)
+* [Manual Installation](/docs/category/manual-installation)
 
 
 ### Configuration
@@ -24,7 +24,7 @@ We have a few installation options you can choose from
 ### Development version
 Based on latest commit
 * [Docker Compose](/docs/installation/docker/development_version.md)
-* [Manual Installation](category/development-version)
+* [Manual Installation](/docs/category/development-version)
 
 
 ### Development
