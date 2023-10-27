@@ -15,10 +15,10 @@ We have a few installation options you can choose from
 
 ### Configuration
 #### Proxy
-* [NGINX](/docs/configuration/proxy/nginx.md)
-* [Apache2](/docs/configuration/proxy/apache2.md)
-* [Traefik](/docs/configuration/proxy/traefik.md)
-* [Caddy](/docs/configuration/proxy/caddy.md)
+* [NGINX](/docs/Configuration/proxy/nginx)
+* [Apache2](/docs/Configuration/proxy/apache2)
+* [Traefik](/docs/Configuration/proxy/traefik)
+* [Caddy](/docs/Configuration/proxy/caddy)
 
 
 ### Development version
@@ -28,4 +28,4 @@ Based on latest commit
 
 
 ### Development
-* [Development](/docs/development.md)
+* [Development](/docs/Development)
