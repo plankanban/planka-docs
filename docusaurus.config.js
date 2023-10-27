@@ -10,7 +10,7 @@ const config = {
   tagline: 'Project Management was never that easy.',
   url: 'https://docs.planka.cloud',
   baseUrl: '/',
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/planka.ico',
 
