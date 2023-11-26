@@ -4,7 +4,7 @@
 Planka can be configured to use an OIDC provider for logging in. If a user doesn't exist it will be automatically created. If a user exists and the email claim matches the email stored in Planka the accounts will be linked.
 
 #### Configuration Values
-* **OIDC_ISSUER**: URL pointing to the identity provider. This is used to bull the `.well-known/openid-configuration` endpoint that is used to identify the necessary endpoints.
+* **OIDC_ISSUER**: URL pointing to the identity provider. This is used to pull the `.well-known/openid-configuration` endpoint that is used to identify the necessary endpoints.
 * **OIDC_CLIENT_ID**: The OAUTH client id you created in the identity provider.
 * **OIDC_CLIENT_SECRET**: The OAUTH client secret you created in the identity provider.
 * **OIDC_SCOPES**: Scopes to request from the identity provider. This controls what values the OAuth client has access to. Planka needs the email and name claims. By default it requests `openid profile email`.
