@@ -3,14 +3,20 @@
 
 Planka can be configured to use an OIDC provider for logging in. If a user doesn't exist it will be automatically created. If a user exists and the email claim matches the email stored in Planka the accounts will be linked.
 
-#### Configuration Values
+#### Required Configuration Values
 * **OIDC_ISSUER**: URL pointing to the identity provider. This is used to pull the `.well-known/openid-configuration` endpoint that is used to identify the necessary endpoints.
 * **OIDC_CLIENT_ID**: The OAUTH client id you created in the identity provider.
 * **OIDC_CLIENT_SECRET**: The OAUTH client secret you created in the identity provider.
+
+#### Optional Configuration Values
 * **OIDC_SCOPES**: Scopes to request from the identity provider. This controls what values the OAuth client has access to. Planka needs the email and name claims. By default it requests `openid profile email`.
-* **OIDC_ADMIN_ROLES**: Looks in the claim declared by `OIDC_ROLES_ATTRIBUTE` to see if the user is an admin.
-* **OIDC_ROLES_ATTRIBUTE**: The claim containing the group/roles that will be used to identify an admin. It is expected that this will be a flat list.
-* **OIDC_IGNORE_ROLES**: If set to `true` the `OIDC_ADMIN_ROLES` and `OIDC_ROLES_ATTRIBUTE` will be ignored. This is useful if you want to use OIDC for authentication but not for authorization. Like that the user roles will be managed by Planka.
+* **OIDC_ADMIN_ROLES**: Looks in the claim declared by `OIDC_ROLES_ATTRIBUTE` to see if the user is an admin. By default the `admin` role is used.
+* **OIDC_EMAIL_ATTRIBUTE**: The claim containing the email. By default `email` is used.
+* **OIDC_NAME_ATTRIBUTE**: The claim containing the name. By default `name` is used.
+* **OIDC_USERNAME_ATTRIBUTE**: The claim containing the username. By default `preferred_username` is used.
+* **OIDC_ROLES_ATTRIBUTE**: The claim containing the group/roles that will be used to identify an admin. It is expected that this will be a flat list. By default `groups` is used.
+* **OIDC_IGNORE_USERNAME**: If set to `true` the `OIDC_USERNAME_ATTRIBUTE` will be ignored. This is useful if the format of usernames in your identity provider differs from the format in Planka. By default it's not ignored.
+* **OIDC_IGNORE_ROLES**: If set to `true` the `OIDC_ADMIN_ROLES` and `OIDC_ROLES_ATTRIBUTE` will be ignored. This is useful if you want to use OIDC for authentication but not for authorization. Like that the user roles will be managed by Planka. By default they're not ignored.
 
 ####  Example configuration
 This is an example of the environment variables used to configure Planka to use [Authentik](https://goauthentik.io/ "Homepage for authentik"). It will work with any OIDC provider.
@@ -21,7 +27,11 @@ OIDC_CLIENT_ID=sxxaAIAxVXlCxTmc1YLHBbQr8NL8MqLI2DUbt42d
 OIDC_CLIENT_SECRET=om4RTMRVHRszU7bqxB7RZNkHIzA8e4sGYWxeCwIMYQXPwEBWe4SY5a0wwCe9ltB3zrq5f0dnFnp34cEHD7QSMHsKvV9AiV5Z7eqDraMnv0I8IFivmuV5wovAECAYreSI
 OIDC_SCOPES=openid profile email
 OIDC_ADMIN_ROLES=planka-admin
-OIDC_ROLES_ATTRIBUTE=groups
+# OIDC_EMAIL_ATTRIBUTE=email
+# OIDC_NAME_ATTRIBUTE=name
+# OIDC_USERNAME_ATTRIBUTE=preferred_username
+# OIDC_ROLES_ATTRIBUTE=groups
+# OIDC_IGNORE_USERNAME=true
 # OIDC_IGNORE_ROLES=true
 ```
 
