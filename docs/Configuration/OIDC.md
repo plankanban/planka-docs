@@ -17,6 +17,7 @@ Planka can be configured to use an OIDC provider for logging in. If a user doesn
 * **OIDC_ROLES_ATTRIBUTE**: The claim containing the group/roles that will be used to identify an admin. It is expected that this will be a flat list. By default `groups` is used.
 * **OIDC_IGNORE_USERNAME**: If set to `true` the `OIDC_USERNAME_ATTRIBUTE` will be ignored. This is useful if the format of usernames in your identity provider differs from the format in Planka. By default it's not ignored.
 * **OIDC_IGNORE_ROLES**: If set to `true` the `OIDC_ADMIN_ROLES` and `OIDC_ROLES_ATTRIBUTE` will be ignored. This is useful if you want to use OIDC for authentication but not for authorization. Like that the user roles will be managed by Planka. By default they're not ignored.
+* **OIDC_ENFORCED**: If set to `true` all built-in authentication/authorization will be deactivated. By default it's not enforced.
 
 ####  Example configuration
 This is an example of the environment variables used to configure Planka to use [Authentik](https://goauthentik.io/ "Homepage for authentik"). It will work with any OIDC provider.
@@ -33,6 +34,7 @@ OIDC_ADMIN_ROLES=planka-admin
 # OIDC_ROLES_ATTRIBUTE=groups
 # OIDC_IGNORE_USERNAME=true
 # OIDC_IGNORE_ROLES=true
+# OIDC_ENFORCED=true
 ```
 
 At least these values will need to be modified:
