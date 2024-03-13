@@ -14,21 +14,21 @@ const FeatureList: FeatureItem[] = [
     Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
     description: (
       <>
-        
+        No complicated settings, working right after installation.
       </>
     ),
   },
   {
-    title: 'Work together in Real-Time',
+    title: 'Work Together in Real-Time',
     Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
     description: (
       <>
-      All changes in cards or boards are shown in Real-Time to your colleagues
+        All changes in cards or boards are shown in real-time to your colleagues.
       </>
     ),
   },
   {
-    title: 'Blacing fast',
+    title: 'Blazing Fast',
     Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
     description: (
       <>
