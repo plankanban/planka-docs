@@ -14,7 +14,7 @@ const FeatureList: FeatureItem[] = [
     Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
     description: (
       <>
-        No complicated settings, working right after installation.
+        No complicated settings - work right after installation.
       </>
     ),
   },
