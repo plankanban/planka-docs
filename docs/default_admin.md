@@ -22,7 +22,7 @@ bash /opt/planka_installer
 Choose Configuration, than Admin user
 
 ## Docker
-To use the default admin user, you have to uncomment the folling variables in the **docker-compose.yml**
+To use the default admin user, you have to uncomment the following variables in the **docker-compose.yml**
 
 ```bash
     - DEFAULT_ADMIN_EMAIL=demo@demo.demo # Do not remove if you want to prevent this user from being edited/deleted
@@ -37,7 +37,7 @@ docker compose up -d
 ```
 
 ## Manual Installation
-To use the default admin user, you have to uncomment the folling variables in the **.env** file.
+To use the default admin user, you have to uncomment the following variables in the **.env** file.
 
 ```bash
 DEFAULT_ADMIN_EMAIL=demo@demo.demo # Do not remove if you want to prevent this user from being edited/deleted
