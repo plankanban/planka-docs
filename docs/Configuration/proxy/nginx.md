@@ -60,4 +60,4 @@ server {
         proxy_pass http://planka;
     }
 }
-``
+```
