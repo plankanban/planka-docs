@@ -41,3 +41,7 @@ docker-compose up -d
 :::tip
 Now you can browse to **http://YOUR_DOMAIN_NAME:YOUR_PORT** and login as **YOUR_ADMIN_EMAIL** with password **YOUR_ADMIN_PASSWORD**
 :::
+
+:::info
+If you're not using Docker volumes and prefer to directly link folders (bind mounts), you'll need to adjust the permissions of those folders. This allows the default user running the Node.js application (usually called "node" and has a user ID of 1000) to make changes to the files and folders inside. You can achieve this by running the following command: `chown -R 1000:1000 /mnt/path`
+:::
