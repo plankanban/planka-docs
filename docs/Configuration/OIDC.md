@@ -61,3 +61,19 @@ OIDC_CLIENT_ID=xxx-xxx.apps.googleusercontent.com
 OIDC_CLIENT_SECRET=xxxx-xxxx-xx
 OIDC_SCOPES=openid profile email
 ```
+
+### Synology SSO
+
+* Folllow the [Synology SSO Server Tutorial](https://kb.synology.com/de-de/DSM/tutorial/set_up_oidc_for_dsm_in_sso_server) and create a new OIDC application.
+* Use `https://my-planka.url/oidc-callback` as Redirect URI
+* Set the following environment variables into your config
+
+```
+OIDC_ISSUER=https://sso.mysynology.me/webman/sso
+OIDC_CLIENT_ID=xxx
+OIDC_CLIENT_SECRET=xxx
+OIDC_NAME_ATTRIBUTE=email # This is important because Synology does not support profile scope
+OIDC_SCOPES=openid email
+OIDC_IGNORE_USERNAME=true
+OIDC_IGNORE_ROLES=true
+```
