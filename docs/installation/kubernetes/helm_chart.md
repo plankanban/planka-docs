@@ -16,7 +16,7 @@ helm search repo planka
 **Generate *SECRETKEY* and install Planka**
 ```bash
 export SECRETKEY=$(openssl rand -hex 64)
-helm install planka . --set secretkey=$SECRETKEY  \
+helm install planka planka/planka --set secretkey=$SECRETKEY  \
 --set admin_email="demo@demo.demo"  \
 --set admin_password="demo"  \
 --set admin_name="Demo Demo" \
@@ -36,7 +36,7 @@ kubectl port-forward $POD_NAME 3000:1337
 **To access Planka externally you can use the following configuration**
 ```bash
 # HTTP only
-helm install planka . --set secretkey=$SECRETKEY \
+helm install planka planka/planka --set secretkey=$SECRETKEY \
 --set admin_email="demo@demo.demo"  \
 --set admin_password="demo"  \
 --set admin_name="Demo Demo" \
@@ -45,7 +45,7 @@ helm install planka . --set secretkey=$SECRETKEY \
 --set ingress.hosts[0].host=planka.example.dev \
 
 # HTTPS
-helm install planka . --set secretkey=$SECRETKEY \
+helm install planka planka/planka --set secretkey=$SECRETKEY \
 --set admin_email="demo@demo.demo"  \
 --set admin_password="demo"  \
 --set admin_name="Demo Demo" \
