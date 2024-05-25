@@ -50,5 +50,5 @@ After changing variables, you have to restart Planka
 
 If you're using our guide with PM2, just run
 ```bash
-service plaka restart
+service planka restart
 ```
