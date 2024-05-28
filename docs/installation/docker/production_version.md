@@ -35,7 +35,7 @@ nano docker-compose.yml
 
 **Pull images and start services**
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 
 :::tip
