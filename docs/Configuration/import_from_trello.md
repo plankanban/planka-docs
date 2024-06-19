@@ -20,6 +20,10 @@ If you're running Planka without SSL encryption, Chrome might block access to yo
 User information and attachments from Trello won't be imported during the Planka import process.
 Currently, Planka can only import one checklist per card.
 
+The default JSON export from Trello is limited to 1,000 actions.
+Trello does not provide a warning if the JSON export is incomplete, so you will need to verify the JSON file yourself.
+If you encounter this limitation, you will need to create your own JSON export using the [Trello REST API](https://developer.atlassian.com/cloud/trello/guides/rest-api/api-introduction/).
+
 ## Looking for More Features?
 
 If you need an import script with more advanced features, check out the excellent tool called trello2planka available on GitHub: [trello2planka](https://github.com/christophenne/trello2planka).
