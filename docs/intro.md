@@ -11,6 +11,7 @@ We have a few installation options you can choose from
 * [Docker Compose](/docs/installation/docker/production_version.md)
 * [Kubernetes (Helm)](/docs/installation/kubernetes/helm_chart.md)
 * [Manual Installation](/docs/category/manual-installation)
+* [One-Click Deploy on RepoCloud](https://repocloud.io/details/?app_id=135)
 
 
 ### Configuration
