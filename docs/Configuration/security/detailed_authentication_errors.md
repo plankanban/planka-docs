@@ -1,4 +1,4 @@
-# Detail Authentication Errors
+# Detailed Authentication Errors
 
 By default, the authentication error messages are kept simple to avoid leaking sensitive information.
 
