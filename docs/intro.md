@@ -20,6 +20,10 @@ We have a few installation options you can choose from
 * [Traefik](/docs/Configuration/proxy/traefik)
 * [Caddy](/docs/Configuration/proxy/caddy)
 
+#### Security
+* [Fail2Ban](/docs/Configuration/security/fail2ban)
+* [Detailed authentication errors](/docs/Configuration/security/detailed_authentication_errors)
+
 
 ### Development version
 Based on latest commit

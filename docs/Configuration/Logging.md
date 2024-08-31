@@ -1,12 +1,17 @@
+---
+sidebar_position: 2
+---
 # Logging
 
-Planka currently allows you to expose the application's logfile directory to the host machine via a shared volume. This feature is not enabled by default.
+Planka currently allows you to expose the application's logfile directory to the host machine via a shared volume. This feature is **NOT** enabled by default.
 
 To expose the logfile director to the host machine, add the item `./logs/:/app/logs/` under `services.planka.volumes`.
 
 Note that the directory to the left of the semicolon is regarding the host machine while the directory to the right of the semicolon is regarding the Docker container.
 
 For example, in the above step, `./logs/:/app/logs/` will create the folder `logs` in the same directory where the `docker-compose.yml` file lives.
+
+If your logs are not being written to the logfile directory, you may need to adjust the permissions. See the information at the end of the [Docker Compose](/docs/installation/docker/production_version) guide for more information.
 
 ### Rotating Logs
 

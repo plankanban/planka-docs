@@ -1,3 +1,6 @@
+---
+sidebar_position: 0
+---
 # Fail2ban
 
 Fail2ban is a service that uses iptables to automatically drop connections for a pre-defined amount of time from IPs that continuously failed to authenticate to the configured services.
@@ -28,7 +31,7 @@ maxretry = 5
 bantime = 900
 ```
 
-Ensure to replace `logpath`'s value with your installation’s `/logs/planka.log` location. If you are using ports other than 80 and 443 for your Web server you should replace those too. The bantime and findtime are defined in seconds.
+Ensure to replace `logpath`'s value with your installation’s `/logs/planka.log` location (Do not forget to enable [logs](/docs/Configuration/Logging)). If you are using ports other than 80 and 443 for your Web server you should replace those too. The bantime and findtime are defined in seconds.
 
 Restart the fail2ban service. You can check the status of your Planka jail by running:
 
