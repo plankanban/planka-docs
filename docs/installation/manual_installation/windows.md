@@ -15,7 +15,7 @@ mkdir C:\planka
 **Download the prebuild version of Planka.**
 ```powershell
 cd C:\planka
-curl https://github.com/plankanban/planka/releases/latest/download/planka-prebuild.zip -o planka-prebuild.zip
+curl -O https://github.com/plankanban/planka/releases/latest/download/planka-prebuild.zip
 Expand-Archive  planka-prebuild.zip -DestinationPath C:\
 rm planka-prebuild.zip
 ```

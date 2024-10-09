@@ -131,7 +131,7 @@ sudo -i -u planka
 **Download the prebuild version of Planka.**
 ```bash
 cd /var/www/planka
-curl -fsSL https://github.com/plankanban/planka/releases/latest/download/planka-prebuild.zip -o planka-prebuild.zip
+curl -fsSL -O https://github.com/plankanban/planka/releases/latest/download/planka-prebuild.zip
 unzip planka-prebuild.zip -d /var/www/
 rm planka-prebuild.zip
 ```
