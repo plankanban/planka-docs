@@ -11,6 +11,7 @@ Planka can be configured to use an OIDC provider for logging in. If a user doesn
 ### Optional Configuration Values
 * **OIDC_SCOPES**: Scopes to request from the identity provider. This controls what values the OAuth client has access to. Planka needs the email and name claims. By default it requests `openid profile email`.
 * **OIDC_ADMIN_ROLES**: Looks in the claim declared by `OIDC_ROLES_ATTRIBUTE` to see if the user is an admin. By default the `admin` role is used.
+* **OIDC_CLAIMS_SOURCE**: Controls the source of the claims for OIDC token, can be `id_token` or `userinfo`.
 * **OIDC_EMAIL_ATTRIBUTE**: The claim containing the email. By default `email` is used.
 * **OIDC_NAME_ATTRIBUTE**: The claim containing the name. By default `name` is used.
 * **OIDC_USERNAME_ATTRIBUTE**: The claim containing the username. By default `preferred_username` is used.
