@@ -39,7 +39,7 @@ docker compose up -d
 ```
 
 :::tip
-Now you can browse to **http://YOUR_DOMAIN_NAME:YOUR_PORT** and login as **YOUR_ADMIN_EMAIL** with password **YOUR_ADMIN_PASSWORD**
+Now you can browse to **http://YOUR_DOMAIN_NAME:YOUR_PORT** and login as **DEFAULT_ADMIN_EMAIL** with password **DEFAULT_ADMIN_PASSWORD**
 :::
 
 :::info
