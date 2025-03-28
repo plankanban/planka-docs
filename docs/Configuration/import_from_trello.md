@@ -26,4 +26,6 @@ If you encounter this limitation, you will need to create your own JSON export u
 
 ## Looking for More Features?
 
-If you need an import script with more advanced features, check out the excellent tool called trello2planka available on GitHub: [trello2planka](https://github.com/christophenne/trello2planka).
+If you need an import script with advanced features, check out these excellent community-made tools:
+- [Import script with attachment transfer support](https://github.com/garpastyls/Trello_to_Planka_migration_script)
+- [trello2planka](https://github.com/christophenne/trello2planka)
