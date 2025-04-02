@@ -114,6 +114,12 @@ Output
 v18.X.X
 ```
 
+### Install packages required to support planka installation
+```bash
+sudo apt install unzip
+sudo apt install build-essential
+```
+
 ### Install Planka
 First we have to prepare some stuff
 our installation directory is `/vaw/www/planka`
