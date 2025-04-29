@@ -48,10 +48,10 @@ Choose the method that best fits your needs:
 
 ### 🔁 Reverse Proxy
 
-- [Nginx](./configuration/reverse_proxy/nginx.md)
-- [Apache](./configuration/reverse_proxy/apache2.md)
-- [Traefik (Docker Only)](./configuration/reverse_proxy/traefik.md)
-- [Caddy](./configuration/reverse_proxy/caddy.md)
+- [Nginx](./configuration/reverse-proxy/nginx.md)
+- [Apache](./configuration/reverse-proxy/apache2.md)
+- [Traefik (Docker Only)](./configuration/reverse-proxy/traefik.md)
+- [Caddy](./configuration/reverse-proxy/caddy.md)
 
 ### 🔒 Security
 
