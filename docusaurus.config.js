@@ -74,22 +74,21 @@ const config = {
             label: 'GitHub',
             position: 'right',
           },
-
         ],
       },
       footer: {
         style: 'dark',
         links: [
           {
-            title: 'Docs',
+            title: 'Installation',
             items: [
               {
-                label: 'Docker',
-                to: '/docs/category/docker',
+                label: 'Automated',
+                to: '/docs/category/automated/',
               },
               {
-                label: 'Automated Installation',
-                to: '/docs/category/automated-installation',
+                label: 'Docker',
+                to: '/docs/category/docker/',
               },
             ],
           },

@@ -26,9 +26,9 @@ sidebar_position: 6
 
 ## How to deploy Planka
 
-There are many ways to install Planka, [check them out](https://docs.planka.cloud/docs/intro).
+There are many ways to install Planka, [check them out](https://docs.planka.cloud/docs/welcome/).
 
-For configuration, please see the [configuration section](https://docs.planka.cloud/docs/category/configuration).
+For configuration, please see the [configuration section](https://docs.planka.cloud/docs/category/configuration/).
 
 ## Contact
 
@@ -39,7 +39,7 @@ We do NOT offer any public support via email, please use GitHub.
 
 ## Development
 
-See the [development section](https://docs.planka.cloud/docs/Development).
+See the [development section](https://docs.planka.cloud/docs/development/).
 
 ## Tech stack
 
