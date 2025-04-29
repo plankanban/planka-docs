@@ -25,7 +25,7 @@ openssl rand -hex 64
 ```
 
 **Enter the folder and edit ``docker-compose.yml``**
-Past in your generated **SECRET_KEY**, change the **BASE_URL** und setup your default admin user by uncommenting the lines starting with **DEFAULT_ADMIN_**
+Past in your generated **SECRET_KEY**, change the **BASE_URL** and setup your default admin user by uncommenting the lines starting with **DEFAULT_ADMIN_**
 ```bash
 cd /opt/planka
 nano docker-compose.yml
