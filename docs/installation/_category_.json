@@ -1,8 +1,8 @@
 {
   "label": "Installation",
-  "position": 3,
+  "position": 2,
   "link": {
     "type": "generated-index",
-    "description": "The installation of Planka can be hard, lets make it a bit easier for you. :-)"
+    "description": "Installing Planka can be tricky, but let's make it a bit easier for you. :-)"
   }
 }

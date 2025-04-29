@@ -1,25 +1,36 @@
 ---
-sidebar_position: 2
+sidebar_position: 3
 ---
+
 # Logging
 
-Planka currently allows you to expose the application's logfile directory to the host machine via a shared volume. This feature is **NOT** enabled by default.
+Planka supports exposing its internal log directory to the host machine via a shared Docker volume.
 
-To expose the logfile director to the host machine, add the item `./logs/:/app/logs/` under `services.planka.volumes`.
+This feature is **disabled by default**.
 
-Note that the directory to the left of the semicolon is regarding the host machine while the directory to the right of the semicolon is regarding the Docker container.
+## Enable Host Log Access
 
-For example, in the above step, `./logs/:/app/logs/` will create the folder `logs` in the same directory where the `docker-compose.yml` file lives.
+To enable logging to the host, add the following volume entry under `services.planka.volumes` in your `docker-compose.yml`:
 
-If your logs are not being written to the logfile directory, you may need to adjust the permissions. See the information at the end of the [Docker Compose](/docs/installation/docker/production_version) guide for more information.
+```yaml
+volumes:
+  - ./logs/:/app/logs/
+```
 
-### Rotating Logs
+- `./logs/` refers to the **host** machine.
+- `/app/logs/` refers to the **container**.
 
-Logrotate is designed to ease administration of systems that generate large numbers of log files. It allows automatic rotation, compression, removal, and mailing of log files. Each log file may be handled daily, weekly, monthly, or when it grows too large.
+This will create a `logs` directory next to your `docker-compose.yml` and map it to Planka's internal logging folder.
 
-#### Setup logrotate for Planka logs
+> **Tip:** If logs aren't appearing, check file and folder permissions. You may need to `chown` or `chmod` the host directory appropriately.
 
-Create a file in `/etc/logrotate.d` named `planka` with the following contents:
+## Log Rotation
+
+Over time, logs can consume disk space. Use **logrotate** to automatically manage log size and retention.
+
+### Configure logrotate for Planka
+
+Create a file at `/etc/logrotate.d/planka` with the following content:
 
 ```
 /path/to/planka/logs/planka.log {
@@ -34,6 +45,20 @@ Create a file in `/etc/logrotate.d` named `planka` with the following contents:
 }
 ```
 
-Ensure to replace logfile directory with your installation’s `/logs/planka.log` location.
+Be sure to replace `/path/to/planka/logs/planka.log` with your actual log file path on the host system.
 
-Restart the logrotate service.
+To apply changes:
+
+```bash
+sudo systemctl restart logrotate
+```
+
+This setup will:
+- Rotate logs **daily**
+- Keep the last **14** logs
+- Compress old logs to save space
+- Only rotate if the log is **not empty**
+
+---
+
+Now your logs will be persisted on the host and managed efficiently.

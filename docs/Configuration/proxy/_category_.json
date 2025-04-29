@@ -1,8 +1,0 @@
-{
-  "label": "Proxy",
-  "position": 1,
-  "link": {
-    "type": "generated-index",
-    "description": "We do not cover any installation Process of webservers."
-  }
-}

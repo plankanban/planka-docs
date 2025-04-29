@@ -5,8 +5,8 @@ import {themes as prismThemes} from 'prism-react-renderer';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Planka Documentation',
-  tagline: 'Project Management was never that easy.',
+  title: 'Planka Docs',
+  tagline: 'Project Management was never that easy',
   url: 'https://docs.planka.cloud',
   baseUrl: '/',
   onBrokenLinks: 'warn',
@@ -64,7 +64,7 @@ const config = {
         items: [
           {
             type: 'doc',
-            docId: 'intro',
+            docId: 'welcome',
             position: 'left',
             label: 'Docs',
           },

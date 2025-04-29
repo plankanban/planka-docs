@@ -1,0 +1,8 @@
+{
+  "label": "Automated",
+  "position": 1,
+  "link": {
+    "type": "generated-index",
+    "description": "Automated installation based on the Docker version of Planka."
+  }
+}

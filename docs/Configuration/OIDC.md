@@ -1,30 +1,39 @@
-# OIDC
-## Single Sign on with OIDC
+---
+sidebar_position: 4
+---
 
-Planka can be configured to use an OIDC provider for logging in. If a user doesn't exist it will be automatically created. If a user exists and the email claim matches the email stored in Planka the accounts will be linked.
+# OIDC (OpenID Connect)
+
+## Single Sign-On with OIDC
+
+Planka can be configured to use an **OIDC (OpenID Connect)** provider for authentication. When a user logs in via OIDC:
+- If the user doesn't exist in Planka, an account will be automatically created.
+- If the user already exists and their email claim matches the email stored in Planka, the accounts will be linked.
 
 ### Required Configuration Values
-* **OIDC_ISSUER**: URL pointing to the identity provider. This is used to pull the `.well-known/openid-configuration` endpoint that is used to identify the necessary endpoints.
-* **OIDC_CLIENT_ID**: The OAUTH client id you created in the identity provider.
-* **OIDC_CLIENT_SECRET**: The OAUTH client secret you created in the identity provider.
+- **OIDC_ISSUER**: The URL pointing to your identity provider. This URL is used to retrieve the `.well-known/openid-configuration` endpoint which helps to identify the necessary endpoints.
+- **OIDC_CLIENT_ID**: The OAuth client ID created within the identity provider.
+- **OIDC_CLIENT_SECRET**: The OAuth client secret created within the identity provider.
 
 ### Optional Configuration Values
-* **OIDC_SCOPES**: Scopes to request from the identity provider. This controls what values the OAuth client has access to. Planka needs the email and name claims. By default it requests `openid profile email`.
-* **OIDC_ADMIN_ROLES**: Looks in the claim declared by `OIDC_ROLES_ATTRIBUTE` to see if the user is an admin. By default the `admin` role is used.
-* **OIDC_CLAIMS_SOURCE**: Controls the source of the claims for OIDC token, can be `id_token` or `userinfo`. By default `userinfo` is used.
-* **OIDC_EMAIL_ATTRIBUTE**: The claim containing the email. By default `email` is used.
-* **OIDC_NAME_ATTRIBUTE**: The claim containing the name. By default `name` is used.
-* **OIDC_USERNAME_ATTRIBUTE**: The claim containing the username. By default `preferred_username` is used.
-* **OIDC_ROLES_ATTRIBUTE**: The claim containing the group/roles that will be used to identify an admin. It is expected that this will be a flat list. By default `groups` is used.
-* **OIDC_IGNORE_USERNAME**: If set to `true` the `OIDC_USERNAME_ATTRIBUTE` will be ignored. This is useful if the format of usernames in your identity provider differs from the format in Planka. By default it's not ignored.
-* **OIDC_IGNORE_ROLES**: If set to `true` the `OIDC_ADMIN_ROLES` and `OIDC_ROLES_ATTRIBUTE` will be ignored. This is useful if you want to use OIDC for authentication but not for authorization. Like that the user roles will be managed by Planka. By default they're not ignored.
-* **OIDC_ENFORCED**: If set to `true` all built-in authentication/authorization will be deactivated. By default it's not enforced.
+- **OIDC_SCOPES**: Scopes to request from the identity provider. This controls what data the OAuth client can access. Planka requires access to the `email` and `name` claims. By default, it requests `openid profile email`.
+- **OIDC_ADMIN_ROLES**: The role claim used to determine if a user is an admin. By default, the `admin` role is checked.
+- **OIDC_CLAIMS_SOURCE**: Determines whether the claims are sourced from the `id_token` or `userinfo`. By default, it is set to `userinfo`.
+- **OIDC_EMAIL_ATTRIBUTE**: The claim that contains the email. By default, it is `email`.
+- **OIDC_NAME_ATTRIBUTE**: The claim that contains the user's name. By default, it is `name`.
+- **OIDC_USERNAME_ATTRIBUTE**: The claim containing the username. By default, it is `preferred_username`.
+- **OIDC_ROLES_ATTRIBUTE**: The claim containing the roles used to identify an admin. By default, it is `groups`.
+- **OIDC_IGNORE_USERNAME**: If set to `true`, the `OIDC_USERNAME_ATTRIBUTE` will be ignored. This is useful if the format of usernames in your identity provider differs from Planka. By default, it is not ignored.
+- **OIDC_IGNORE_ROLES**: If set to `true`, the `OIDC_ADMIN_ROLES` and `OIDC_ROLES_ATTRIBUTE` will be ignored. This is useful if you wish to use OIDC only for authentication and not authorization, in which case user roles will be managed by Planka. By default, it is not ignored.
+- **OIDC_ENFORCED**: If set to `true`, all built-in authentication/authorization will be disabled. By default, it is not enforced.
 
 ## Examples
-### Authentik
-This is an example of the environment variables used to configure Planka to use [Authentik](https://goauthentik.io/ "Homepage for authentik"). It will work with any OIDC provider.
 
-```
+### Authentik
+
+Below is an example configuration for using [Authentik](https://goauthentik.io/) as an OIDC provider. This configuration will work with any OIDC provider.
+
+```bash
 OIDC_ISSUER=https://auth.local/application/o/planka/
 OIDC_CLIENT_ID=sxxaAIAxVXlCxTmc1YLHBbQr8NL8MqLI2DUbt42d
 OIDC_CLIENT_SECRET=om4RTMRVHRszU7bqxB7RZNkHIzA8e4sGYWxeCwIMYQXPwEBWe4SY5a0wwCe9ltB3zrq5f0dnFnp34cEHD7QSMHsKvV9AiV5Z7eqDraMnv0I8IFivmuV5wovAECAYreSI
@@ -39,24 +48,22 @@ OIDC_ADMIN_ROLES=planka-admin
 # OIDC_ENFORCED=true
 ```
 
-At least these values will need to be modified:
-* `auth.local` is the domain authentik is running on.
-* `sxxaAIAxVXlCxTmc1YLHBbQr8NL8MqLI2DUbt42d` is the client id generated by authentik.
-* `om4RTMRVHRszU7bqxB7RZNkHIzA8e4sGYWxeCwIMYQXPwEBWe4SY5a0wwCe9ltB3zrq5f0dnFnp34cEHD7QSMHsKvV9AiV5Z7eqDraMnv0I8IFivmuV5wovAECAYreSI` is the client secret generated by authentik.
-* `planka-admin` is the group in authentik, this is used to create admin accounts (or alternatively you can set `OIDC_IGNORE_ROLES` to `true`)
+> **Note:** Be sure to modify the following values:
+- `auth.local` is the domain on which Authentik is hosted.
+- The client ID (`sxxaAIAxVXlCxTmc1YLHBbQr8NL8MqLI2DUbt42d`) and client secret (`om4RTMRVHRszU7bqxB7RZNkHIzA8e4sGYWxeCwIMYQXPwEBWe4SY5a0wwCe9ltB3zrq5f0dnFnp34cEHD7QSMHsKvV9AiV5Z7eqDraMnv0I8IFivmuV5wovAECAYreSI`) are generated by Authentik.
+- `planka-admin` is the role used in Authentik to create admin accounts (you can alternatively set `OIDC_IGNORE_ROLES` to `true`).
 
 ### Google
 
-* Go to [console.cloud.google.com/apis/credentials](https://console.cloud.google.com/apis/credentials)
-* Select a existing project at the top or create a new one
-* Select “create credentials”
-* Pick oAuth Client ID
-* Application type: Web application
-* Name: Planka
-* Add Redirect URI: `https://your-domain.com/oidc-callback`
-* Set the displayed ClientID and Client Secret as environment variables
+For Google OAuth setup, follow these steps:
+1. Go to [Google API Credentials](https://console.cloud.google.com/apis/credentials).
+2. Select an existing project or create a new one.
+3. Choose **Create Credentials** > **OAuth Client ID**.
+4. Set application type as **Web application**.
+5. Add the following **Redirect URI**: `https://your-domain.com/oidc-callback`.
+6. Set the **Client ID** and **Client Secret** as environment variables.
 
-```
+```bash
 OIDC_ISSUER=https://accounts.google.com
 OIDC_CLIENT_ID=xxx-xxx.apps.googleusercontent.com
 OIDC_CLIENT_SECRET=xxxx-xxxx-xx
@@ -65,16 +72,20 @@ OIDC_SCOPES=openid profile email
 
 ### Synology SSO
 
-* Folllow the [Synology SSO Server Tutorial](https://kb.synology.com/de-de/DSM/tutorial/set_up_oidc_for_dsm_in_sso_server) and create a new OIDC application.
-* Use `https://my-planka.url/oidc-callback` as Redirect URI
-* Set the following environment variables into your config
+Follow the [Synology SSO Server Tutorial](https://kb.synology.com/de-de/DSM/tutorial/set_up_oidc_for_dsm_in_sso_server) to create an OIDC application.
+- Use `https://my-planka.url/oidc-callback` as the Redirect URI.
+- Set the following environment variables:
 
-```
+```bash
 OIDC_ISSUER=https://sso.mysynology.me/webman/sso
 OIDC_CLIENT_ID=xxx
 OIDC_CLIENT_SECRET=xxx
-OIDC_NAME_ATTRIBUTE=email # This is important because Synology does not support profile scope
+OIDC_NAME_ATTRIBUTE=email # Synology does not support the profile scope
 OIDC_SCOPES=openid email
 OIDC_IGNORE_USERNAME=true
 OIDC_IGNORE_ROLES=true
 ```
+
+---
+
+This setup will enable you to authenticate users via OIDC, linking or creating accounts automatically depending on the email claim, and giving you flexibility in managing user roles.

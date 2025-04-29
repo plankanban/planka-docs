@@ -1,15 +1,20 @@
 ---
-sidebar_position: 0
+sidebar_position: 2
 ---
+
 # Fail2ban
 
-Fail2ban is a service that uses iptables to automatically drop connections for a pre-defined amount of time from IPs that continuously failed to authenticate to the configured services.
+Fail2ban is a security tool that helps protect your system from brute-force attacks. It monitors log files and, upon detecting a series of failed login attempts, blocks the offending IP addresses for a specified time using `iptables`.
 
-#### Setup a filter and a jail for Planka
+## Setup a Filter and a Jail for Planka
 
-A filter defines regex rules to identify when users fail to authenticate on Planka's user interface.
+To protect Planka from brute-force attacks, you'll need to set up both a **filter** and a **jail** in Fail2ban.
 
-Create a file in `/etc/fail2ban/filter.d` named `planka.conf` with the following contents:
+### 1. Create the Filter
+
+A **filter** defines regular expressions to identify failed authentication attempts in the log files.
+
+Create a file named `planka.conf` in `/etc/fail2ban/filter.d` with the following contents:
 
 ```conf
 [Definition]
@@ -17,9 +22,11 @@ failregex = ^(.*) Invalid (email or username:|password!) (\"(.*)\"!)? ?\(IP: <AD
 ignoreregex =
 ```
 
-The jail file defines how to handle the failed authentication attempts found by the Planka filter.
+### 2. Create the Jail
 
-Create a file in `/etc/fail2ban/jail.d` named `planka.local` with the following contents:
+A **jail** controls how to handle the failed authentication attempts found by the filter. 
+
+Create a file named `planka.local` in `/etc/fail2ban/jail.d` with the following contents:
 
 ```conf
 [planka]
@@ -31,10 +38,34 @@ maxretry = 5
 bantime = 900
 ```
 
-Ensure to replace `logpath`'s value with your installation’s `/logs/planka.log` location (Do not forget to enable [logs](/docs/Configuration/Logging)). If you are using ports other than 80 and 443 for your Web server you should replace those too. The bantime and findtime are defined in seconds.
+> **Note:** Replace `/path/to/planka/logs/planka.log` with the actual location of your Planka log file (ensure you've enabled [logging](../logging.md)).
 
-Restart the fail2ban service. You can check the status of your Planka jail by running:
+- `maxretry` defines the number of failed login attempts before banning an IP.
+- `bantime` is the duration (in seconds) for which the offending IP will be blocked (900 seconds = 15 minutes).
+
+### 3. Restart Fail2ban
+
+After setting up the filter and jail, restart the Fail2ban service to apply the changes:
+
+```bash
+sudo systemctl restart fail2ban
+```
+
+### 4. Check the Status of Planka's Jail
+
+To monitor the status of the Fail2ban jail for Planka, use the following command:
 
 ```bash
 fail2ban-client status planka
 ```
+
+## Additional Considerations
+
+Make sure you:
+- Have **logging** enabled in your Planka setup.
+- Adjust the `logpath` in the jail configuration if your log file is in a different location or has a different name.
+- Update the `port` field if you're using non-standard ports for HTTP or HTTPS.
+
+---
+
+By using Fail2ban, you can significantly reduce the risk of brute-force attacks on your Planka instance.
