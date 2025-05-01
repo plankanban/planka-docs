@@ -11,7 +11,7 @@ const config = {
   baseUrl: '/',
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/planka.ico',
+  favicon: 'images/planka.ico',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -59,7 +59,7 @@ const config = {
         title: 'Planka',
         logo: {
           alt: 'Planka',
-          src: 'img/planka.png',
+          src: 'images/planka.png',
         },
         items: [
           {

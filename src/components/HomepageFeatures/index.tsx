@@ -11,7 +11,7 @@ type FeatureItem = {
 const FeatureList: FeatureItem[] = [
   {
     title: 'Easy to Use',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+    Svg: require('@site/static/images/undraw-docusaurus-mountain.svg').default,
     description: (
       <>
         No complicated settings - work right after installation.
@@ -20,7 +20,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'Work Together in Real-Time',
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+    Svg: require('@site/static/images/undraw-docusaurus-tree.svg').default,
     description: (
       <>
         All changes in cards or boards are shown in real-time to your colleagues.
@@ -29,7 +29,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'Blazing Fast',
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
+    Svg: require('@site/static/images/undraw-docusaurus-react.svg').default,
     description: (
       <>
         Build with React and Redux.

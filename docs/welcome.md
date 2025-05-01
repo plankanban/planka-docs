@@ -71,3 +71,9 @@ Choose the method that best fits your needs:
 ## 🧑‍💻 Development
 
 - [Set Up Environment](./development/set-up-environment.md)
+
+---
+
+## ❤️ Community
+
+- [Projects](./community/projects.md)
