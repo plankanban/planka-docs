@@ -62,6 +62,7 @@ Choose the method that best fits your needs:
 
 ## 📡 API Reference
 
+- [Postman](./api-reference/postman.md)
 - [PHP](./api-reference/php.md)
 - [Python (plankapy)](./api-reference/python.md)
 
