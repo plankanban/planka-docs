@@ -25,7 +25,7 @@ This version **is not production-ready** and may result in data loss. Use at you
 
 2. **Download the `docker-compose-dev.yml`**
    ```bash
-   curl -L https://raw.githubusercontent.com/plankanban/planka/master/docker-compose-dev.yml -o /opt/planka/docker-compose.yml
+   curl -L https://raw.githubusercontent.com/plankanban/planka/master/docker-compose.yml -o /opt/planka/docker-compose.yml
    ```
 
 3. **Generate a Secret Key**
@@ -35,12 +35,14 @@ This version **is not production-ready** and may result in data loss. Use at you
 
 4. **Enter the Folder and Edit `docker-compose.yml`**
 
-   Paste your generated **SECRET_KEY**, change the **BASE_URL**, and set up your default admin user by uncommenting the lines starting with **DEFAULT_ADMIN_**.
-
    ```bash
    cd /opt/planka
    nano docker-compose.yml
    ```
+
+   Change the image tag to `dev` by replacing `ghcr.io/plankanban/planka:latest` with `ghcr.io/plankanban/planka:dev`.
+
+   Paste your generated **SECRET_KEY**, change the **BASE_URL**, and set up your default admin user by uncommenting the lines starting with **DEFAULT_ADMIN_**.
 
 5. **Pull Images and Start Services**
    ```bash
