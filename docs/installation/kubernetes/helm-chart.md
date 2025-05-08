@@ -24,7 +24,7 @@ Thanks to [Chris-Greaves](https://github.com/Chris-Greaves) for the amazing work
    --set admin_username="demo"
    ```
 
-   > **NOTE:** The command `openssl rand -hex 64` generates a random hexadecimal key for Planka. On Windows, you can use Git Bash to run that command.
+   > **Note:** The command `openssl rand -hex 64` generates a random hexadecimal key for Planka. On Windows, you can use Git Bash to run that command.
 
 3. **Access Planka via Port Forwarding**
    ```bash
