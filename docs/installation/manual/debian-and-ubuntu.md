@@ -145,6 +145,7 @@ rm planka-prebuild.zip
 Install dependencies:
 
 ```bash
+cd /var/www/planka
 npm install
 ```
 

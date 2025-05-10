@@ -110,6 +110,7 @@ Save and exit the editor.
 ## 8. Install Dependencies
 
 ```bash
+cd /var/www/planka
 npm install
 ```
 

@@ -143,6 +143,7 @@ sudo -i -u planka
 Clone the repo:
 
 ```bash
+cd /var/www/planka
 git clone https://github.com/plankanban/planka.git .
 ```
 
