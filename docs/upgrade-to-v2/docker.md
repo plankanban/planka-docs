@@ -82,7 +82,7 @@ volumes:
 Delete the following from your environment section:
 
 * `ALLOW_ALL_TO_CREATE_PROJECTS` — Now managed via user-specific global roles.
-* `SLACK_*`, `GOOGLE_*`, `TELEGRAM_*` — Replaced by in-app notifications with support for 140+ services.
+* `SLACK_*`, `GOOGLE_*`, `TELEGRAM_*` — Replaced by in-app notifications with support for 100+ services.
 
 ### Add New Variable
 
