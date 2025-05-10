@@ -14,15 +14,9 @@ Before proceeding, ensure you are running **at least version 1.26.2** of PLANKA.
 If not, update to version 1.26.2 first.
 :::
 
-## 1. Stop and Remove Containers
+## 1. Create a Backup
 
-To stop and remove the containers, run the following command from the folder containing your `docker-compose.yml` file:
-
-```bash
-docker compose down
-```
-
-## 2. Create a Backup
+Navigate to the directory containing your `docker-compose.yml` file.
 
 ### Database Backup
 
@@ -36,6 +30,12 @@ docker compose exec postgres pg_dump -U postgres planka > planka_backup_$(date +
 docker run --rm -v $(pwd):/backup -v planka_user-avatars:/data alpine tar -czvf /backup/user-avatars.tar.gz -C /data .
 docker run --rm -v $(pwd):/backup -v planka_attachments:/data alpine tar -czvf /backup/attachments.tar.gz -C /data .
 docker run --rm -v $(pwd):/backup -v planka_project-background-images:/data alpine tar -czvf /backup/project-background-images.tar.gz -C /data .
+```
+
+## 2. Stop and Remove Containers
+
+```bash
+docker compose down
 ```
 
 ## 3. Change Image Tag to `2.0.0-rc.2`
@@ -61,18 +61,18 @@ services:
     volumes:
 +     - favicons:/app/public/favicons
       - user-avatars:/app/public/user-avatars
+      - project-background-images:/app/public/project-background-images # Will be deleted after migration
 +     - background-images:/app/public/background-images
       - attachments:/app/private/attachments
-      - project-background-images:/app/public/project-background-images # Will be deleted after migration
     ...
 
 volumes:
 + favicons:
   user-avatars:
+  project-background-images:
 + background-images:
   attachments:
   db-data:
-  project-background-images:
 ```
 
 ## 5. Clean Up Environment Variables
@@ -129,18 +129,18 @@ services:
     volumes:
       - favicons:/app/public/favicons
       - user-avatars:/app/public/user-avatars
+-     - project-background-images:/app/public/project-background-images
       - background-images:/app/public/background-images
       - attachments:/app/private/attachments
--     - project-background-images:/app/public/project-background-images
     ...
 
 volumes:
   favicons:
   user-avatars:
+- project-background-images:
   background-images:
   attachments:
   db-data:
-- project-background-images:
 ```
 
 ## 10. Start PLANKA and Verify

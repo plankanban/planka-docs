@@ -16,46 +16,54 @@ If not, update to version 1.26.2 first.
 
 ## 1. Stop the Running Service
 
-If you are using **systemd**:
+Navigate to the `/var/www/planka` directory.
+
+### If using systemd
 
 ```bash
 sudo systemctl stop planka
-````
+```
 
-If using **PM2** or running in the foreground:
+### If using PM2
 
 ```bash
-# Using PM2
 pm2 stop planka
-
-# If running in foreground
-# Press Ctrl+C in the terminal where PLANKA is running
 ```
+
+### If running directly
+
+Press Ctrl+C in the terminal where PLANKA is running.
 
 ## 2. Create a Backup
 
-### Backup the PostgreSQL Database
+### Database Backup
 
 ```bash
 sudo -u postgres pg_dump planka > planka_backup_$(date +%Y%m%d).sql
 ```
 
-### Backup the PLANKA Directory
+### Rename the PLANKA Directory
 
 ```bash
-sudo cp -r /var/www/planka /var/www/planka_backup_$(date +%Y%m%d)
+cd ..
+sudo mv /var/www/planka /var/www/planka-v1
 ```
 
-## 3. Switch to the `planka` User
+## 3. Create the New Directory and Set Ownership
 
 ```bash
-sudo -i -u planka
+sudo mkdir -p /var/www/planka/
+sudo chown -R planka:planka /var/www/planka/
 cd /var/www/planka
 ```
 
-## 4. Update the PLANKA Source Code
+## 4. Switch to the `planka` User
 
-Download and extract the **v2.0.0-rc.2** build:
+```bash
+sudo -i -u planka
+```
+
+## 5. Download and Extract the Prebuilt Version of PLANKA
 
 ```bash
 curl -fsSL -O https://github.com/plankanban/planka/releases/latest/download/planka-prebuild.zip
@@ -63,21 +71,13 @@ unzip -o planka-prebuild.zip -d /var/www/
 rm planka-prebuild.zip
 ```
 
-## 5. Create Required Directories
-
-Create the new directories:
+## 6. Copy Required Files From the Previous Version
 
 ```bash
-mkdir -p /var/www/planka/public/favicons
-mkdir -p /var/www/planka/public/background-images
-```
-
-## 6. Copy Background Images
-
-Copy existing background images to the new location:
-
-```bash
-cp -av /var/www/planka/public/project-background-images/. /var/www/planka/public/background-images/
+cp -av /var/www/planka-v1/.env /var/www/planka/
+cp -av /var/www/planka-v1/public/user-avatars/. /var/www/planka/public/user-avatars/
+cp -av /var/www/planka-v1/public/project-background-images/. /var/www/planka/public/background-images/
+cp -av /var/www/planka-v1/private/attachments/. /var/www/planka/public/attachments/
 ```
 
 ## 7. Clean Up Environment Variables
@@ -109,10 +109,7 @@ Save and exit the editor.
 
 ## 8. Install Dependencies
 
-Install Node.js dependencies:
-
 ```bash
-cd /var/www/planka
 npm install
 ```
 
@@ -127,12 +124,6 @@ npm run db:upgrade
 ```
 
 ## 10. Start PLANKA
-
-### If running directly
-
-```bash
-npm start --prod
-```
 
 ### If using systemd
 
@@ -152,22 +143,18 @@ exit
 pm2 start planka
 ```
 
+### If running directly
+
+```bash
+npm start --prod
+```
+
 ## 11. Verify the Installation
 
 - Application starts successfully
 - You can log in
 - Projects, boards, and cards are displayed
 - Background images are visible
-
-## 12. Clean Up
-
-Once confirmed everything works, remove the old directory:
-
-```bash
-sudo -i -u planka
-rm -rf /var/www/planka/public/project-background-images
-exit
-```
 
 ## Troubleshooting
 
