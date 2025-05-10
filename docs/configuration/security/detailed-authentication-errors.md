@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Detailed Authentication Errors
 
-By default, Planka uses **generic authentication error messages** to avoid revealing sensitive information to potential attackers.
+By default, PLANKA uses **generic authentication error messages** to avoid revealing sensitive information to potential attackers.
 
 ## Enable Detailed Error Messages
 
@@ -29,6 +29,7 @@ SHOW_DETAILED_AUTH_ERRORS=true
 Detailed error messages can help attackers perform brute force or enumeration attacks.
 
 You should:
+
 - Enable rate limiting
 - Use [Fail2Ban](./fail2ban.md) or a similar tool
 - Monitor logs for unusual login activity

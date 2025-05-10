@@ -5,6 +5,7 @@ sidebar_position: 1
 # Overview
 
 ## Demo
+
 See the installer in action: https://www.youtube.com/watch?v=0Qya8iLDnq0
 
 ![Installer](./images/installer.jpeg)
@@ -12,7 +13,7 @@ See the installer in action: https://www.youtube.com/watch?v=0Qya8iLDnq0
 ## Features
 
 - Installs all required packages
-- Installs Planka
+- Installs PLANKA
 - Configures Nginx reverse proxy
 - Automates SSL certificates
 - Automates backups
@@ -26,6 +27,7 @@ See the installer in action: https://www.youtube.com/watch?v=0Qya8iLDnq0
 - Consider additional features
 
 ## Backups
+
 Backups will be stored here:
 
 ```bash
@@ -33,6 +35,7 @@ Backups will be stored here:
 ```
 
 ## Logs
+
 Logs can be found here:
 
 ```bash
@@ -41,14 +44,16 @@ Logs can be found here:
 
 ## Uninstalling / Reinstalling
 
-You can reinstall Planka using the "Uninstall Planka" option in the installer.
+You can reinstall PLANKA using the "Uninstall PLANKA" option in the installer.
 
 ### Option 1: Light
-- Delete Planka containers
+
+- Delete PLANKA containers
 - Delete all Docker volumes
 - Delete the Nginx configuration
 
 ### Option 2: Full (Coming Soon)
+
 - All of Option 1
 - Revoke SSL certificates (SSL Setup)
 - Delete ACME accounts (SSL Setup)

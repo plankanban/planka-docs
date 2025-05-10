@@ -18,7 +18,7 @@ function HomepageHeader() {
           <Link
             className="button button--secondary button--lg"
             to="/docs/welcome">
-            Install Planka
+            Install now
           </Link>
         </div>
       </div>
@@ -31,7 +31,7 @@ export default function Home(): JSX.Element {
   return (
     <Layout
       title={`${siteConfig.title}`}
-      description="Planka Docs page">
+      description="PLANKA Docs">
       <HomepageHeader />
       <main>
         <HomepageFeatures />

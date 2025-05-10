@@ -9,12 +9,14 @@ Thanks to [Chris-Greaves](https://github.com/Chris-Greaves) for the amazing work
 ## Basic Usage
 
 1. **Add the Repo and Check Availability**
+
    ```bash
    helm repo add planka http://plankanban.github.io/planka
    helm search repo planka
    ```
 
-2. **Generate a Secret Key and Install Planka**
+2. **Generate a Secret Key and Install PLANKA**
+
    ```bash
    export SECRETKEY=$(openssl rand -hex 64)
    helm install planka planka/planka --set secretkey=$SECRETKEY \
@@ -24,18 +26,20 @@ Thanks to [Chris-Greaves](https://github.com/Chris-Greaves) for the amazing work
    --set admin_username="demo"
    ```
 
-   > **Note:** The command `openssl rand -hex 64` generates a random hexadecimal key for Planka. On Windows, you can use Git Bash to run that command.
+   > **Note:** The command `openssl rand -hex 64` generates a random hexadecimal key for PLANKA. On Windows, you can use Git Bash to run that command.
 
-3. **Access Planka via Port Forwarding**
+3. **Access PLANKA via Port Forwarding**
+
    ```bash
    kubectl port-forward $POD_NAME 3000:1337
    ```
 
 ## Accessing Externally
 
-To access Planka externally, you can use the following configuration:
+To access PLANKA externally, you can use the following configuration:
 
 1. **HTTP Only:**
+
    ```bash
    helm install planka planka/planka --set secretkey=$SECRETKEY \
    --set admin_email="demo@demo.demo" \
@@ -47,6 +51,7 @@ To access Planka externally, you can use the following configuration:
    ```
 
 2. **HTTPS:**
+
    ```bash
    helm install planka planka/planka --set secretkey=$SECRETKEY \
    --set admin_email="demo@demo.demo" \
@@ -69,7 +74,7 @@ It is recommended to create a `values.yaml` to simplify future upgrades and conf
 
    ```yaml
    secretkey: "<InsertSecretKey>"
-   # The admin section needs to be present for new instances of Planka, after the first start you can remove the lines starting with admin_. If you want the admin user to be unchangeable admin_email: has to stay
+   # The admin section needs to be present for new instances of PLANKA, after the first start you can remove the lines starting with admin_. If you want the admin user to be unchangeable admin_email: has to stay
    # After changing the config you have to run ```helm upgrade  planka . -f values.yaml```
 
    # Admin user
@@ -94,18 +99,19 @@ It is recommended to create a `values.yaml` to simplify future upgrades and conf
          - planka.example.dev
    ```
 
-2. **Install Planka Using the `values.yaml`**
+2. **Install PLANKA Using the `values.yaml`**
+
    ```bash
    helm install planka planka/planka -f values.yaml
    ```
 
-## Access Planka
+## Access PLANKA
 
 Once the services are running, browse to **planka.example.dev** and log in as **admin_email** with the password **admin_password**.
 
 ## Considerations for Production Hosting
 
-If you plan to host Planka in a production environment, here are some things to consider:
+If you plan to host PLANKA in a production environment, here are some things to consider:
 
 - Create a `values.yaml` with your custom configurations. This makes applying future upgrades easier.
 - Generate your `secretkey` once and store it securely (e.g., in a vault or in the `values.yaml`) to ensure consistency during upgrades.

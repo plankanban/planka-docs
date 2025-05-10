@@ -1,6 +1,6 @@
 version: '3.3'
 services:
-    planka-docs:
-        ports:
-            - '3033:80'
-        image: 'ghcr.io/plankanban/planka-docs:latest'
+  planka-docs:
+    ports:
+      - '3033:80'
+    image: 'ghcr.io/plankanban/planka-docs:latest'

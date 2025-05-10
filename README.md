@@ -1,7 +1,6 @@
-# Planka Documentation
+# PLANKA Docs
 
-A more detailed description will be added later
-
+A more detailed description will be added later.
 
 ### Needed commands
 
@@ -17,5 +16,4 @@ A more detailed description will be added later
   `npm run serve`
     Serves the built website locally.
 
-
-This website is built using [Docusaurus 2](https://docusaurus.io/).
+This website is built using [Docusaurus 2](https://docusaurus.io).

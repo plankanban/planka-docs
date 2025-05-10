@@ -10,40 +10,59 @@ sidebar_position: 1
 
 - Make sure you have [Docker](https://docs.docker.com/install/) and [Docker Compose](https://docs.docker.com/compose/install/) installed and operational.
 
-## Steps to Install Planka
+## Steps to Install PLANKA
 
 1. **Create a Folder**
+
    ```bash
    mkdir /opt/planka
    ```
 
 2. **Download the `docker-compose.yml`**
+
    ```bash
    curl -L https://raw.githubusercontent.com/plankanban/planka/master/docker-compose.yml -o /opt/planka/docker-compose.yml
    ```
 
 3. **Generate a Secret Key**
+
    ```bash
    openssl rand -hex 64
    ```
 
 4. **Enter the Folder and Edit `docker-compose.yml`**
 
-   Paste your generated **SECRET_KEY**, change the **BASE_URL**, and set up your default admin user by uncommenting the lines starting with **DEFAULT_ADMIN_**.
-
    ```bash
    cd /opt/planka
    nano docker-compose.yml
    ```
 
-5. **Pull Images and Start Services**
+   Paste your generated **SECRET_KEY** and change the **BASE_URL**.
+
+5. **Create an Admin User**
+
+   ```bash
+   docker compose run --rm planka npm run db:create-admin-user
+   ```
+
+   Sample output:
+
+   ```bash
+   Email: YOUR_ADMIN_EMAIL
+   Password: YOUR_ADMIN_PASSWORD
+   Name: ...
+   Username (optional): ...
+   ```
+
+6. **Start Services**
+
    ```bash
    docker compose up -d
    ```
 
-## Access Planka
+## Access PLANKA
 
-Once the services are running, browse to **BASE_URL** and log in as **DEFAULT_ADMIN_EMAIL** with the password **DEFAULT_ADMIN_PASSWORD**.
+Once the services are running, browse to **BASE_URL** and log in as **YOUR_ADMIN_EMAIL** with the password **YOUR_ADMIN_PASSWORD**.
 
 ## Additional Info
 

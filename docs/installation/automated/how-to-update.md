@@ -10,22 +10,26 @@ You can also update manually.
 
 ## Steps to Update Manually
 
-1. **Stop Planka**
+1. **Stop PLANKA**
+
    ```bash
    cd /opt/planka/ && docker compose down
    ```
 
 2. **Create a Backup**
+
    ```bash
    bash cron/backup.sh
    ```
 
 3. **Download the Latest Version**
+
    ```bash
    docker compose pull
    ```
 
-4. **Start Planka Again**
+4. **Start PLANKA Again**
+
    ```bash
    docker compose --env-file .env up -d
    ```

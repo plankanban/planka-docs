@@ -2,9 +2,9 @@
 sidebar_position: 1
 ---
 
-# Welcome to Planka Docs
+# Welcome to PLANKA Docs
 
-This documentation provides useful information and guides to help you install, configure, and develop Planka.
+This documentation provides useful information and guides to help you install, configure, and develop PLANKA.
 
 We offer several installation options, depending on your environment and preferences.
 
@@ -38,9 +38,16 @@ Choose the method that best fits your needs:
 
 ---
 
+## ⬆️ Upgrade to v2
+
+- [Manual (Debian & Ubuntu)](./upgrade-to-v2/manual.md)
+- [Docker](./upgrade-to-v2/docker.md)
+
+---
+
 ## ⚙️ Configuration
 
-- [Default Admin](./configuration/default-admin.md)
+- [Admin User](./configuration/admin-user.md)
 - [Run as a Service (Linux)](./configuration/run-as-a-service.md)
 - [Logging](./configuration/logging.md)
 - [OIDC (OpenID Connect)](./configuration/oidc.md)

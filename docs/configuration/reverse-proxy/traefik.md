@@ -4,7 +4,7 @@ sidebar_position: 3
 
 # Traefik (Docker Only)
 
-This guide helps you configure **Traefik** as a reverse proxy for Planka when running with Docker. Traefik handles HTTPS certificates automatically using Let's Encrypt.
+This guide helps you configure **Traefik** as a reverse proxy for PLANKA when running with Docker. Traefik handles HTTPS certificates automatically using Let's Encrypt.
 
 ### 1. Create Traefik Folder
 
@@ -87,9 +87,9 @@ services:
       - /opt/traefik/ssl/:/ssl-certs/
 ```
 
-### 4. Add Labels to Planka's `docker-compose.yml`
+### 4. Add Labels to PLANKA's `docker-compose.yml`
 
-Update your Planka service with Traefik labels. Replace `domain.tld` with your actual domain:
+Update your PLANKA service with Traefik labels. Replace `domain.tld` with your actual domain:
 
 ```yaml
 labels:
@@ -107,4 +107,4 @@ docker compose up -d
 
 ---
 
-Now Traefik will automatically manage HTTPS for your Planka instance.
+Now Traefik will automatically manage HTTPS for your PLANKA instance.

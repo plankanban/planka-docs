@@ -9,18 +9,23 @@ Thanks to [hwelch-fle](https://github.com/hwelch-fle) for the amazing work.
 For more information, see the [plankapy GitHub repository](https://github.com/hwelch-fle/plankapy).
 
 ## Installation
+
 ```bash
 pip install plankapy
 ```
 
 ## Documentation
+
 The full documentation can be found [here](https://hwelch-fle.github.io/plankapy/).
 
 All Interfaces are documented in the [API](https://hwelch-fle.github.io/plankapy/interfaces/Planka/) section.
 
 ## Features
+
 ### No Keys Required
-Planka models have all been implemented as Python objects. This means that you can access all the properties of a resource as if it were a Python object:
+
+PLANKA models have all been implemented as Python objects. This means that you can access all the properties of a resource as if it were a Python object:
+
 ```python
 >>> project.name
 'Project 1'
@@ -30,10 +35,13 @@ Planka models have all been implemented as Python objects. This means that you c
 ```
 
 ### Disambiguation of resource attributes and methods
+
 All models have type hints for every property and attribute, meaning you don't have to guess what a method or property will return. When using a modern IDE, this allows for extensive code completion and prevents you from having to remember what every property and method returns.
 
 ### Synced by Default
+
 All included resources are accessible through object properties that send out a request to the server when accessed. This means that you can access up to date information about a resource without having to manually refresh it.
+
 ```python
 >>> list1 = board.lists[0]
 >>> list2 = board.lists[1]
@@ -53,11 +61,12 @@ All included resources are accessible through object properties that send out a 
 [Card(id=1, name='Card 1', ...)]
 ```
 
-
 ### Edit with Context
+
 Because all stored objects maintain the attributes assigned to them on their creation, direct attribute editing is *not* synced with the server resource. To mitigate this a `.editor()` context manager is provided that refreshes the resource on entry and updates the resource on exit.
 
 #### Direct editing of attributes fails to update the resource
+
 ```python
 >>> c1 = list1.cards[0]
 >>> c1.name = "New Name"
@@ -69,7 +78,9 @@ Because all stored objects maintain the attributes assigned to them on their cre
 >>> c2.name
 'Card 1'
 ```
+
 #### Context editing updates the resource after exiting the context
+
 ```python
 >>> c1 = list1.cards[0]
 >>> with c1.editor():
@@ -86,6 +97,7 @@ Because all stored objects maintain the attributes assigned to them on their cre
 ```
 
 ## Usage
+
 Getting started with plankapy is as simple as creating a `Planka` object and passing it your authentication method. From there, you can access all the resources available to your logged in user account.
 
 ```python
@@ -101,4 +113,5 @@ User(id=1, username='username', ...)
 ```
 
 ## License
+
 This project is licensed under the AGPLv3 License - see the [LICENSE](https://github.com/hwelch-fle/plankapy/blob/main/LICENSE) file for details.

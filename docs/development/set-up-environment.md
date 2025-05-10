@@ -4,11 +4,11 @@ sidebar_position: 1
 
 # Set Up Environment
 
-This guide explains how to set up a local development environment for Planka using either a traditional Node.js setup or Docker-based approach.
+This guide explains how to set up a local development environment for PLANKA using either a traditional Node.js setup or Docker-based approach.
 
 ## Cloning the Repository
 
-Start by cloning the Planka repository and installing dependencies:
+Start by cloning the PLANKA repository and installing dependencies:
 
 ```bash
 git clone https://github.com/plankanban/planka.git
@@ -17,14 +17,6 @@ npm install
 ```
 
 ## Traditional Development Setup
-
-### Setting Up the Database
-
-You can use a local PostgreSQL database or start the provided development database using Docker:
-
-```bash
-docker-compose -f docker-compose-db.yml up
-```
 
 ### Configuring Environment Variables
 
@@ -36,7 +28,7 @@ cp server/.env.sample server/.env
 
 Edit `server/.env`:
 
-- Set `DATABASE_URL` to your local or Docker database instance.
+- Set `DATABASE_URL` to your local database instance.
 - Optionally configure `DEFAULT_ADMIN_*` variables to define an initial admin user.
 
 ### Initializing the Database
@@ -57,7 +49,7 @@ npm start
 
 ## Docker-Based Development Setup
 
-This setup uses Docker Compose to run all services (client, server, database, proxy) and auto-reloads on file changes.
+This setup uses Docker Compose to run all services (client, server, database) and auto-reloads on file changes.
 
 ### Start the Full Stack Dev Environment
 
@@ -69,18 +61,15 @@ docker-compose -f docker-compose-dev.yml up
 
 ### Environment Variables
 
-Make sure the following environment variables are defined (can be passed via `.env` or Compose config):
+Make sure the following environment variables are defined:
 
 ```env
-NODE_ENV=development
 DEFAULT_ADMIN_EMAIL=demo@demo.demo
 DEFAULT_ADMIN_PASSWORD=demo
 DEFAULT_ADMIN_NAME=Demo Demo
 DEFAULT_ADMIN_USERNAME=demo
 ```
 
-### Access Planka
+## Access PLANKA
 
-Once started, access Planka in your browser at `http://localhost:3000`
-
-If ports conflict with existing services, modify `docker-compose-dev.yml` to use alternative ports.
+Once started, access PLANKA in your browser at `http://localhost:3000`.

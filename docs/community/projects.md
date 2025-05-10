@@ -22,7 +22,7 @@ An API wrapper for PHP.
 
 An API wrapper for Python.
 
-### [Trello_to_Planka_migration_script](https://github.com/garpastyls/Trello_to_Planka_migration_script)
+### [Trello_to_Planka_migration_script](https://github.com/John-Gear/Trello_to_Planka_migration_script)
 
 Script for importing data from Trello with attachment transfer support.
 
@@ -30,7 +30,7 @@ Script for importing data from Trello with attachment transfer support.
 
 Script for importing data from Trello using its JSON export format.
 
-### [Bot_checker_date_planka](https://github.com/garpastyls/Bot_checker_date_planka)
+### [Bot_checker_date_planka](https://github.com/John-Gear/Bot_checker_date_planka)
 
 A Telegram bot that fetches tasks by a specific date.
 

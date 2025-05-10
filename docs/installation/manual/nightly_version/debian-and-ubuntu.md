@@ -21,25 +21,29 @@ This version **is not production-ready** and may result in data loss. Use at you
 ### Installing PostgreSQL
 
 Refresh your local package index:
+
 ```bash
 sudo apt update
 ```
 
 Install PostgreSQL and additional utilities:
+
 ```bash
 sudo apt install postgresql postgresql-contrib -y
 ```
 
 If prompted to restart any services, press **ENTER** to accept the defaults.
 
-### Create a PostgreSQL User and Database for Planka
+### Create a PostgreSQL User and Database for PLANKA
 
 **Create a PostgreSQL user:**
+
 ```bash
 sudo -u postgres createuser --interactive
 ```
 
 Sample output:
+
 ```bash
 Enter name of role to add: planka
 Shall the new role be a superuser? (y/n) y
@@ -48,11 +52,13 @@ Shall the new role be a superuser? (y/n) y
 **Create the database:**
 
 To avoid `sudo` permission issues:
+
 ```bash
 cd /tmp
 ```
 
 Then run:
+
 ```bash
 sudo -u postgres createdb planka
 ```
@@ -60,21 +66,25 @@ sudo -u postgres createdb planka
 ### Create a Unix User and Set the Database Password
 
 Create a Unix user named `planka`:
+
 ```bash
 sudo adduser planka
 ```
 
 Login to PostgreSQL as the `planka` user:
+
 ```bash
 sudo -u planka psql
 ```
 
 Change the password:
+
 ```sql
 ALTER USER planka PASSWORD 'YOUR_DATABASE_PASSWORD';
 ```
 
 Exit the PostgreSQL prompt:
+
 ```bash
 \q
 ```
@@ -102,19 +112,22 @@ sudo apt-get install nodejs -y
 ```
 
 Verify installation:
+
 ```bash
 node -v
 # Output: v18.x.x
 ```
 
-## Install Planka (Nightly)
+## Install PLANKA (Nightly)
 
 Install required packages:
+
 ```bash
 sudo apt install unzip build-essential -y
 ```
 
 Create the installation directory and set ownership:
+
 ```bash
 sudo mkdir -p /var/www/planka
 sudo chown -R planka:planka /var/www/planka
@@ -122,16 +135,19 @@ cd /var/www/planka
 ```
 
 Switch to the `planka` user:
+
 ```bash
 sudo -i -u planka
 ```
 
 Clone the repo:
+
 ```bash
 git clone https://github.com/plankanban/planka.git .
 ```
 
 Install dependencies and build the client:
+
 ```bash
 npm install
 
@@ -142,26 +158,28 @@ npm run build
 ### Set Up Symlinks
 
 Instead of copying files, use symbolic links for easier updates:
+
 ```bash
-ln -s /var/www/planka/client/build/asset-manifest.json /var/www/planka/server/public/asset-manifest.json
-ln -s /var/www/planka/client/build/favicon.ico /var/www/planka/server/public/favicon.ico
-ln -s /var/www/planka/client/build/logo192.png /var/www/planka/server/public/logo192.png
-ln -s /var/www/planka/client/build/logo512.png /var/www/planka/server/public/logo512.png
-ln -s /var/www/planka/client/build/manifest.json /var/www/planka/server/public/manifest.json
-ln -s /var/www/planka/client/build/robots.txt /var/www/planka/server/public/robots.txt
-ln -s /var/www/planka/client/build/static /var/www/planka/server/public/static
-ln -s /var/www/planka/client/build/index.html /var/www/planka/server/views/index.ejs
+ln -s /var/www/planka/client/dist/favicon.ico /var/www/planka/server/public/favicon.ico
+ln -s /var/www/planka/client/dist/logo192.png /var/www/planka/server/public/logo192.png
+ln -s /var/www/planka/client/dist/logo512.png /var/www/planka/server/public/logo512.png
+ln -s /var/www/planka/client/dist/manifest.json /var/www/planka/server/public/manifest.json
+ln -s /var/www/planka/client/dist/robots.txt /var/www/planka/server/public/robots.txt
+ln -s /var/www/planka/client/dist/assets /var/www/planka/server/public/assets
+ln -s /var/www/planka/client/dist/index.html /var/www/planka/server/views/index.html
 ```
 
 ### Configure Environment Variables
 
 Go to the `server` directory and copy the sample `.env` file:
+
 ```bash
 cd /var/www/planka/server
 cp .env.sample .env
 ```
 
 Generate a secret key:
+
 ```bash
 openssl rand -hex 64
 ```
@@ -169,11 +187,13 @@ openssl rand -hex 64
 > Note the output - you'll need it for the `.env` file.
 
 Edit the `.env` file:
+
 ```bash
 nano .env
 ```
 
 Example `.env` configuration:
+
 ```env
 ## Required
 
@@ -184,22 +204,39 @@ SECRET_KEY=YOUR_GENERATED_KEY
 ## Optional
 
 ...
-
-DEFAULT_ADMIN_EMAIL=YOUR_ADMIN_EMAIL
-DEFAULT_ADMIN_PASSWORD=YOUR_ADMIN_PASSWORD
-DEFAULT_ADMIN_NAME=YOUR_ADMIN_NAME
-DEFAULT_ADMIN_USERNAME=YOUR_ADMIN_USERNAME
-
-...
 ```
 
-## Start Planka
+### Initialize the Database and Create an Admin User
 
-From the `server` directory, initialize the database and start Planka:
+**Initialize the database:**
+
 ```bash
-npm run db:init && npm start --prod
+npm run db:init
 ```
 
-## Access Planka
+**Create an admin user:**
+
+```bash
+npm run db:create-admin-user
+```
+
+Sample output:
+
+```bash
+Email: YOUR_ADMIN_EMAIL
+Password: YOUR_ADMIN_PASSWORD
+Name: ...
+Username (optional): ...
+```
+
+## Start PLANKA
+
+From the `server` directory, start PLANKA:
+
+```bash
+npm start --prod
+```
+
+## Access PLANKA
 
 Once the services are running, browse to **http://YOUR_DOMAIN_NAME:YOUR_PORT** and log in as **YOUR_ADMIN_EMAIL** with the password **YOUR_ADMIN_PASSWORD**.

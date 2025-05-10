@@ -6,7 +6,7 @@ sidebar_position: 2
 
 ## Configuration Sample
 
-Below is an example configuration for running Planka behind an **Apache2 reverse proxy**. Replace `domain` with your actual domain name and make sure to set up **SSL** correctly.
+Below is an example configuration for running PLANKA behind an **Apache2 reverse proxy**. Replace `domain` with your actual domain name and make sure to set up **SSL** correctly.
 
 **Note:** You have to enable ``ws-proxy`` and ``rewrite`` in apache.
 
@@ -33,5 +33,6 @@ Below is an example configuration for running Planka behind an **Apache2 reverse
 ```
 
 ## Notes
-- This configuration assumes Planka is running on `localhost:1337`.
+
+- This configuration assumes PLANKA is running on `localhost:1337`.
 - For production use, you should also set up an HTTPS VirtualHost (`<VirtualHost *:443>`) with a valid SSL certificate (e.g., via Let's Encrypt).

@@ -2,35 +2,46 @@
 sidebar_position: 1
 ---
 
-# Default Admin
+# Admin User
 
 :::info
-Starting with version 1.13, a default administrator **is not created automatically**.
+Starting with version 1.13, an administrator user **is not created automatically**.
 
-You need to set environment variables to create one.
+You need to run the script or set environment variables to create one.
 :::
 
-### Important Notes
+### Important Notes (For Environment Variables)
 
 - You **can remove** the variables after the first successful startup.
 - If you leave `DEFAULT_ADMIN_EMAIL` in place, the corresponding admin user **cannot be deleted or edited** by others.
 
 ## Automated Installation
 
-If you've used the **Planka Installer**, you can re-run it to modify admin credentials:
+If you've used the **PLANKA Installer**, you can re-run it to modify admin credentials:
 
 ```bash
 bash /opt/planka_installer
 ```
 
 Then select:
+
 ```
 Configuration → Admin user
 ```
 
 ## Manual Installation
 
-In your `.env` file (located in the `server` directory), set the following variables:
+### By Running the Script
+
+From the folder with PLANKA, run the script:
+
+```bash
+npm run db:create-admin-user
+```
+
+### By Setting Environment Variables
+
+In your `.env` file, uncomment or add the following environment variables:
 
 ```env
 DEFAULT_ADMIN_EMAIL=demo@demo.demo # Do not remove if you want to prevent this user from being edited/deleted
@@ -39,14 +50,25 @@ DEFAULT_ADMIN_NAME=Demo Demo
 DEFAULT_ADMIN_USERNAME=demo
 ```
 
-After updating the file, restart Planka:
+After making changes, restart PLANKA.
 
 If you're using **PM2**:
+
 ```bash
-service planka restart
+pm2 restart planka
 ```
 
 ## Docker Installation
+
+### By Running the Script
+
+From the folder with your `docker-compose.yml`, run the script:
+
+```bash
+docker compose run --rm planka npm run db:create-admin-user
+```
+
+### By Setting Environment Variables
 
 In your `docker-compose.yml`, uncomment or add the following environment variables:
 
@@ -57,7 +79,7 @@ In your `docker-compose.yml`, uncomment or add the following environment variabl
 - DEFAULT_ADMIN_USERNAME=demo
 ```
 
-After making changes, restart Planka:
+After making changes, restart PLANKA:
 
 ```bash
 docker compose up -d

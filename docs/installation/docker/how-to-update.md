@@ -12,17 +12,20 @@ You can use our provided **[scripts](./backup-and-restore)** to create a backup.
 
 ### Steps to Update
 
-1. **Stop Planka**
+1. **Stop PLANKA**
+
    ```bash
    cd /opt/planka && docker compose down
    ```
 
 2. **Download the Latest Version**
+
    ```bash
    docker compose pull
    ```
 
-3. **Start Planka Again**
+3. **Start PLANKA Again**
+
    ```bash
    docker compose up -d
    ```

@@ -7,7 +7,7 @@ sidebar_position: 2
 Thanks to [decole](https://github.com/decole) for the amazing work.
 For more information, see the [planka-php-sdk GitHub repository](https://github.com/decole/planka-php-sdk).
 
-> Tested with Planka versions: **1.10.3**, **1.11**, **1.24.3**  
+> Tested with PLANKA versions: **1.10.3**, **1.11**, **1.24.3**  
 > Supports all endpoints from version **1.10.3** and later.
 
 ## Install
@@ -18,7 +18,7 @@ composer require decole/planka-php-sdk
 
 ## How to use
 
-Wrapper executes the requests that Planka makes over the web socket or hidden REST API.
+Wrapper executes the requests that PLANKA makes over the web socket or hidden REST API.
 Wrapper use hidden REST API. See endpoints in https://github.com/plankanban/planka/blob/master/server/config/routes.js.
 
 To understand how to use the wrapper, you can go to the web socket and see how the web client of the web socket 

@@ -6,7 +6,7 @@ sidebar_position: 1
 
 ## Configuration Sample
 
-Below is an example configuration for running Planka behind an **Nginx reverse proxy**. Replace `<domain>` with your actual domain name, and be sure to configure SSL separately (e.g., via Let's Encrypt).
+Below is an example configuration for running PLANKA behind an **Nginx reverse proxy**. Replace `<domain>` with your actual domain name, and be sure to configure SSL separately (e.g., via Let's Encrypt).
 
 ```nginx
 upstream planka {
@@ -65,5 +65,6 @@ server {
 ```
 
 ## Notes
+
 - SSL is **not included** in this configuration. For production, it is strongly recommended to use HTTPS.
 - Consider redirecting HTTP to HTTPS and setting up SSL with Let's Encrypt and `certbot`.

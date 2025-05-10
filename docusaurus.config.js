@@ -5,8 +5,8 @@ import {themes as prismThemes} from 'prism-react-renderer';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Planka Docs',
-  tagline: 'Project Management was never that easy',
+  title: 'PLANKA Docs',
+  tagline: 'Project mastering driven by fun',
   url: 'https://docs.planka.cloud',
   baseUrl: '/',
   onBrokenLinks: 'warn',
@@ -56,9 +56,9 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
-        title: 'Planka',
+        title: 'PLANKA',
         logo: {
-          alt: 'Planka',
+          alt: 'PLANKA',
           src: 'images/planka.png',
         },
         items: [
@@ -87,6 +87,10 @@ const config = {
                 to: '/docs/category/automated/',
               },
               {
+                label: 'Manual',
+                to: '/docs/category/manual/',
+              },
+              {
                 label: 'Docker',
                 to: '/docs/category/docker/',
               },
@@ -96,14 +100,13 @@ const config = {
             title: 'Community',
             items: [
               {
+                label: 'Discord',
+                href: 'https://discord.gg/WqqYNd7Jvt',
+              },
+              {
                 label: 'Facebook',
                 href: 'https://www.facebook.com/people/Planka/100086009366161/',
               },
-              // Will be live soon
-              /*{
-                label: 'Discord',
-                href: 'https://discord.gg/WqqYNd7Jvt',
-              },*/
               {
                 label: 'Twitter',
                 href: 'https://twitter.com/planka_',
@@ -118,13 +121,17 @@ const config = {
                 href: 'https://github.com/plankanban/planka',
               },
               {
-                label: 'Allgäu Informatik GmbH',
-                href: 'https://allgaeu-informatik.de',
+                label: 'planka.app',
+                href: 'https://planka.app',
+              },
+              {
+                label: 'Imprint (German)',
+                href: 'https://planka.app/imprint',
               },
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} Allgäu Informatik GmbH`,
+        copyright: `Copyright © ${new Date().getFullYear()} PLANKA Software GmbH`,
       },
       prism: {
         theme: prismThemes.github,
