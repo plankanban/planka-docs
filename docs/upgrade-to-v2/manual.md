@@ -97,7 +97,7 @@ Delete the following from your environment section:
 
 ### Update the `TRUST_PROXY` Value
 
-If you have the `TRUST_PROXY` environment variable set, make sure its value is `true` (as a string), not `1`. Using `1` will no longer work correctly.
+Regardless of whether you've previously set the `TRUST_PROXY` environment variable, you have to ensure it uses the correct boolean string value. If it's currently set to `0`, update it to `false` (even if the variable is commented out). If it's set to `1`, update it to `true`. The use of numeric values (`0` or `1`) is no longer supported and may lead to unexpected behavior.
 
 ### Add New Variable
 
