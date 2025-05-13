@@ -84,6 +84,10 @@ Delete the following from your environment section:
 * `ALLOW_ALL_TO_CREATE_PROJECTS` — Now managed via user-specific global roles.
 * `SLACK_*`, `GOOGLE_*`, `TELEGRAM_*` — Replaced by in-app notifications with support for 100+ services.
 
+### Update the `TRUST_PROXY` Value
+
+If you have the `TRUST_PROXY` environment variable set, make sure its value is `true` (as a string), not `1`. Using `1` will no longer work correctly.
+
 ### Add New Variable
 
 Add this new environment variable:
