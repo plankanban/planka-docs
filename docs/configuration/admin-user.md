@@ -44,7 +44,7 @@ npm run db:create-admin-user
 In your `.env` file, uncomment or add the following environment variables:
 
 ```env
-DEFAULT_ADMIN_EMAIL=demo@demo.demo # Do not remove if you want to prevent this user from being edited/deleted
+DEFAULT_ADMIN_EMAIL=demo@demo.demo
 DEFAULT_ADMIN_PASSWORD=demo
 DEFAULT_ADMIN_NAME=Demo Demo
 DEFAULT_ADMIN_USERNAME=demo
@@ -73,7 +73,7 @@ docker compose run --rm planka npm run db:create-admin-user
 In your `docker-compose.yml`, uncomment or add the following environment variables:
 
 ```yaml
-- DEFAULT_ADMIN_EMAIL=demo@demo.demo # Do not remove if you want to prevent this user from being edited/deleted
+- DEFAULT_ADMIN_EMAIL=demo@demo.demo
 - DEFAULT_ADMIN_PASSWORD=demo
 - DEFAULT_ADMIN_NAME=Demo Demo
 - DEFAULT_ADMIN_USERNAME=demo
