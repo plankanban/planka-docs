@@ -7,7 +7,7 @@ sidebar_position: 8
 
 **Project mastering driven by fun**
 
-![Version](https://img.shields.io/github/package-json/v/plankanban/planka?style=flat-square) ![Docker Pulls](https://img.shields.io/badge/docker_pulls-5M%2B-%23066da5?style=flat-square&color=%23e05d44) ![Contributors](https://img.shields.io/github/contributors/plankanban/planka?style=flat-square)
+![Version](https://img.shields.io/github/package-json/v/plankanban/planka?style=flat-square) ![Docker Pulls](https://img.shields.io/badge/docker_pulls-6M%2B-%23066da5?style=flat-square&color=%23e05d44) ![Contributors](https://img.shields.io/github/contributors/plankanban/planka?style=flat-square)
 
 ![Demo](https://raw.githubusercontent.com/plankanban/planka/master/assets/demo.gif)
 
