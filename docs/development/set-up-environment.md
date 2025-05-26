@@ -8,15 +8,22 @@ This guide explains how to set up a local development environment for PLANKA usi
 
 ## Cloning the Repository
 
-Start by cloning the PLANKA repository and installing dependencies:
+Start by cloning the PLANKA repository:
 
 ```bash
 git clone https://github.com/plankanban/planka.git
-cd planka
-npm install
 ```
 
 ## Traditional Development Setup
+
+### Install dependencies
+
+First, install the required dependencies:
+
+```bash
+cd planka
+npm install
+```
 
 ### Configuring Environment Variables
 
@@ -51,6 +58,16 @@ npm start
 
 This setup uses Docker Compose to run all services (client, server, database) and auto-reloads on file changes.
 
+### Configuring Environment Variables
+
+Create a `.env` file in the `server/` directory based on the sample:
+
+```bash
+cp server/.env.sample server/.env
+```
+
+This will automatically define the `DEFAULT_ADMIN_*` variables for an initial admin user.
+
 ### Start the Full Stack Dev Environment
 
 ```bash
@@ -58,17 +75,6 @@ docker-compose -f docker-compose-dev.yml up
 ```
 
 > This will build and start all required services in development mode.
-
-### Environment Variables
-
-Make sure the following environment variables are defined:
-
-```env
-DEFAULT_ADMIN_EMAIL=demo@demo.demo
-DEFAULT_ADMIN_PASSWORD=demo
-DEFAULT_ADMIN_NAME=Demo Demo
-DEFAULT_ADMIN_USERNAME=demo
-```
 
 ## Access PLANKA
 
