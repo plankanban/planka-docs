@@ -36,7 +36,7 @@ cp server/.env.sample server/.env
 Edit `server/.env`:
 
 - Set `DATABASE_URL` to your local database instance.
-- Optionally configure `DEFAULT_ADMIN_*` variables to define an initial admin user.
+- Сonfigure `DEFAULT_ADMIN_*` variables to define an initial admin user.
 
 ### Initializing the Database
 
@@ -66,7 +66,9 @@ Create a `.env` file in the `server/` directory based on the sample:
 cp server/.env.sample server/.env
 ```
 
-This will automatically define the `DEFAULT_ADMIN_*` variables for an initial admin user.
+Edit `server/.env`:
+
+- Сonfigure `DEFAULT_ADMIN_*` variables to define an initial admin user.
 
 ### Start the Full Stack Dev Environment
 
