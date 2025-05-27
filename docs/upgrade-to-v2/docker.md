@@ -38,7 +38,7 @@ docker run --rm -v $(pwd):/backup -v planka_project-background-images:/data alpi
 docker compose down
 ```
 
-## 3. Change Image Tag to `2.0.0-rc.2`
+## 3. Change Image Tag to `2.0.0-rc.3`
 
 Edit your `docker-compose.yml` file and update the PLANKA image:
 
@@ -46,7 +46,7 @@ Edit your `docker-compose.yml` file and update the PLANKA image:
 services:
   planka:
 -   image: ghcr.io/plankanban/planka:latest
-+   image: ghcr.io/plankanban/planka:2.0.0-rc.2
++   image: ghcr.io/plankanban/planka:2.0.0-rc.3
     ...
 ```
 
