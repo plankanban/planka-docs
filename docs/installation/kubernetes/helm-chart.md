@@ -85,18 +85,18 @@ It is recommended to create a `values.yaml` to simplify future upgrades and conf
    # Admin user
 
    ingress:
-   enabled: true
-   hosts:
-      - host: planka.example.dev
+     enabled: true
+     hosts:
+       - host: planka.example.dev
          paths:
-         - path: /
-            pathType: ImplementationSpecific
-
-   # Needed for HTTPS
-   tls:
-      - secretName: planka-tls # existing TLS secret in k8s
-      hosts:
-         - planka.example.dev
+           - path: /
+             pathType: ImplementationSpecific
+   
+      # Needed for HTTPS
+     tls:
+       - secretName: planka-tls # existing TLS secret in k8s
+         hosts:
+           - planka.example.dev
    ```
 
 2. **Install PLANKA Using the `values.yaml`**
