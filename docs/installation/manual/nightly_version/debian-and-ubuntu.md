@@ -103,7 +103,7 @@ sudo mkdir -p /etc/apt/keyrings
 curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
 
 # Add the Node.js repository
-NODE_MAJOR=18
+NODE_MAJOR=22
 echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
 
 # Install Node.js
@@ -115,7 +115,7 @@ Verify installation:
 
 ```bash
 node -v
-# Output: v18.x.x
+# Output: v22.x.x
 ```
 
 ## Install PLANKA (Nightly)
