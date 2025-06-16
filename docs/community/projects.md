@@ -30,9 +30,13 @@ Script for importing data from Trello with attachment transfer support.
 
 Script for importing data from Trello using its JSON export format.
 
+### [Bot_checker_date_planka_2.0](https://github.com/John-Gear/Bot_checker_date_planka_2.0)
+
+A Telegram bot that fetches tasks by a specific date for PLANKA v2.
+
 ### [Bot_checker_date_planka](https://github.com/John-Gear/Bot_checker_date_planka)
 
-A Telegram bot that fetches tasks by a specific date.
+A Telegram bot that fetches tasks by a specific date for PLANKA v1.
 
 ---
 
