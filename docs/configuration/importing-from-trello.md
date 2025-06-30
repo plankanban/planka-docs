@@ -33,5 +33,6 @@ Head over to Trello's documentation for instructions on exporting data: https://
 
 If you need an import script with advanced features, check out these excellent community-made tools:
 
-- [Import script with attachment transfer support](https://github.com/garpastyls/Trello_to_Planka_migration_script)
+- [Import script with attachment transfer support for PLANKA v2](https://github.com/John-Gear/Trello_to_Planka_migration_script_2)
+- [Import script with attachment transfer support for PLANKA v1](https://github.com/John-Gear/Trello_to_Planka_migration_script)
 - [trello2planka](https://github.com/christophenne/trello2planka)

@@ -22,9 +22,13 @@ An API wrapper for PHP.
 
 An API wrapper for Python.
 
+### [Trello_to_Planka_migration_script_2](https://github.com/John-Gear/Trello_to_Planka_migration_script_2)
+
+Script for importing data from Trello with attachment transfer support for PLANKA v2.
+
 ### [Trello_to_Planka_migration_script](https://github.com/John-Gear/Trello_to_Planka_migration_script)
 
-Script for importing data from Trello with attachment transfer support.
+Script for importing data from Trello with attachment transfer support for PLANKA v1.
 
 ### [trello2planka](https://github.com/christophenne/trello2planka)
 
