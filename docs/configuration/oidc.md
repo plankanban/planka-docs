@@ -20,14 +20,16 @@ PLANKA can be configured to use an **OIDC (OpenID Connect)** provider for authen
 ### Optional Configuration Values
 
 - **OIDC_SCOPES**: Scopes to request from the identity provider. This controls what data the OAuth client can access. PLANKA requires access to the `email` and `name` claims. By default, it requests `openid profile email`.
-- **OIDC_ADMIN_ROLES**: The role claim used to determine if a user is an admin. By default, the `admin` role is checked.
+- **OIDC_ADMIN_ROLES**: The role claim used to determine if a user is an admin.
+- **OIDC_PROJECT_OWNER_ROLES**: The role claim used to determine if a user is a project owner.
+- **OIDC_BOARD_USER_ROLES**: The role claim used to determine if a user is a board user.
 - **OIDC_CLAIMS_SOURCE**: Determines whether the claims are sourced from the `id_token` or `userinfo`. By default, it is set to `userinfo`.
 - **OIDC_EMAIL_ATTRIBUTE**: The claim that contains the email. By default, it is `email`.
 - **OIDC_NAME_ATTRIBUTE**: The claim that contains the user's name. By default, it is `name`.
 - **OIDC_USERNAME_ATTRIBUTE**: The claim containing the username. By default, it is `preferred_username`.
 - **OIDC_ROLES_ATTRIBUTE**: The claim containing the roles used to identify an admin. By default, it is `groups`.
 - **OIDC_IGNORE_USERNAME**: If set to `true`, the `OIDC_USERNAME_ATTRIBUTE` will be ignored. This is useful if the format of usernames in your identity provider differs from PLANKA. By default, it is not ignored.
-- **OIDC_IGNORE_ROLES**: If set to `true`, the `OIDC_ADMIN_ROLES` and `OIDC_ROLES_ATTRIBUTE` will be ignored. This is useful if you wish to use OIDC only for authentication and not authorization, in which case user roles will be managed by PLANKA. By default, it is not ignored.
+- **OIDC_IGNORE_ROLES**: If set to `true`, all `OIDC_*_ROLES` variables and `OIDC_ROLES_ATTRIBUTE` will be ignored. This is useful if you wish to use OIDC only for authentication and not authorization, in which case user roles will be managed by PLANKA. By default, it is not ignored.
 - **OIDC_ENFORCED**: If set to `true`, all built-in authentication/authorization will be disabled. By default, it is not enforced.
 
 ## Examples
@@ -42,6 +44,8 @@ OIDC_CLIENT_ID=sxxaAIAxVXlCxTmc1YLHBbQr8NL8MqLI2DUbt42d
 OIDC_CLIENT_SECRET=om4RTMRVHRszU7bqxB7RZNkHIzA8e4sGYWxeCwIMYQXPwEBWe4SY5a0wwCe9ltB3zrq5f0dnFnp34cEHD7QSMHsKvV9AiV5Z7eqDraMnv0I8IFivmuV5wovAECAYreSI
 OIDC_SCOPES=openid profile email
 OIDC_ADMIN_ROLES=planka-admin
+# OIDC_PROJECT_OWNER_ROLES=project_owner
+# OIDC_BOARD_USER_ROLES=board_user
 # OIDC_EMAIL_ATTRIBUTE=email
 # OIDC_NAME_ATTRIBUTE=name
 # OIDC_USERNAME_ATTRIBUTE=preferred_username
