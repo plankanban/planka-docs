@@ -77,7 +77,7 @@ rm planka-prebuild.zip
 cp -av /var/www/planka-v1/.env /var/www/planka/
 cp -av /var/www/planka-v1/public/user-avatars/. /var/www/planka/public/user-avatars/
 cp -av /var/www/planka-v1/public/project-background-images/. /var/www/planka/public/background-images/
-cp -av /var/www/planka-v1/private/attachments/. /var/www/planka/public/attachments/
+cp -av /var/www/planka-v1/private/attachments/. /var/www/planka/private/attachments/
 ```
 
 ## 7. Clean Up Environment Variables
