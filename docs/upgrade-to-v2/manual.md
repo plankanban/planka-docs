@@ -124,8 +124,16 @@ npm install
 This must be done before starting PLANKA for the first time.
 :::
 
+Run the upgrade script:
+
 ```bash
 npm run db:upgrade
+```
+
+Then run the migration script to apply any additional database changes:
+
+```bash
+npm run db:migrate
 ```
 
 ## 10. Start PLANKA
