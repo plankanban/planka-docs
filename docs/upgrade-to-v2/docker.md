@@ -8,6 +8,12 @@ sidebar_position: 2
 There is **no way to revert** after migrating to v2 without a proper backup.
 :::
 
+:::warning
+Hosting under a path like `https://example.domain/planka` is **not currently supported**.
+
+Consider using a subdomain instead.
+:::
+
 :::info
 Before proceeding, ensure you are running **at least version 1.26.2** of PLANKA.
 
