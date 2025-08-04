@@ -32,6 +32,10 @@ docker compose exec postgres pg_dump -U postgres planka > planka_backup_$(date +
 
 ### Volume Backups
 
+> **Important:** Replace the volume names (`planka_user-avatars`, `planka_attachments`, `planka_project-background-images`) below with the actual volume names used in your setup.
+>
+> After running the commands, verify the created `.tar.gz` files contain the expected data.
+
 ```bash
 docker run --rm -v $(pwd):/backup -v planka_user-avatars:/data alpine tar -czvf /backup/user-avatars.tar.gz -C /data .
 docker run --rm -v $(pwd):/backup -v planka_attachments:/data alpine tar -czvf /backup/attachments.tar.gz -C /data .
