@@ -117,7 +117,7 @@ node -v
 Install required packages:
 
 ```bash
-sudo apt install unzip build-essential -y
+sudo apt install unzip build-essential python3-venv -y
 ```
 
 Create the installation directory and set ownership:
@@ -219,3 +219,4 @@ npm start --prod
 ## Access PLANKA
 
 Once the services are running, browse to **http://YOUR_DOMAIN_NAME:YOUR_PORT** and log in as **YOUR_ADMIN_EMAIL** with the password **YOUR_ADMIN_PASSWORD**.
+
