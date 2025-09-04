@@ -15,9 +15,9 @@ Consider using a subdomain instead.
 :::
 
 :::info
-Before proceeding, ensure you are running **at least version 1.26.2** of PLANKA.
+Before proceeding, ensure you are running **>= 1.26.2** of PLANKA.
 
-If not, update to version 1.26.2 first.
+If not, update to this version first.
 :::
 
 ## 1. Stop the Running Service

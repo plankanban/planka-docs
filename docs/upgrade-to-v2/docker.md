@@ -15,9 +15,9 @@ Consider using a subdomain instead.
 :::
 
 :::info
-Before proceeding, ensure you are running **at least version 1.26.2** of PLANKA.
+Before proceeding, ensure you are running **>= 1.26.2** of PLANKA.
 
-If not, update to version 1.26.2 first.
+If not, update to this version first.
 :::
 
 ## 1. Create a Backup
@@ -48,7 +48,7 @@ docker run --rm -v $(pwd):/backup -v planka_project-background-images:/data alpi
 docker compose down
 ```
 
-## 3. Change Image Tag to `2.0.0-rc.3`
+## 3. Change Image Tag to `2.0.0-rc.4`
 
 Edit your `docker-compose.yml` file and update the PLANKA image:
 
@@ -56,7 +56,7 @@ Edit your `docker-compose.yml` file and update the PLANKA image:
 services:
   planka:
 -   image: ghcr.io/plankanban/planka:latest
-+   image: ghcr.io/plankanban/planka:2.0.0-rc.3
++   image: ghcr.io/plankanban/planka:2.0.0-rc.4
     ...
 ```
 
