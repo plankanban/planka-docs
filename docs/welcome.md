@@ -69,6 +69,7 @@ Choose the method that best fits your needs:
 
 ## 📡 API Reference
 
+- [Swagger UI](./api-reference/swagger-ui.md)
 - [Postman](./api-reference/postman.md)
 - [PHP](./api-reference/php.md)
 - [Python (plankapy)](./api-reference/python.md)
