@@ -58,6 +58,16 @@ npm start
 
 This setup uses Docker Compose to run all services (client, server, database) and auto-reloads on file changes.
 
+### Clean Workspace Requirement
+
+Make sure there are no already installed dependencies (`node_modules` or `.venv` directories), since they should be installed via Docker. Otherwise, this can lead to `Segmentation fault` errors due to Node.js/Python version mismatches.
+
+If you already have them, remove them first:
+
+```bash
+rm -rf node_modules client/node_modules server/node_modules server/.venv
+```
+
 ### Configuring Environment Variables
 
 Create a `.env` file in the `server/` directory based on the sample:
