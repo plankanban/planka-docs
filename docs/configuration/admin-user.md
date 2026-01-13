@@ -15,20 +15,6 @@ You need to run the script or set environment variables to create one.
 - You **can remove** the variables after the first successful startup.
 - If you leave `DEFAULT_ADMIN_EMAIL` in place, the corresponding admin user **cannot be deleted or edited** by others.
 
-## Automated Installation
-
-If you've used the **PLANKA Installer**, you can re-run it to modify admin credentials:
-
-```bash
-bash /opt/planka_installer
-```
-
-Then select:
-
-```
-Configuration → Admin user
-```
-
 ## Manual Installation
 
 ### By Running the Script
@@ -83,4 +69,18 @@ After making changes, restart PLANKA:
 
 ```bash
 docker compose up -d
+```
+
+## Automated Installation
+
+If you've used the **PLANKA Installer**, you can re-run it to modify admin credentials:
+
+```bash
+bash /opt/planka_installer
+```
+
+Then select:
+
+```
+Configuration → Admin user
 ```

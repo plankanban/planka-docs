@@ -12,12 +12,6 @@ We offer several installation options, depending on your environment and prefere
 
 Choose the method that best fits your needs:
 
-### ✅ Automated
-
-- [Overview](./installation/automated/overview.md)
-- [Getting Started](./installation/automated/getting-started.md)
-- [How to Update](./installation/automated/how-to-update.md)
-
 ### 🛠️ Manual
 
 - [Debian & Ubuntu](./installation/manual/debian-and-ubuntu.md)
@@ -35,6 +29,12 @@ Choose the method that best fits your needs:
 ### ☸️ Kubernetes
 
 - [Helm Chart](./installation/kubernetes/helm-chart.md)
+
+### ✅ Automated
+
+- [Overview](./installation/automated/overview.md)
+- [Getting Started](./installation/automated/getting-started.md)
+- [How to Update](./installation/automated/how-to-update.md)
 
 ---
 

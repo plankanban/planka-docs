@@ -4,6 +4,12 @@ sidebar_position: 3
 
 # How to Update
 
+:::warning
+This installation method **is outdated** and may not include all current configuration options.
+
+For the best experience, we recommend using the [**Docker-based installation**](../docker/production-version.md).
+:::
+
 Updates are installed automatically once a day. A backup is created before each update.
 
 You can also update manually.

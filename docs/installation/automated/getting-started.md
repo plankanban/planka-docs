@@ -5,6 +5,12 @@ sidebar_position: 2
 # Getting Started
 
 :::warning
+This installation method **is outdated** and may not include all current configuration options.
+
+For the best experience, we recommend using the [**Docker-based installation**](../docker/production-version.md).
+:::
+
+:::warning
 **Do not run** this installer on a server that is already in use.
 
 Since you need a fresh server, I recommend using Ubuntu 22.04 or Debian 12.

@@ -4,6 +4,12 @@ sidebar_position: 1
 
 # Overview
 
+:::warning
+This installation method **is outdated** and may not include all current configuration options.
+
+For the best experience, we recommend using the [**Docker-based installation**](../docker/production-version.md).
+:::
+
 ## Demo
 
 See the installer in action: https://www.youtube.com/watch?v=0Qya8iLDnq0
