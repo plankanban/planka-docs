@@ -129,6 +129,53 @@ OIDC_IGNORE_USERNAME=true
 OIDC_IGNORE_ROLES=true
 ```
 
+### Microsoft Entra ID
+
+To configure a new App Registration for Planka in [Entra ID](https://entra.microsoft.com/) follow these steps:
+
+1. [Register a new application](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app).  
+    - Select `Web` as the *Redirect URI* type and enter `https://your-domain.com/oidc-callback` as the URI
+    - Note the *Application (client) ID* and your *Directory (tenant) ID*. 
+
+2. [Create a secret](https://learn.microsoft.com/en-us/entra/identity-platform/how-to-add-credentials?tabs=client-secret) for the new Planka app.
+    - Note the *Secret Value* as it will not be retrievable later. 
+
+3. [Add the following API permissions](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-configure-app-access-web-apis#add-permissions-to-access-your-web-api) to the Planka app
+    - *Microsoft Graph* > *Delegated Permissions*: `email`, `openid`, `profile`
+
+4. Add the below environment variables to your Planka configuration:
+
+```bash
+OIDC_CLIENT_ID=[ClientID] # Replace with Application (client) ID
+OIDC_CLIENT_SECRET=[SecretValue] # Replace with Secret Value
+OIDC_ISSUER=https://login.microsoftonline.com/[DirectoryID]/v2.0 # Replace with your Directory ID
+OIDC_SCOPES=openid profile email
+OIDC_IGNORE_ROLES=true # Do not enter this if managing roles as below
+```
+
+#### Optional: Assign Planka roles through Entra ID group membership
+
+In order to use Entra ID for authorization, follow these steps: 
+
+1. [Create security groups](https://learn.microsoft.com/en-us/entra/fundamentals/how-to-manage-groups) for the Planka roles (example names below) and add members.
+    - `APP-Planka-Admin`
+    - `APP-Planka-ProjectOwner`
+    - `APP-Planka-BoardUser` (optional)
+    - Note the *Object ID*s for each group
+2. [Add a group claim](https://learn.microsoft.com/en-us/entra/identity/hybrid/connect/how-to-connect-fed-group-claims#add-group-claims-to-tokens-for-saml-applications-using-sso-configuration) for the Planka app, ensure you select `Group ID` as the source attribute
+3. Add the below environment variables to your Planka configuration:
+
+```bash
+OIDC_CLAIMS_SOURCE=id_token # By default userinfo claim does not include groups info
+OIDC_USERNAME_ATTRIBUTE=oid # By default preferred_username will return email when id_token used and Planka username regex check does not allow "@"
+OIDC_IGNORE_ROLES=false
+OIDC_ROLES_ATTRIBUTE=groups
+OIDC_ADMIN_ROLES=[ObjectID] # Replace with Object ID for Planka Admin security group
+OIDC_PROJECT_OWNER_ROLES=[ObjectID] # Replace with Object ID for Planka Project Owner security group
+OIDC_BOARD_USER_ROLES=[ObjectID] # Replace with Object ID for Planka Board User security group
+OIDC_ENFORCED=true # Optional if you would like to disable local authentication
+```
+
 ---
 
 This setup will enable you to authenticate users via OIDC, linking or creating accounts automatically depending on the email claim, and giving you flexibility in managing user roles.
