@@ -83,7 +83,7 @@ Edit `server/.env`:
 ### Start the Full Stack Dev Environment
 
 ```bash
-docker-compose -f docker-compose-dev.yml up
+docker compose -f docker-compose-dev.yml up
 ```
 
 > This will build and start all required services in development mode.

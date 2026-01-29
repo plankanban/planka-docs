@@ -65,7 +65,7 @@ This version **is not production-ready** and may result in data loss. Use at you
 6. **Pull Images and Start Services**
 
    ```bash
-   docker-compose up -d
+   docker compose up -d
    ```
 
 ## Access PLANKA
