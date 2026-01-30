@@ -22,6 +22,10 @@ An API wrapper for PHP.
 
 An API wrapper for Python.
 
+### [kanban-mcp](https://github.com/bradrisse/kanban-mcp)
+
+A middleware that lets Large Language Models (LLMs) interact seamlessly with PLANKA boards via a simplified API.
+
 ### [Trello_to_Planka_migration_script_2](https://github.com/John-Gear/Trello_to_Planka_migration_script_2)
 
 Script for importing data from Trello with attachment transfer support for PLANKA v2.
