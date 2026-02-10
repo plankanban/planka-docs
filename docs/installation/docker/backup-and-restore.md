@@ -4,15 +4,6 @@ sidebar_position: 4
 
 # Backup & Restore
 
-:::info
-Please use these links to access the scripts:
-
-- [docker-backup.sh](https://raw.githubusercontent.com/plankanban/planka/6335b3bd3ca553ce8ed73a72ada63b62ba9b8c01/docker-backup.sh)
-- [docker-restore.sh](https://raw.githubusercontent.com/plankanban/planka/6335b3bd3ca553ce8ed73a72ada63b62ba9b8c01/docker-restore.sh)
-
-Scripts in the repository may have been updated and **may not be compatible** with your version.
-:::
-
 PLANKA comes with two scripts that allow for manual backup and restore when running PLANKA with `docker-compose.yml`.
 
 Backups can be triggered with the `docker-backup.sh` script, which exports the database, user avatars, background images, and attachments into a single `.tgz` file.
@@ -22,9 +13,7 @@ Backups can be triggered with the `docker-backup.sh` script, which exports the d
 ```bash
 $ ./docker-backup.sh
 Exporting postgres database ... Success!
-Exporting user-avatars ... Success!
-Exporting background-images ... Success!
-Exporting attachments ... Success!
+Exporting data volume ... Success!
 Creating final tarball 2023-01-17T15-37-22Z-backup.tgz ... Success!
 Cleaning up temporary files and folders ... Success!
 Backup Complete!
@@ -43,9 +32,7 @@ Importing postgres database ...
 ...
 
 Success!
-Importing user-avatars ... Success!
-Importing background-images ... Success!
-Importing attachments ... Success!
+Importing data volume ... Success!
 Cleaning up temporary files and folders ... Success!
 Restore complete!
 ```
@@ -61,8 +48,8 @@ Restore complete!
 2. **Download the Backup and Restore Scripts**
 
    ```bash
-   curl -L https://raw.githubusercontent.com/plankanban/planka/6335b3bd3ca553ce8ed73a72ada63b62ba9b8c01/docker-backup.sh -o /opt/planka/backup/backup.sh
-   curl -L https://raw.githubusercontent.com/plankanban/planka/6335b3bd3ca553ce8ed73a72ada63b62ba9b8c01/docker-restore.sh -o /opt/planka/backup/restore.sh
+   curl -L https://raw.githubusercontent.com/plankanban/planka/master/docker-backup.sh -o /opt/planka/backup/backup.sh
+   curl -L https://raw.githubusercontent.com/plankanban/planka/master/docker-restore.sh -o /opt/planka/backup/restore.sh
    ```
 
 ### With Logging

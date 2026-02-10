@@ -39,6 +39,8 @@ sidebar_position: 1
 
    Paste your generated **SECRET_KEY** and change the **BASE_URL**.
 
+   > **Security note:** Ensure that your internal services are specified in the outgoing block list (`OUTGOING_BLOCKED_IPS` / `OUTGOING_BLOCKED_HOSTS`). By default, only `localhost` and `postgres` hostnames are blocked. If you are using S3, OIDC, or other internal integrations, we recommend adding their hostnames to the blocked list as well.
+
 5. **Create an Admin User**
 
    ```bash

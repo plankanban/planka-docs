@@ -96,26 +96,48 @@ nano /var/www/planka/.env
 
 ### Remove Deprecated Variables
 
-Delete the following from your environment section:
+Delete the following:
 
 * `ALLOW_ALL_TO_CREATE_PROJECTS` — Now managed via user-specific global roles.
 * `SLACK_*`, `GOOGLE_*`, `TELEGRAM_*` — Replaced by in-app notifications with support for 100+ services.
+* `TZ` - No longer needed, now handled automatically.
 
 ### Update the `TRUST_PROXY` Value
 
 Regardless of whether you've previously set the `TRUST_PROXY` environment variable, you have to ensure it uses the correct boolean string value. If it's currently set to `0`, update it to `false` (even if the variable is commented out). If it's set to `1`, update it to `true`. The use of numeric values (`0` or `1`) is no longer supported and may lead to unexpected behavior.
 
-### Add New Variable
+### Add New Variables
 
-Add this new environment variable:
+Add these new environment variable if needed:
 
 ```yaml
-DEFAULT_LANGUAGE=en-US
+# MAX_UPLOAD_FILE_SIZE=
+
+# The default application language used as a fallback when a user's language is not set.
+# This language is also used for per-board notifications.
+# DEFAULT_LANGUAGE=en-US
+
+# INTERNAL_ACCESS_TOKEN=
+# STORAGE_LIMIT=
+# ACTIVE_USERS_LIMIT=
+# CUSTOMER_PANEL_URL=
+# DEMO_MODE=true
+
+# All outgoing HTTP requests (SMTP, webhooks, Apprise notifications, favicon fetching, etc.)
+# will be sent through this proxy if set.
+# OUTGOING_PROXY=http://proxy:3128
+
+# OIDC_USE_OAUTH_CALLBACK=true
+# OIDC_PROJECT_OWNER_ROLES=project_owner
+# OIDC_BOARD_USER_ROLES=board_user
+# OIDC_DEBUG=true
+
+# SMTP_NAME=
+
+# Using Gravatar directly exposes user IPs and hashed emails to a third party (GDPR risk).
+# Use a proxy you control for privacy, or leave commented out or empty to disable.
+# GRAVATAR_BASE_URL=https://www.gravatar.com/avatar/
 ```
-
-This sets the default language for sending notifications per user (if a user hasn't selected a language) and per board. It also acts as a fallback when translations are not available.
-
-Save and exit the editor.
 
 ## 8. Install Dependencies
 
@@ -124,7 +146,7 @@ cd /var/www/planka
 npm install
 ```
 
-## 9. Run the Database Upgrade Script
+## 9. Run the Upgrade Script
 
 :::info
 This must be done before starting PLANKA for the first time.
@@ -142,7 +164,18 @@ Then run the migration script to apply any additional database changes:
 npm run db:migrate
 ```
 
-## 10. Start PLANKA
+## 10. Upgrade to New Data Structure
+
+Move data files to the new unified directory:
+
+```bash
+mkdir -p /var/www/planka/data/protected /var/www/planka/data/private
+mv /var/www/planka/public/user-avatars /var/www/planka/data/protected
+mv /var/www/planka/public/background-images /var/www/planka/data/protected
+mv /var/www/planka/private/attachments /var/www/planka/data/private
+```
+
+## 11. Start PLANKA
 
 ### If using systemd
 
@@ -168,12 +201,12 @@ pm2 start planka
 npm start --prod
 ```
 
-## 11. Verify the Installation
+## 12. Verify the Installation
 
 - Application starts successfully
 - You can log in
 - Projects, boards, and cards are displayed
-- Background images are visible
+- All uploaded images and files appear correctly
 
 ## Troubleshooting
 
@@ -191,7 +224,7 @@ npm start --prod
    # If running in foreground, logs are shown in the terminal
    ```
 
-2. Ensure database migrations completed successfully
+2. Ensure every command completed successfully
 
 3. Check file ownership and permissions
 

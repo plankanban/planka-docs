@@ -10,6 +10,14 @@ This version **is not production-ready** and may result in data loss. Use at you
 **No Backup - No Mercy!**
 :::
 
+:::warning
+We **strongly recommend** using the [**Docker-based installation**](../docker/production-version.md) for PLANKA.
+
+The manual installation requires additional security configurations and a deep understanding of your environment. For example, to prevent SSRF and accidental access to internal services, you would need to properly configure an outgoing HTTP proxy.
+
+The Docker version comes with a **pre-installed outgoing proxy**, which can be easily configured using Docker-only environment variables (`OUTGOING_BLOCKED_IPS`, `OUTGOING_BLOCKED_HOSTS`, `OUTGOING_ALLOWED_IPS`, `OUTGOING_ALLOWED_HOSTS`) to safely restrict outbound traffic.
+:::
+
 ### System Requirements
 
 - Debian 11 or Ubuntu 22.04
@@ -206,6 +214,8 @@ SECRET_KEY=YOUR_GENERATED_KEY
 
 ...
 ```
+
+> **Security note:** For manual installations, you need to configure your own `OUTGOING_PROXY` or implement firewall rules to restrict outbound traffic and prevent access to internal services.
 
 ### Initialize the Database and Create an Admin User
 

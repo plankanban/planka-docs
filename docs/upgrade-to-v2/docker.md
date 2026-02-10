@@ -26,6 +26,8 @@ Navigate to the directory containing your `docker-compose.yml` file.
 
 ### Database Backup
 
+The instance should be running while performing the backup.
+
 ```bash
 docker compose exec postgres pg_dump -U postgres planka > planka_backup_$(date +%Y%m%d).sql
 ```
@@ -48,19 +50,7 @@ docker run --rm -v $(pwd):/backup -v planka_project-background-images:/data alpi
 docker compose down
 ```
 
-## 3. Change Image Tag to `2.0.0-rc.4`
-
-Edit your `docker-compose.yml` file and update the PLANKA image:
-
-```
-services:
-  planka:
--   image: ghcr.io/plankanban/planka:latest
-+   image: ghcr.io/plankanban/planka:2.0.0-rc.4
-    ...
-```
-
-## 4. Add New Volumes
+## 3. Add New Volumes
 
 Update the `volumes` sections:
 
@@ -69,15 +59,15 @@ services:
   planka:
     ...
     volumes:
-+     - favicons:/app/public/favicons
++     - data:/app/data
       - user-avatars:/app/public/user-avatars
-      - project-background-images:/app/public/project-background-images # Will be deleted after migration
+      - project-background-images:/app/public/project-background-images
 +     - background-images:/app/public/background-images
       - attachments:/app/private/attachments
     ...
 
 volumes:
-+ favicons:
++ data:
   user-avatars:
   project-background-images:
 + background-images:
@@ -85,7 +75,7 @@ volumes:
   db-data:
 ```
 
-## 5. Clean Up Environment Variables
+## 4. Clean Up Environment Variables
 
 ### Remove Deprecated Variables
 
@@ -93,28 +83,70 @@ Delete the following from your environment section:
 
 * `ALLOW_ALL_TO_CREATE_PROJECTS` — Now managed via user-specific global roles.
 * `SLACK_*`, `GOOGLE_*`, `TELEGRAM_*` — Replaced by in-app notifications with support for 100+ services.
+* `TZ` - No longer needed, now handled automatically.
 
 ### Update the `TRUST_PROXY` Value
 
 Regardless of whether you've previously set the `TRUST_PROXY` environment variable, you have to ensure it uses the correct boolean string value. If it's currently set to `0`, update it to `false` (even if the variable is commented out). If it's set to `1`, update it to `true`. The use of numeric values (`0` or `1`) is no longer supported and may lead to unexpected behavior.
 
-### Add New Variable
+### Add New Variables
 
-Add this new environment variable:
+Add these new environment variable if needed:
 
 ```yaml
-DEFAULT_LANGUAGE=en-US
+# - MAX_UPLOAD_FILE_SIZE=
+
+# The default application language used as a fallback when a user's language is not set.
+# This language is also used for per-board notifications.
+# - DEFAULT_LANGUAGE=en-US
+
+# - INTERNAL_ACCESS_TOKEN=
+# - STORAGE_LIMIT=
+# - ACTIVE_USERS_LIMIT=
+# - CUSTOMER_PANEL_URL=
+# - DEMO_MODE=true
+
+# All outgoing HTTP requests (SMTP, webhooks, Apprise notifications, favicon fetching, etc.)
+# will be sent through this proxy if set.
+# If commented out, an internal Squid proxy will be started inside the container,
+# which you can control via OUTGOING_BLOCKED_* and OUTGOING_ALLOWED_* below.
+# - OUTGOING_PROXY=http://proxy:3128
+
+# - OIDC_USE_OAUTH_CALLBACK=true
+# - OIDC_PROJECT_OWNER_ROLES=project_owner
+# - OIDC_BOARD_USER_ROLES=board_user
+# - OIDC_DEBUG=true
+
+# - SMTP_NAME=
+
+# Using Gravatar directly exposes user IPs and hashed emails to a third party (GDPR risk).
+# Use a proxy you control for privacy, or leave commented out or empty to disable.
+# - GRAVATAR_BASE_URL=https://www.gravatar.com/avatar/
+
+# --------------------------------------------------------------------
+# Outgoing traffic control (internal Squid proxy)
+# --------------------------------------------------------------------
+
+# These IPs/hostnames will always be blocked (highest priority)
+# - OUTGOING_BLOCKED_IPS=
+# - OUTGOING_BLOCKED_HOSTS=localhost,postgres
+
+# Only these IPs/hostnames will be reachable
+# - OUTGOING_ALLOWED_IPS=
+# - OUTGOING_ALLOWED_HOSTS=
 ```
 
-This sets the default language for sending notifications per user (if a user hasn't selected a language) and per board. It also acts as a fallback when translations are not available.
+If you are using S3, OIDC, or other internal integrations, we recommend uncommenting `OUTGOING_BLOCKED_HOSTS` and adding their hostnames to the blocked list.
 
-## 6. Pull the Docker Image
+## 5. Pull the Docker Image
+
+Ensure the PLANKA image is set to the `latest` tag in your `docker-compose.yml`.
 
 ```bash
 docker compose pull
 ```
 
-## 7. Copy Background Images to New Location
+## 6. Copy Background Images to New Location
 
 Copy existing background images to the new volume:
 
@@ -122,7 +154,7 @@ Copy existing background images to the new volume:
 docker compose run --rm planka cp -av /app/public/project-background-images/. /app/public/background-images
 ```
 
-## 8. Run the Database Upgrade Script
+## 7. Run the Upgrade Script
 
 :::info
 This must be done before starting PLANKA for the first time.
@@ -132,28 +164,36 @@ This must be done before starting PLANKA for the first time.
 docker compose run --rm planka npm run db:upgrade
 ```
 
+## 8. Upgrade to New Data Structure
+
+Copy data files to the new unified volume:
+
+```bash
+docker compose run --rm planka sh -c 'mkdir -p /app/data/protected /app/data/private && for folder in user-avatars background-images; do cp -av /app/public/$folder /app/data/protected; done && cp -av /app/private/attachments /app/data/private'
+```
+
 ## 9. Remove the Old Volume Reference
 
-Update your `docker-compose.yml` to remove the old `project-background-images` volume:
+Update your `docker-compose.yml` to remove the old volumes:
 
 ```
 services:
   planka:
     ...
     volumes:
-      - favicons:/app/public/favicons
-      - user-avatars:/app/public/user-avatars
+      - data:/app/data
+-     - user-avatars:/app/public/user-avatars
 -     - project-background-images:/app/public/project-background-images
-      - background-images:/app/public/background-images
-      - attachments:/app/private/attachments
+-     - background-images:/app/public/background-images
+-     - attachments:/app/private/attachments
     ...
 
 volumes:
-  favicons:
-  user-avatars:
+  data:
+- user-avatars:
 - project-background-images:
-  background-images:
-  attachments:
+- background-images:
+- attachments:
   db-data:
 ```
 
@@ -176,14 +216,14 @@ docker compose logs -f
 - Application starts successfully
 - You can log in
 - Projects, boards, and cards are displayed
-- Background images are visible
+- All uploaded images and files appear correctly
 
 ## 11. Clean Up
 
-Once confirmed everything works, remove the old volume:
+Once confirmed everything works, remove the old volumes:
 
 ```bash
-docker volume rm planka_project-background-images
+docker volume rm planka_user-avatars planka_project-background-images planka_background-images planka_attachments
 ```
 
 ## Troubleshooting
@@ -191,5 +231,5 @@ docker volume rm planka_project-background-images
 If you encounter issues:
 
 - Check logs with `docker compose logs -f planka`
-- Ensure database migrations completed successfully
+- Ensure every command completed successfully
 - If necessary, restore from your backup and try again
