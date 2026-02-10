@@ -151,7 +151,7 @@ docker compose pull
 Copy existing background images to the new volume:
 
 ```bash
-docker compose run --rm planka cp -av /app/public/project-background-images/. /app/public/background-images
+docker compose run --rm --user root planka sh -c 'cp -av /app/public/project-background-images/. /app/public/background-images && chown -R node:node /app/public/background-images'
 ```
 
 ## 7. Run the Upgrade Script
