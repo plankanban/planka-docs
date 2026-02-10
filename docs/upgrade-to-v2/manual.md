@@ -113,15 +113,12 @@ Add these new environment variable if needed:
 ```yaml
 # MAX_UPLOAD_FILE_SIZE=
 
+# STORAGE_LIMIT=
+# ACTIVE_USERS_LIMIT=
+
 # The default application language used as a fallback when a user's language is not set.
 # This language is also used for per-board notifications.
 # DEFAULT_LANGUAGE=en-US
-
-# INTERNAL_ACCESS_TOKEN=
-# STORAGE_LIMIT=
-# ACTIVE_USERS_LIMIT=
-# CUSTOMER_PANEL_URL=
-# DEMO_MODE=true
 
 # All outgoing HTTP requests (SMTP, webhooks, Apprise notifications, favicon fetching, etc.)
 # will be sent through this proxy if set.
