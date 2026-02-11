@@ -11,7 +11,7 @@ This version **is not production-ready** and may result in data loss. Use at you
 :::
 
 :::warning
-We **strongly recommend** using the [**Docker-based installation**](../docker/production-version.md) for PLANKA.
+We **strongly recommend** using the [**Docker-based installation**](../../docker/production-version.md) for PLANKA.
 
 The manual installation requires additional security configurations and a deep understanding of your environment. For example, to prevent SSRF and accidental access to internal services, you would need to properly configure an outgoing HTTP proxy.
 
