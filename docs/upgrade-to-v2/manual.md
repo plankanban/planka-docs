@@ -14,6 +14,12 @@ Hosting under a path like `https://example.domain/planka` is **not currently sup
 Consider using a subdomain instead.
 :::
 
+:::warning
+After the migration, due date completion statuses **will be reset**.
+
+See [this issue](https://github.com/plankanban/planka/issues/1519) for the cause and how to fix it.
+:::
+
 :::info
 Before proceeding, ensure you are running **>= 1.26.2** of PLANKA.
 
