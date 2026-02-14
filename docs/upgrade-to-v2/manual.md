@@ -14,12 +14,6 @@ Hosting under a path like `https://example.domain/planka` is **not currently sup
 Consider using a subdomain instead.
 :::
 
-:::warning
-After the migration, due date completion statuses **will be reset**.
-
-See [this issue](https://github.com/plankanban/planka/issues/1519) for the cause and how to fix it.
-:::
-
 :::info
 Before proceeding, ensure you are running **>= 1.26.2** of PLANKA.
 
@@ -178,7 +172,50 @@ mv /var/www/planka/public/background-images /var/www/planka/data/protected
 mv /var/www/planka/private/attachments /var/www/planka/data/private
 ```
 
-## 11. Start PLANKA
+## 11. Restore Due Date Completion States
+
+In the initial v2 release, we removed the due date toggle (because we introduced the Closed list type) and later restored it in the final version. During the upgrade, the field is removed from the database first and then re-added during the post-upgrade migration in a non-completed state.
+
+To restore all completion states, follow these additional steps:
+
+1. Generate an SQL file with `UPDATE` statements (replace `/var/www/planka-v1/planka_backup_20260212.sql` with the path to your v1 SQL backup file):
+
+```bash
+awk '
+  BEGIN { in_copy=0 }
+  /^COPY public\.card/ {
+    split($0, a, "\\(|\\)");
+    split(a[2], cols, ", ");
+    for(i in cols) gsub("\"","",cols[i]);
+    for(i in cols) col_index[cols[i]]=i;
+    in_copy=1; next
+  }
+  in_copy && $0=="\\." { in_copy=0; next }
+  in_copy {
+    n=split($0, vals, "\t");
+    id=vals[col_index["id"]];
+    val=vals[col_index["is_due_date_completed"]];
+    if(val=="t") val="TRUE";
+    else if(val=="f") val="FALSE";
+    else next;
+    printf "UPDATE card SET is_due_completed = %s WHERE id = ''%s'';\n", val, id
+  }
+' /var/www/planka-v1/planka_backup_20260212.sql > due_completion_fix.sql
+```
+
+2. Execute the SQL updates:
+
+```bash
+cat due_completion_fix.sql | sudo -u postgres psql -d planka
+```
+
+3. Remove the generated file:
+
+```bash
+rm due_completion_fix.sql
+```
+
+## 12. Start PLANKA
 
 ### If using systemd
 
@@ -204,7 +241,7 @@ pm2 start planka
 npm start --prod
 ```
 
-## 12. Verify the Installation
+## 13. Verify the Installation
 
 - Application starts successfully
 - You can log in

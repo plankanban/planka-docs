@@ -14,12 +14,6 @@ Hosting under a path like `https://example.domain/planka` is **not currently sup
 Consider using a subdomain instead.
 :::
 
-:::warning
-After the migration, due date completion statuses **will be reset**.
-
-See [this issue](https://github.com/plankanban/planka/issues/1519) for the cause and how to fix it.
-:::
-
 :::info
 Before proceeding, ensure you are running **>= 1.26.2** of PLANKA.
 
@@ -200,7 +194,56 @@ volumes:
   db-data:
 ```
 
-## 10. Start PLANKA and Verify
+## 10. Restore Due Date Completion States
+
+In the initial v2 release, we removed the due date toggle (because we introduced the Closed list type) and later restored it in the final version. During the upgrade, the field is removed from the database first and then re-added during the post-upgrade migration in a non-completed state.
+
+To restore all completion states, follow these additional steps:
+
+1. Run the migration script to apply additional database changes:
+
+```bash
+docker compose run --rm planka npm run db:migrate
+```
+
+2. Generate an SQL file with `UPDATE` statements (replace `planka_backup_20260212.sql` with the path to your v1 SQL backup file):
+
+```bash
+awk '
+  BEGIN { in_copy=0 }
+  /^COPY public\.card/ {
+    split($0, a, "\\(|\\)");
+    split(a[2], cols, ", ");
+    for(i in cols) gsub("\"","",cols[i]);
+    for(i in cols) col_index[cols[i]]=i;
+    in_copy=1; next
+  }
+  in_copy && $0=="\\." { in_copy=0; next }
+  in_copy {
+    n=split($0, vals, "\t");
+    id=vals[col_index["id"]];
+    val=vals[col_index["is_due_date_completed"]];
+    if(val=="t") val="TRUE";
+    else if(val=="f") val="FALSE";
+    else next;
+    printf "UPDATE card SET is_due_completed = %s WHERE id = ''%s'';\n", val, id
+  }
+' planka_backup_20260212.sql > due_completion_fix.sql
+```
+
+3. Execute the SQL updates:
+
+```bash
+docker compose up -d postgres && cat due_completion_fix.sql | docker compose exec -T postgres bash -c 'until pg_isready -U postgres; do sleep 2; done; psql -U postgres -d planka'
+```
+
+4. Remove the generated file:
+
+```bash
+rm due_completion_fix.sql
+```
+
+## 11. Start PLANKA and Verify
 
 Start PLANKA:
 
@@ -221,7 +264,7 @@ docker compose logs -f
 - Projects, boards, and cards are displayed
 - All uploaded images and files appear correctly
 
-## 11. Clean Up
+## 12. Clean Up
 
 Once confirmed everything works, remove the old volumes:
 
