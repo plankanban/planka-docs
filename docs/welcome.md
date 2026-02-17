@@ -48,6 +48,7 @@ Choose the method that best fits your needs:
 ## ⚙️ Configuration
 
 - [Admin User](./configuration/admin-user.md)
+- [Customizing End User Terms](./configuration/customizing-end-user-terms.md)
 - [Run as a Service (Linux)](./configuration/run-as-a-service.md)
 - [Logging](./configuration/logging.md)
 - [OIDC (OpenID Connect)](./configuration/oidc.md)
