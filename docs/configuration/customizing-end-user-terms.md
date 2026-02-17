@@ -69,7 +69,7 @@ You can view the full default template [here](https://raw.githubusercontent.com/
 Your custom Terms must be placed in:
 
 ```
-/app/terms/self-hosted
+/app/terms/custom
 ```
 
 How you do this depends on your installation method.
@@ -79,7 +79,7 @@ How you do this depends on your installation method.
 Create the directory:
 
 ```bash
-mkdir -p /var/www/planka/terms/self-hosted
+mkdir -p /var/www/planka/terms/custom
 ```
 
 Then place your `.md` Terms files inside that directory.
@@ -104,7 +104,7 @@ services:
     ...
     volumes:
       - data:/app/data
-      - ./terms:/app/terms/self-hosted
+      - ./terms:/app/terms/custom
     ...
 ```
 
