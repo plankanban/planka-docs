@@ -4,7 +4,7 @@ sidebar_position: 2
 
 # Postman
 
-The official documentation for PLANKA v2 is available here: [PLANKA v2 Docs](https://documenter.getpostman.com/view/48263477/2sB3HqJebc).
+The official documentation for PLANKA v2 is available here: [PLANKA v2 Docs](https://documenter.getpostman.com/view/48263477/2sBXcDGMDt).
 
 ## Previous Version
 
