@@ -16,6 +16,7 @@ The Docker version comes with a **pre-installed outgoing proxy**, which can be e
 
 - PostgreSQL (tested with v16): https://www.postgresql.org/download/windows/
 - Node.js (tested with v22): https://nodejs.org/en/download/
+- Python (tested with v3.10): https://www.python.org/downloads/
 - Windows PowerShell **as Administrator**
 
 ## Install PLANKA

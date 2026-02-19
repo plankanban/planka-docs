@@ -23,6 +23,7 @@ The Docker version comes with a **pre-installed outgoing proxy**, which can be e
 - Debian 11 or Ubuntu 22.04
 - PostgreSQL
 - Node.js
+- Python
 
 ## PostgreSQL
 
