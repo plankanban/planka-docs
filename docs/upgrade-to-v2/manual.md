@@ -9,6 +9,12 @@ There is **no way to revert** after migrating to v2 without a proper backup.
 :::
 
 :::warning
+This guide is **only for users** who still have version 1.
+
+If you are already running any `2.0.0-rc` version, see the **[migration guide for 2.0.0-rc](https://github.com/plankanban/planka/issues/1506)**.
+:::
+
+:::warning
 Hosting under a path like `https://example.domain/planka` is **not currently supported**.
 
 Consider using a subdomain instead.
