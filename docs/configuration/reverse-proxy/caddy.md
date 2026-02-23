@@ -24,9 +24,14 @@ Replace placeholders with your actual email and domain:
 }
 
 your.domain.tld {
-    reverse_proxy http://localhost:3000
+    reverse_proxy http://localhost:3000 {
+        header_up X-Forwarded-Proto {scheme}
+    }
 }
+
 ```
+
+Note: The header_up X-Forwarded-Proto {scheme} directive is strictly required if you plan to use OIDC (SSO) or other secure session features. It ensures the backend Node.js server correctly identifies the original request as HTTPS.
 
 This config enables automatic HTTPS via Let's Encrypt.
 
