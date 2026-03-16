@@ -115,6 +115,30 @@ docker compose down
 docker compose up -d
 ```
 
+### Kubernetes / Helm Installation
+
+When deploying PLANKA using the official Helm chart, you can configure your custom terms directly inside your `values.yaml` using the `terms` definition block.
+
+```yaml
+terms:
+  enabled: true
+  customFiles:
+    en-US.md: |
+      # End User Terms of Service
+      ...
+      [confirmations]::
+      ---
+      ✔️ **I have read and accept these End User Terms of Service**
+    de-DE.md: |
+      # Nutzungsbedingungen
+      ...
+      [confirmations]::
+      ---
+      ✔️ **Ich habe diese Nutzungsbedingungen gelesen und akzeptiere sie**
+```
+
+The Helm chart will automatically create a configuration map with your provided Markdown files and mount it to `/app/terms/custom`.
+
 ## Important Notes
 
 - If no custom Terms are found, PLANKA will fall back to the built-in template.
