@@ -22,6 +22,10 @@ An API wrapper for PHP.
 
 An API wrapper for Python.
 
+### [plnk](https://github.com/plattnum/planka-cli)
+
+A scriptable Rust CLI and SDK for PLANKA, plus a live terminal TUI explorer. Built for shell scripts, CI/CD pipelines, and AI agents.
+
 ### [kanban-mcp](https://github.com/bradrisse/kanban-mcp)
 
 A middleware that lets Large Language Models (LLMs) interact seamlessly with PLANKA boards via a simplified API.
