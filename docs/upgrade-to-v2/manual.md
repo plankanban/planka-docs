@@ -124,11 +124,6 @@ Add these new environment variable if needed:
 # will be sent through this proxy if set.
 # OUTGOING_PROXY=http://proxy:3128
 
-# OIDC_USE_OAUTH_CALLBACK=true
-# OIDC_PROJECT_OWNER_ROLES=project_owner
-# OIDC_BOARD_USER_ROLES=board_user
-# OIDC_DEBUG=true
-
 # SMTP_NAME=
 
 # Using Gravatar directly exposes user IPs and hashed emails to a third party (GDPR risk).

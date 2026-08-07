@@ -109,11 +109,6 @@ Add these new environment variable if needed:
 # which you can control via OUTGOING_BLOCKED_* and OUTGOING_ALLOWED_* below.
 # - OUTGOING_PROXY=http://proxy:3128
 
-# - OIDC_USE_OAUTH_CALLBACK=true
-# - OIDC_PROJECT_OWNER_ROLES=project_owner
-# - OIDC_BOARD_USER_ROLES=board_user
-# - OIDC_DEBUG=true
-
 # - SMTP_NAME=
 
 # Using Gravatar directly exposes user IPs and hashed emails to a third party (GDPR risk).
@@ -133,7 +128,7 @@ Add these new environment variable if needed:
 # - OUTGOING_ALLOWED_HOSTS=
 ```
 
-If you are using S3, OIDC, or other internal integrations, we recommend uncommenting `OUTGOING_BLOCKED_HOSTS` and adding their hostnames to the blocked list.
+If you are using S3 or other internal integrations, we recommend uncommenting `OUTGOING_BLOCKED_HOSTS` and adding their hostnames to the blocked list.
 
 ## 5. Pull the Docker Image
 

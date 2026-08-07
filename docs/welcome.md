@@ -51,7 +51,6 @@ Choose the method that best fits your needs:
 - [Customizing End User Terms](./configuration/customizing-end-user-terms.md)
 - [Run as a Service (Linux)](./configuration/run-as-a-service.md)
 - [Logging](./configuration/logging.md)
-- [OIDC (OpenID Connect)](./configuration/oidc.md)
 - [Importing from Trello](./configuration/importing-from-trello.md)
 
 ### 🔁 Reverse Proxy

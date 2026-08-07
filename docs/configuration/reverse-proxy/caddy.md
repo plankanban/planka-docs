@@ -30,7 +30,7 @@ your.domain.tld {
 }
 ```
 
-Note: The `header_up X-Forwarded-Proto {scheme}` directive is strictly required if you plan to use OIDC (SSO) or other secure session features. It ensures the backend Node.js server correctly identifies the original request as HTTPS.
+Note: The `header_up X-Forwarded-Proto {scheme}` directive is strictly required if you rely on secure cookies and session features. It ensures the backend Node.js server correctly identifies the original request as HTTPS.
 
 This config enables automatic HTTPS via Let's Encrypt.
 
