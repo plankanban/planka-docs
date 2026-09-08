@@ -36,3 +36,7 @@ If you need an import script with advanced features, check out these excellent c
 - [Import script with attachment transfer support for PLANKA v2](https://github.com/John-Gear/Trello_to_Planka_migration_script_2)
 - [Import script with attachment transfer support for PLANKA v1](https://github.com/John-Gear/Trello_to_Planka_migration_script)
 - [trello2planka](https://github.com/christophenne/trello2planka)
+
+---
+
+Migrating a whole team? [PLANKA Pro](https://planka.app/pro?ref=docs-trello) adds calendar and timeline views, mobile support, templates and PDF export, and can be trialled for 30 days on your own server.

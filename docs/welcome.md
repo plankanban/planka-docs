@@ -8,6 +8,12 @@ This documentation provides useful information and guides to help you install, c
 
 We offer several installation options, depending on your environment and preferences.
 
+## 🧭 Choosing an Edition
+
+- [Community or Pro?](./community-or-pro.md) — what the free edition does, and where Pro differs
+
+---
+
 ## 📦 Installation
 
 Choose the method that best fits your needs:

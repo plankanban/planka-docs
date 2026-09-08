@@ -73,3 +73,7 @@ If you're not using Docker volumes and prefer to directly link folders (bind mou
 ```bash
 chown -R 1000:1000 /mnt/path
 ```
+
+---
+
+Running PLANKA for a company? [PLANKA Pro](https://planka.app/pro?ref=docs-install) adds mobile support, SSO, calendar and timeline views, templates and PDF export, and can be trialled for 30 days on your own server.

@@ -70,6 +70,11 @@ const config = {
           },
           //{to: '/blog', label: 'News', position: 'left'},
           {
+            href: 'https://planka.app/pro?ref=docs-nav',
+            label: 'Pro',
+            position: 'right',
+          },
+          {
             href: 'https://github.com/plankanban/planka',
             label: 'GitHub',
             position: 'right',

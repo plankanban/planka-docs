@@ -154,3 +154,9 @@ Please ensure that you are restoring the correct backup.
    ```bash
    bash restore.sh the_name_of_your_backup.tgz
    ```
+
+---
+
+:::info
+Planning to try [PLANKA Pro](https://planka.app/pro?ref=docs-backup)? Take a backup first. The upgrade to Pro is one-way — there is no downgrade back to Community — so the backup is your only way back.
+:::
