@@ -4,69 +4,56 @@ sidebar_position: 2
 
 # Fail2ban
 
-Fail2ban is a security tool that helps protect your system from brute-force attacks. It monitors log files and, upon detecting a series of failed login attempts, blocks the offending IP addresses for a specified time using `iptables`.
+PLANKA already limits failed sign-ins on its own (see [Sign-in Limits](./detailed-authentication-errors.md#sign-in-limits)). Fail2ban adds to that by blocking an offending address at the firewall, based on PLANKA's log file.
 
-## Setup a Filter and a Jail for PLANKA
+## Requirements
 
-To protect PLANKA from brute-force attacks, you'll need to set up both a **filter** and a **jail** in Fail2ban.
+- The log file has to be reachable from the host. In a manual installation it is at `/var/www/planka/logs/planka.log`; with Docker, you have to [mount it](../logging.md#docker).
+- Behind a reverse proxy, set [`TRUST_PROXY=true`](../reverse-proxy/nginx.md). Otherwise, every failed sign-in is logged with the address of the proxy, and Fail2ban locks everybody out by banning it.
 
-### 1. Create the Filter
+## Setup
 
-A **filter** defines regular expressions to identify failed authentication attempts in the log files.
+1. **Create the Filter**
 
-Create a file named `planka.conf` in `/etc/fail2ban/filter.d` with the following contents:
+   Create `/etc/fail2ban/filter.d/planka.conf`:
 
-```conf
-[Definition]
-failregex = ^(.*) Invalid (email or username:|password!) (\"(.*)\"!)? ?\(IP: <ADDR>\)$
-ignoreregex =
-```
+   ```ini
+   [Definition]
+   failregex = ^(.*) Invalid (email or username:|password!) (\"(.*)\"!)? ?\(IP: <ADDR>\)$
+               ^(.*) Login rate limit hit \(IP: <ADDR>\)$
+   ignoreregex =
+   ```
 
-### 2. Create the Jail
+2. **Create the Jail**
 
-A **jail** controls how to handle the failed authentication attempts found by the filter. 
+   Create `/etc/fail2ban/jail.d/planka.local`:
 
-Create a file named `planka.local` in `/etc/fail2ban/jail.d` with the following contents:
+   ```ini
+   [planka]
+   enabled = true
+   backend = polling
+   port = http,https
+   filter = planka
+   logpath = /var/www/planka/logs/planka.log
+   maxretry = 5
+   bantime = 900
+   ```
 
-```conf
-[planka]
-enabled = true
-port = http,https
-filter = planka
-logpath = /path/to/planka/logs/planka.log
-maxretry = 5
-bantime = 900
-```
+   Adjust `logpath` and `port` to your setup. `maxretry` is the number of failed attempts before an address is banned, `bantime` is how long the ban lasts in seconds.
 
-> **Note:** Replace `/path/to/planka/logs/planka.log` with the actual location of your PLANKA log file (ensure you've enabled [logging](../logging.md)).
+   :::warning
+   Are you publishing PLANKA's port directly from Docker, with no reverse proxy on the host? Then add `chain = DOCKER-USER` to the jail. Docker's forwarded traffic bypasses the default `INPUT` chain, so the ban would have no effect.
+   :::
 
-- `maxretry` defines the number of failed login attempts before banning an IP.
-- `bantime` is the duration (in seconds) for which the offending IP will be blocked (900 seconds = 15 minutes).
+3. **Test the Filter and Restart Fail2ban**
 
-### 3. Restart Fail2ban
+   ```bash
+   sudo fail2ban-regex /var/www/planka/logs/planka.log /etc/fail2ban/filter.d/planka.conf
+   sudo systemctl restart fail2ban
+   ```
 
-After setting up the filter and jail, restart the Fail2ban service to apply the changes:
+4. **Check the Jail**
 
-```bash
-sudo systemctl restart fail2ban
-```
-
-### 4. Check the Status of PLANKA's Jail
-
-To monitor the status of the Fail2ban jail for PLANKA, use the following command:
-
-```bash
-fail2ban-client status planka
-```
-
-## Additional Considerations
-
-Make sure you:
-
-- Have **logging** enabled in your PLANKA setup.
-- Adjust the `logpath` in the jail configuration if your log file is in a different location or has a different name.
-- Update the `port` field if you're using non-standard ports for HTTP or HTTPS.
-
----
-
-By using Fail2ban, you can significantly reduce the risk of brute-force attacks on your PLANKA instance.
+   ```bash
+   sudo fail2ban-client status planka
+   ```

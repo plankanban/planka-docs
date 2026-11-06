@@ -6,21 +6,21 @@ sidebar_position: 3
 
 This guide helps you configure **Traefik** as a reverse proxy for PLANKA when running with Docker. Traefik handles HTTPS certificates automatically using Let's Encrypt.
 
-### 1. Create Traefik Folder
+### 1. Create a Shared Network
+
+```bash
+docker network create proxy
+```
+
+### 2. Create the Traefik Folder
 
 ```bash
 mkdir -p /opt/traefik && cd /opt/traefik
 ```
 
-### 2. Create the Traefik Configuration
+### 3. Create the Traefik Configuration
 
-Create the `traefik.yml` file:
-
-```bash
-nano traefik.yml
-```
-
-Paste and edit the following (replace `your@email-com`):
+Create `traefik.yml` and replace `your@email.com`:
 
 ```yaml
 global:
@@ -29,8 +29,6 @@ global:
 
 api:
   dashboard: false
-  # Set insecure to false for production!
-  insecure: false
 
 entryPoints:
   web:
@@ -50,7 +48,7 @@ entryPoints:
 certificatesResolvers:
   default:
     acme:
-      email: your@email-com
+      email: your@email.com
       storage: /ssl-certs/acme.json
       httpChallenge:
         entryPoint: web
@@ -58,51 +56,63 @@ certificatesResolvers:
 providers:
   docker:
     exposedByDefault: false
+    network: proxy
 ```
 
-### 3. Create the Traefik Docker Compose File
+### 4. Create the Traefik Compose File
 
 Create `docker-compose.yml`:
 
-```bash
-nano docker-compose.yml
-```
-
-Insert:
-
 ```yaml
-version: "3"
-
 services:
   traefik:
-    image: traefik:v2.9
+    image: traefik:v3
+    restart: unless-stopped
     ports:
       - "80:80"
       - "443:443"
-      # Uncomment to enable dashboard (insecure for production)
-      # - "8080:8080"
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - /opt/traefik/traefik.yml:/etc/traefik/traefik.yml
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /opt/traefik/traefik.yml:/etc/traefik/traefik.yml:ro
       - /opt/traefik/ssl/:/ssl-certs/
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true
 ```
 
-### 4. Add Labels to PLANKA's `docker-compose.yml`
+### 5. Update PLANKA's `docker-compose.yml`
 
-Update your PLANKA service with Traefik labels. Replace `domain.tld` with your actual domain:
+Replace `domain.tld` with your actual domain. Set `BASE_URL` and `TRUST_PROXY`, remove the `ports` section so that PLANKA can only be reached through Traefik, then add the labels and the network:
 
 ```yaml
-labels:
-  - "traefik.enable=true"
-  - "traefik.http.routers.frontend.rule=Host(`domain.tld`)"
-  - "traefik.http.routers.frontend.entrypoints=websecure"
-  - "traefik.http.routers.frontend.tls.certresolver=default"
+services:
+  planka:
+    environment:
+      - BASE_URL=https://domain.tld
+      - TRUST_PROXY=true
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.planka.rule=Host(`domain.tld`)"
+      - "traefik.http.routers.planka.entrypoints=websecure"
+      - "traefik.http.routers.planka.tls.certresolver=default"
+      - "traefik.http.services.planka.loadbalancer.server.port=1337"
+    networks:
+      - default
+      - proxy
+
+networks:
+  proxy:
+    external: true
 ```
 
-### 5. Start Traefik
+### 6. Start Everything
 
 ```bash
-docker compose up -d
+cd /opt/traefik && docker compose up -d
+cd /opt/planka && docker compose up -d
 ```
 
 ---

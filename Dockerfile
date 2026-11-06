@@ -1,6 +1,6 @@
 ## Base ########################################################################
 # Use a larger node image to do the build for native deps (e.g., gcc, python)
-FROM node:lts as base
+FROM node:lts AS base
 
 # Reduce npm log spam and colour during install within Docker
 ENV NPM_CONFIG_LOGLEVEL=warn
@@ -12,7 +12,7 @@ WORKDIR /app
 COPY --chown=node:node . /app
 
 ## Production ##################################################################
-FROM base as production
+FROM base AS production
 WORKDIR /app
 
 # Install (not ci) with dependencies, and for Linux vs. Linux Musl (which we use for -alpine)
@@ -22,7 +22,7 @@ RUN npm run build
 
 ## Deploy ######################################################################
 # Use a stable nginx image
-FROM nginx:stable-alpine as deploy
+FROM nginx:stable-alpine AS deploy
 WORKDIR /app
 # Copy what we've installed/built from production
 COPY --from=production /app/build /usr/share/nginx/html/

@@ -1,0 +1,5 @@
+:::warning Set `TRUST_PROXY=true`
+Add `TRUST_PROXY=true` to your `.env` or `docker-compose.yml`, and set `BASE_URL` to the public address. Without it, PLANKA sees the address of the proxy for every user: they all share one [sign-in limit](../security/detailed-authentication-errors.md#sign-in-limits), and [Fail2ban](../security/fail2ban.md) would ban the proxy. Make sure PLANKA cannot be reached without going through the proxy.
+:::
+
+The samples use the port of a manual installation, `1337`. The stock `docker-compose.yml` publishes port `3000` instead.

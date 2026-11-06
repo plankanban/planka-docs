@@ -16,6 +16,8 @@ git clone https://github.com/plankanban/planka.git
 
 ## Traditional Development Setup
 
+You need Node.js 24 or newer, Python 3.11 or newer and a PostgreSQL database.
+
 ### Install dependencies
 
 First, install the required dependencies:
@@ -36,7 +38,7 @@ cp server/.env.sample server/.env
 Edit `server/.env`:
 
 - Set `DATABASE_URL` to your local database instance.
-- Сonfigure `DEFAULT_ADMIN_*` variables to define an initial admin user.
+- Configure `DEFAULT_ADMIN_*` variables to define an initial admin user.
 
 ### Initializing the Database
 
@@ -78,7 +80,7 @@ cp server/.env.sample server/.env
 
 Edit `server/.env`:
 
-- Сonfigure `DEFAULT_ADMIN_*` variables to define an initial admin user.
+- Configure `DEFAULT_ADMIN_*` variables to define an initial admin user.
 
 ### Start the Full Stack Dev Environment
 

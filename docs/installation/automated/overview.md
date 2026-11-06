@@ -4,12 +4,6 @@ sidebar_position: 1
 
 # Overview
 
-:::warning
-This installation method **is outdated** and may not include all current configuration options.
-
-For the best experience, we recommend using the [**Docker-based installation**](../docker/production-version.md).
-:::
-
 ## Demo
 
 See the installer in action: https://www.youtube.com/watch?v=0Qya8iLDnq0
@@ -40,6 +34,8 @@ Backups will be stored here:
 /opt/planka/backup
 ```
 
+You can create and restore backups from the "Backup and restore" menu of the installer.
+
 ## Logs
 
 Logs can be found here:
@@ -52,21 +48,13 @@ Logs can be found here:
 
 You can reinstall PLANKA using the "Uninstall PLANKA" option in the installer.
 
-### Option 1: Light
+This does the following:
 
 - Delete PLANKA containers
 - Delete all Docker volumes
 - Delete the Nginx configuration
 
-### Option 2: Full (Coming Soon)
-
-- All of Option 1
-- Revoke SSL certificates (SSL Setup)
-- Delete ACME accounts (SSL Setup)
-- Remove all installed packages (Docker, Nginx, Certbot, etc.)
-- Remove added repositories
-
-*Note: No matter which option is chosen, backups are never deleted.*
+Backups are never deleted.
 
 ## Some Notes
 

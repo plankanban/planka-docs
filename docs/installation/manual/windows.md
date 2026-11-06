@@ -14,9 +14,9 @@ The Docker version comes with a **pre-installed outgoing proxy**, which can be e
 
 ### System Requirements
 
-- PostgreSQL (tested with v16): https://www.postgresql.org/download/windows/
-- Node.js (tested with v22): https://nodejs.org/en/download/
-- Python (tested with v3.10): https://www.python.org/downloads/
+- PostgreSQL 15 or newer: https://www.postgresql.org/download/windows/
+- Node.js 24 or newer: https://nodejs.org/en/download/
+- Python 3.11 or newer: https://www.python.org/downloads/
 - Windows PowerShell **as Administrator**
 
 ## Install PLANKA
@@ -31,7 +31,7 @@ cd C:\planka
 Download and extract the prebuilt version of PLANKA:
 
 ```powershell
-curl -O https://github.com/plankanban/planka/releases/latest/download/planka-prebuild.zip
+curl.exe -fLO https://github.com/plankanban/planka/releases/latest/download/planka-prebuild.zip
 Expand-Archive planka-prebuild.zip -DestinationPath C:\
 rm planka-prebuild.zip
 ```
@@ -108,8 +108,12 @@ Username (optional): ...
 From the `C:\planka` directory, start PLANKA:
 
 ```powershell
-npm start --prod
+npm run start:prod
 ```
+
+:::info
+`npm run start:prod` is the command for production. `npm start` runs the development file watcher instead, and npm 12 rejects the `npm start --prod` that older guides used.
+:::
 
 ## Access PLANKA
 

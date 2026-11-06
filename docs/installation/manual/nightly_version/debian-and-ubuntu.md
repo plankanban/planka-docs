@@ -20,10 +20,10 @@ The Docker version comes with a **pre-installed outgoing proxy**, which can be e
 
 ### System Requirements
 
-- Debian 11 or Ubuntu 22.04
-- PostgreSQL
-- Node.js
-- Python
+- Debian 13 or Ubuntu 26.04 LTS (Debian 12 and Ubuntu 24.04 work as well)
+- PostgreSQL 15 or newer (the version your distribution ships is fine)
+- Node.js 24 or newer
+- Python 3.11 or newer
 
 ## PostgreSQL
 
@@ -45,32 +45,25 @@ If prompted to restart any services, press **ENTER** to accept the defaults.
 
 ### Create a PostgreSQL User and Database for PLANKA
 
-**Create a PostgreSQL user:**
-
-```bash
-sudo -u postgres createuser --interactive
-```
-
-Sample output:
-
-```bash
-Enter name of role to add: planka
-Shall the new role be a superuser? (y/n) y
-```
-
-**Create the database:**
-
-To avoid `sudo` permission issues:
+To avoid `sudo` permission issues, run these from `/tmp`:
 
 ```bash
 cd /tmp
 ```
 
-Then run:
+**Create a PostgreSQL user:**
 
 ```bash
-sudo -u postgres createdb planka
+sudo -u postgres createuser planka
 ```
+
+**Create the database, owned by that user:**
+
+```bash
+sudo -u postgres createdb -O planka planka
+```
+
+The `planka` user does not have to be a superuser.
 
 ### Create a Unix User and Set the Database Password
 
@@ -112,7 +105,7 @@ sudo mkdir -p /etc/apt/keyrings
 curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
 
 # Add the Node.js repository
-NODE_MAJOR=22
+NODE_MAJOR=24
 echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
 
 # Install Node.js
@@ -124,7 +117,7 @@ Verify installation:
 
 ```bash
 node -v
-# Output: v22.x.x
+# Output: v24.x.x
 ```
 
 ## Install PLANKA (Nightly)
@@ -132,7 +125,7 @@ node -v
 Install required packages:
 
 ```bash
-sudo apt install unzip build-essential -y
+sudo apt install git build-essential python3-venv -y
 ```
 
 Create the installation directory and set ownership:
@@ -162,7 +155,7 @@ Install dependencies and build the client:
 npm install
 
 cd client
-npm run build
+INDEX_FORMAT=ejs npm run build
 ```
 
 ### Set Up Symlinks
@@ -176,7 +169,7 @@ ln -s /var/www/planka/client/dist/logo512.png /var/www/planka/server/public/logo
 ln -s /var/www/planka/client/dist/manifest.json /var/www/planka/server/public/manifest.json
 ln -s /var/www/planka/client/dist/robots.txt /var/www/planka/server/public/robots.txt
 ln -s /var/www/planka/client/dist/assets /var/www/planka/server/public/assets
-ln -s /var/www/planka/client/dist/index.html /var/www/planka/server/views/index.html
+ln -s /var/www/planka/client/dist/index.ejs /var/www/planka/server/views/index.ejs
 ```
 
 ### Configure Environment Variables
@@ -246,8 +239,12 @@ Username (optional): ...
 From the `server` directory, start PLANKA:
 
 ```bash
-npm start --prod
+npm run start:prod
 ```
+
+:::info
+`npm run start:prod` is the command for production. `npm start` runs the development file watcher instead, and npm 12 rejects the `npm start --prod` that older guides used.
+:::
 
 ## Access PLANKA
 

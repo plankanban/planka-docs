@@ -49,7 +49,7 @@ import ProComparison from './_pro-comparison.mdx';
 Pro upgrades an existing Community installation in place — your database, your volume, your
 data. It is a real migration rather than a new image: Pro adds a Valkey service and a one-off
 schema promote. The promote accepts only certain Community releases as a starting point —
-currently 2.1.x and 2.2.x — and from any other version it stops without changing anything.
+currently 2.1.x, 2.2.x and 2.3.x — and from any other version it stops without changing anything.
 **The upgrade is one-way — there is no downgrade back to Community — so take a backup first,
 or try it on a copy.** The step-by-step guide is in the customer center once you have a key,
 and lists the releases the promote accepts.

@@ -9,8 +9,12 @@ const config = {
   tagline: 'Project mastering driven by fun',
   url: 'https://docs.planka.cloud',
   baseUrl: '/',
-  onBrokenLinks: 'warn',
-  onBrokenMarkdownLinks: 'warn',
+  onBrokenLinks: 'throw',
+  markdown: {
+    hooks: {
+      onBrokenMarkdownLinks: 'throw',
+    },
+  },
   favicon: 'images/planka.ico',
 
   // GitHub pages deployment config.

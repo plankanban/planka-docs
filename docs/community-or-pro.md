@@ -35,10 +35,10 @@ Pro is self-hosted on your own infrastructure, exactly as Community is.
 
 Pro upgrades an existing Community installation in place. Your database, your volume and your data stay where they are.
 
-It is a real migration rather than an image swap: Pro adds a Valkey service to your compose file and needs a one-off schema promote (`npm run db:promote`). The promote accepts only certain Community releases as a starting point — currently 2.1.x and 2.2.x — and from any other version it stops without changing anything.
+It is a real migration rather than an image swap: Pro adds a Valkey service to your compose file and needs a one-off schema promote (`npm run db:promote`). The promote accepts only certain Community releases as a starting point — currently 2.1.x, 2.2.x and 2.3.x — and from any other version it stops without changing anything.
 
 :::danger The upgrade is one-way
-There is no downgrade from Pro back to Community, and it cannot be improvised afterwards. Pro carries 90 schema migrations against Community's 21, and most of them have no counterpart in Community at all. Once the promote has run, the migration table lists entries for which no file exists in the Community codebase, and knex will refuse to run against it.
+There is no downgrade from Pro back to Community, and it cannot be improvised afterwards. Pro carries 91 schema migrations against Community's 23, and most of them have no counterpart in Community at all. Once the promote has run, the migration table lists entries for which no file exists in the Community codebase, and knex will refuse to run against it.
 
 Take a backup before you start, or try the upgrade on a copy of your instance.
 :::

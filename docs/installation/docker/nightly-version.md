@@ -12,9 +12,8 @@ This version **is not production-ready** and may result in data loss. Use at you
 
 ### Docker Compose
 
-[![](https://d207aa93qlcgug.cloudfront.net/1.95.5.qa/img/nav/docker-logo-loggedout.png)](https://hub.docker.com/r/meltyshev/planka)
-
-- Make sure you have [Docker](https://docs.docker.com/install/) and [Docker Compose](https://docs.docker.com/compose/install/) installed and operational.
+- Make sure you have [Docker](https://docs.docker.com/engine/install/) with the [Compose plugin](https://docs.docker.com/compose/install/) installed and operational.
+- The image is published at [ghcr.io/plankanban/planka](https://github.com/plankanban/planka/pkgs/container/planka).
 
 ## Steps to Install PLANKA (Nightly Version)
 
@@ -24,7 +23,7 @@ This version **is not production-ready** and may result in data loss. Use at you
    mkdir /opt/planka
    ```
 
-2. **Download the `docker-compose-dev.yml`**
+2. **Download the `docker-compose.yml`**
 
    ```bash
    curl -L https://raw.githubusercontent.com/plankanban/planka/master/docker-compose.yml -o /opt/planka/docker-compose.yml
@@ -45,7 +44,7 @@ This version **is not production-ready** and may result in data loss. Use at you
 
    Change the image tag to `nightly` by replacing `ghcr.io/plankanban/planka:latest` with `ghcr.io/plankanban/planka:nightly`.
 
-   Paste your generated **SECRET_KEY** and change the **BASE_URL**.
+   Paste your generated **SECRET_KEY** and change the **BASE_URL**. PLANKA warns on every start while the key is missing, too short or still the example value.
 
    > **Security note:** Ensure that your internal services are specified in the outgoing block list (`OUTGOING_BLOCKED_IPS` / `OUTGOING_BLOCKED_HOSTS`). By default, only `localhost` and `postgres` hostnames are blocked. If you are using S3 or other internal integrations, we recommend adding their hostnames to the blocked list as well.
 
@@ -79,5 +78,5 @@ Once the services are running, browse to **BASE_URL** and log in as **YOUR_ADMIN
 If you're not using Docker volumes and prefer to directly link folders (bind mounts), you'll need to adjust the permissions of those folders. This ensures that the default user running the Node.js application (usually called "node" with a user ID of 1000) can make changes to the files and folders inside. Run the following command to adjust the permissions:
 
 ```bash
-chown -R 1000:1000 /mnt/pat
+chown -R 1000:1000 /mnt/path
 ```

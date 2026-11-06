@@ -193,4 +193,4 @@ If you don't need the models at the end of the loop, you can instead just captur
 ```
 
 ## License
-This project is licensed under the AGPLv3 License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the AGPLv3 License - see the [LICENSE](https://github.com/hwelch-fle/plankapy/blob/master/LICENSE) file for details.

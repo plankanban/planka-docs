@@ -4,40 +4,79 @@ sidebar_position: 3
 
 # Run as a Service (Linux)
 
-To ensure PLANKA runs persistently across reboots, we use **PM2**, a process manager for Node.js applications.
+To keep a [manual installation](../installation/manual/debian-and-ubuntu.md) running across reboots, run it as a systemd service. If you already use PM2, see [below](#using-pm2). With Docker you do not need any of this: the container restarts on its own.
 
-### Step-by-Step Instructions
+## Using systemd
+
+1. **Create the Service**
+
+   Create `/etc/systemd/system/planka.service`:
+
+   ```ini
+   [Unit]
+   Description=PLANKA
+   After=network-online.target postgresql.service
+   Wants=network-online.target
+
+   [Service]
+   User=planka
+   WorkingDirectory=/var/www/planka
+   Environment=NODE_ENV=production
+   ExecStartPre=/usr/bin/node db/init.js
+   ExecStart=/usr/bin/node app.js --prod
+   Restart=on-failure
+   RestartSec=5
+
+   [Install]
+   WantedBy=multi-user.target
+   ```
+
+   For the nightly version, set `WorkingDirectory` to `/var/www/planka/server`. `db/init.js` applies pending database migrations on every start, so an update only needs a restart.
+
+2. **Enable and Start It**
+
+   ```bash
+   sudo systemctl daemon-reload
+   sudo systemctl enable --now planka
+   ```
+
+3. **Check It**
+
+   ```bash
+   systemctl status planka
+   journalctl -u planka -f
+   ```
+
+:::info
+Does your existing service use `npm start --prod` and fail after an npm update? npm 12 rejects that flag. Replace the `ExecStart` line with the one above, then run `sudo systemctl daemon-reload` and `sudo systemctl restart planka`.
+:::
+
+## Using PM2
 
 1. **Install PM2 Globally**
 
-    ```bash
-    sudo npm install pm2@latest -g
-    ```
+   ```bash
+   sudo npm install pm2@latest -g
+   ```
 
-2. **Navigate to the PLANKA Directory**
+2. **Start PLANKA as the `planka` User**
 
-    ```bash
-    cd /var/www/planka
-    ```
+   ```bash
+   sudo -i -u planka
+   cd /var/www/planka
+   pm2 start --name planka "npm run db:init && npm run start:prod"
+   ```
 
-3. **Start PLANKA with PM2**
+3. **Save the Process List**
 
-    ```bash
-    pm2 start --name "planka" "npm run db:init && npm start --prod"
-    ```
+   ```bash
+   pm2 save
+   ```
 
-    > This registers PLANKA as a PM2 process named `planka`.
+4. **Launch on Boot**
 
-4. **Configure PM2 to Launch on Boot**
+   ```bash
+   pm2 startup systemd
+   ```
 
-    ```bash
-    sudo env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd -u planka --hp /home/planka
-    ```
-
-5. **Save the Current PM2 Process List**
-
-    ```bash
-    pm2 save
-    ```
-
-Now PLANKA will automatically start after system reboots.
+   This prints a `sudo` command. Run it from an account that can use `sudo`.

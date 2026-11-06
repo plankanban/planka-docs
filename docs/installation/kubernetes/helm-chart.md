@@ -4,14 +4,15 @@ sidebar_position: 1
 
 # Helm Chart
 
-Thanks to [Chris-Greaves](https://github.com/Chris-Greaves) for the amazing work.
+The official chart is developed in the [PLANKA repository](https://github.com/plankanban/planka/tree/master/charts/planka). Thanks to [Chris-Greaves](https://github.com/Chris-Greaves) for the original work.
 
 ## Basic Usage
 
 1. **Add the Repo and Check Availability**
 
    ```bash
-   helm repo add planka http://plankanban.github.io/planka
+   helm repo add planka https://plankanban.github.io/planka/
+   helm repo update
    helm search repo planka
    ```
 
@@ -27,11 +28,13 @@ Thanks to [Chris-Greaves](https://github.com/Chris-Greaves) for the amazing work
    ```
 
    > **Note:** The command `openssl rand -hex 64` generates a random hexadecimal key for PLANKA. On Windows, you can use Git Bash to run that command.
+   >
+   > The chart version follows the application version, so `--version 2.3.1` installs PLANKA 2.3.1.
 
 3. **Access PLANKA via Port Forwarding**
 
    ```bash
-   kubectl port-forward $POD_NAME 3000:1337
+   kubectl port-forward deployment/planka 3000:1337
    ```
 
 ## Accessing Externally
@@ -105,6 +108,10 @@ It is recommended to create a `values.yaml` to simplify future upgrades and conf
    helm install planka planka/planka -f values.yaml
    ```
 
+## Base URL
+
+PLANKA only accepts websocket connections from the address the browser uses, so a wrong one gives you a blank page. The chart works it out: with an ingress, it uses the first host, over `https` when `ingress.tls` is set. Without one, it uses `defaultBaseUrl` (`http://localhost:3000`). To set it yourself, use `baseUrl`.
+
 ## Access PLANKA
 
 Once the services are running, browse to **planka.example.dev** and log in as **admin_email** with the password **admin_password**.
@@ -117,7 +124,7 @@ If you plan to host PLANKA in a production environment, here are some things to 
 - Generate your `secretkey` once and store it securely (e.g., in a vault or in the `values.yaml`) to ensure consistency during upgrades.
 - Specify a password for `postgresql.auth.password` to avoid issues with the PostgreSQL chart generating new passwords, which could lock you out of the data you've already stored. (See [this issue](https://github.com/bitnami/charts/issues/2061)).
 
-For any questions or concerns, feel free to [raise an issue](https://github.com/Chris-Greaves/planka-helm-chart/issues/new).
+For any questions or concerns, feel free to [raise an issue](https://github.com/plankanban/planka/issues/new).
 
 ## Known Issues
 

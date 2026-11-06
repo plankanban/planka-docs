@@ -20,9 +20,9 @@ The Docker version comes with a **pre-installed outgoing proxy**, which can be e
 
 ### System Requirements
 
-- PostgreSQL (tested with v16): https://www.postgresql.org/download/windows/
-- Node.js (tested with v22): https://nodejs.org/en/download/
-- Python (tested with v3.10): https://www.python.org/downloads/
+- PostgreSQL 15 or newer: https://www.postgresql.org/download/windows/
+- Node.js 24 or newer: https://nodejs.org/en/download/
+- Python 3.11 or newer: https://www.python.org/downloads/
 - Windows PowerShell **as Administrator**
 
 ## Install PLANKA (Nightly)
@@ -46,6 +46,7 @@ Install dependencies and build the client:
 npm install
 
 cd client
+$env:INDEX_FORMAT = "ejs"
 npm run build
 ```
 
@@ -60,7 +61,7 @@ New-Item -ItemType SymbolicLink -Path "C:\planka\server\public\logo512.png" -Tar
 New-Item -ItemType SymbolicLink -Path "C:\planka\server\public\manifest.json" -Target "C:\planka\client\dist\manifest.json"
 New-Item -ItemType SymbolicLink -Path "C:\planka\server\public\robots.txt" -Target "C:\planka\client\dist\robots.txt"
 New-Item -ItemType SymbolicLink -Path "C:\planka\server\public\assets" -Target "C:\planka\client\dist\assets"
-New-Item -ItemType SymbolicLink -Path "C:\planka\server\views\index.html" -Target "C:\planka\client\dist\index.html"
+New-Item -ItemType SymbolicLink -Path "C:\planka\server\views\index.ejs" -Target "C:\planka\client\dist\index.ejs"
 ```
 
 ### Configure Environment Variables
@@ -130,8 +131,12 @@ Username (optional): ...
 From the `server` directory, start PLANKA:
 
 ```powershell
-npm start --prod
+npm run start:prod
 ```
+
+:::info
+`npm run start:prod` is the command for production. `npm start` runs the development file watcher instead, and npm 12 rejects the `npm start --prod` that older guides used.
+:::
 
 ## Access PLANKA
 

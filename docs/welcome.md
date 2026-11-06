@@ -22,6 +22,7 @@ Choose the method that best fits your needs:
 
 - [Debian & Ubuntu](./installation/manual/debian-and-ubuntu.md)
 - [Windows](./installation/manual/windows.md)
+- [How to Update](./installation/manual/how-to-update.md)
 - [Nightly Version - Debian & Ubuntu](./installation/manual/nightly_version/debian-and-ubuntu.md)
 - [Nightly Version - Windows](./installation/manual/nightly_version/windows.md)
 
@@ -31,6 +32,7 @@ Choose the method that best fits your needs:
 - [Nightly Version](./installation/docker/nightly-version.md)
 - [How to Update](./installation/docker/how-to-update.md)
 - [Backup & Restore](./installation/docker/backup-and-restore.md)
+- [PostgreSQL Major Upgrade](./installation/docker/postgresql-upgrade.md)
 
 ### ☸️ Kubernetes
 
@@ -54,6 +56,7 @@ Choose the method that best fits your needs:
 ## ⚙️ Configuration
 
 - [Admin User](./configuration/admin-user.md)
+- [Environment Variables](./configuration/environment-variables.md)
 - [Customizing End User Terms](./configuration/customizing-end-user-terms.md)
 - [Run as a Service (Linux)](./configuration/run-as-a-service.md)
 - [Logging](./configuration/logging.md)

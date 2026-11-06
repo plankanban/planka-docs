@@ -4,62 +4,40 @@ sidebar_position: 4
 
 # Logging
 
-PLANKA supports exposing its internal log directory to the host machine via a shared Docker volume.
+PLANKA writes every log line to the console and to `logs/planka.log` below its working directory. The file is rotated at 10 MB and at most three files are kept, so you do not need `logrotate`.
 
-This feature is **disabled by default**.
+## Settings
 
-## Enable Host Log Access
+| Variable | Default | Description |
+| --- | --- | --- |
+| `LOG_LEVEL` | `warn` | One of `error`, `warn`, `info`, `http`, `verbose`, `debug`, `silly`, from least to most verbose. |
+| `LOG_FILE` | `logs/planka.log` | Where the log file is written. Set it to `none` for console output only. |
+| `LOG_STDERR_LEVELS` | empty | Comma-separated levels to write to stderr instead of stdout, for example `error,warn`. |
 
-To enable logging to the host, add the following volume entry under `services.planka.volumes` in your `docker-compose.yml`:
+## Docker
+
+Read the console output with:
+
+```bash
+docker compose logs -f planka
+```
+
+That is enough for most setups. If a log collector already reads it, set `LOG_FILE=none`, since the file is only a second copy.
+
+To get the log file on the host, for example for [Fail2ban](./security/fail2ban.md), add this under `services.planka.volumes` in your `docker-compose.yml`:
 
 ```yaml
 volumes:
   - ./logs/:/app/logs/
 ```
 
-- `./logs/` refers to the **host** machine.
-- `/app/logs/` refers to the **container**.
-
-This will create a `logs` directory next to your `docker-compose.yml` and map it to PLANKA's internal logging folder.
-
-> **Tip:** If logs aren't appearing, check file and folder permissions. You may need to `chown` or `chmod` the host directory appropriately.
-
-## Log Rotation
-
-Over time, logs can consume disk space. Use **logrotate** to automatically manage log size and retention.
-
-### Configure logrotate for PLANKA
-
-Create a file at `/etc/logrotate.d/planka` with the following content:
-
-```
-/path/to/planka/logs/planka.log {
-  daily
-  missingok
-  rotate 14
-  compress
-  delaycompress
-  notifempty
-  create 640 root adm
-  sharedscripts
-}
-```
-
-Be sure to replace `/path/to/planka/logs/planka.log` with your actual log file path on the host system.
-
-To apply changes:
+The container runs as uid 1000, so that user has to be able to write to the folder:
 
 ```bash
-sudo systemctl restart logrotate
+mkdir -p logs
+sudo chown -R 1000:1000 logs
 ```
 
-This setup will:
+## Manual Installation
 
-- Rotate logs **daily**
-- Keep the last **14** logs
-- Compress old logs to save space
-- Only rotate if the log is **not empty**
-
----
-
-Now your logs will be persisted on the host and managed efficiently.
+The log file is at `/var/www/planka/logs/planka.log`. With the [systemd service](./run-as-a-service.md), the console output is also available through `journalctl -u planka`.

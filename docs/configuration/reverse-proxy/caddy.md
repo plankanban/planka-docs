@@ -4,6 +4,10 @@ sidebar_position: 4
 
 # Caddy
 
+import TrustProxy from './_trust-proxy.mdx';
+
+<TrustProxy />
+
 Use this guide to configure **Caddy** as a reverse proxy for PLANKA.
 
 ### 1. Edit the Caddy Configuration
@@ -24,7 +28,7 @@ Replace placeholders with your actual email and domain:
 }
 
 your.domain.tld {
-    reverse_proxy http://localhost:3000 {
+    reverse_proxy http://localhost:1337 {
         header_up X-Forwarded-Proto {scheme}
     }
 }

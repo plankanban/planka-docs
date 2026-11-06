@@ -6,9 +6,8 @@ sidebar_position: 1
 
 ### Docker Compose
 
-[![](https://d207aa93qlcgug.cloudfront.net/1.95.5.qa/img/nav/docker-logo-loggedout.png)](https://hub.docker.com/r/meltyshev/planka)
-
-- Make sure you have [Docker](https://docs.docker.com/install/) and [Docker Compose](https://docs.docker.com/compose/install/) installed and operational.
+- Make sure you have [Docker](https://docs.docker.com/engine/install/) with the [Compose plugin](https://docs.docker.com/compose/install/) installed and operational.
+- The image is published at [ghcr.io/plankanban/planka](https://github.com/plankanban/planka/pkgs/container/planka).
 
 ## Steps to Install PLANKA
 
@@ -37,7 +36,7 @@ sidebar_position: 1
    nano docker-compose.yml
    ```
 
-   Paste your generated **SECRET_KEY** and change the **BASE_URL**.
+   Paste your generated **SECRET_KEY** and change the **BASE_URL**. PLANKA warns on every start while the key is missing, too short or still the example value.
 
    > **Security note:** Ensure that your internal services are specified in the outgoing block list (`OUTGOING_BLOCKED_IPS` / `OUTGOING_BLOCKED_HOSTS`). By default, only `localhost` and `postgres` hostnames are blocked. If you are using S3 or other internal integrations, we recommend adding their hostnames to the blocked list as well.
 
@@ -65,6 +64,8 @@ sidebar_position: 1
 ## Access PLANKA
 
 Once the services are running, browse to **BASE_URL** and log in as **YOUR_ADMIN_EMAIL** with the password **YOUR_ADMIN_PASSWORD**.
+
+Running it behind a [reverse proxy](../../configuration/reverse-proxy/nginx.md)? Set `TRUST_PROXY=true` as well. All settings are listed under [Environment Variables](../../configuration/environment-variables.md).
 
 ## Additional Info
 

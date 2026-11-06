@@ -18,6 +18,8 @@ If you are already running any `2.0.0-rc` version, see the **[migration guide fo
 Before proceeding, ensure you are running **>= 1.26.2** of PLANKA.
 
 If not, update to this version first.
+
+The latest PLANKA needs **Node.js 24 or newer**. Check with `node -v` and update it first if necessary.
 :::
 
 ## 1. Stop the Running Service
@@ -233,7 +235,7 @@ pm2 start planka
 ### If running directly
 
 ```bash
-npm start --prod
+npm run start:prod
 ```
 
 ## 13. Verify the Installation

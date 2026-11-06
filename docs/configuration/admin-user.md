@@ -36,12 +36,16 @@ DEFAULT_ADMIN_NAME=Demo Demo
 DEFAULT_ADMIN_USERNAME=demo
 ```
 
-After making changes, restart PLANKA.
-
-If you're using **PM2**:
+The variables are read when the database is initialized, so run that, then restart PLANKA:
 
 ```bash
-pm2 restart planka
+npm run db:init
+```
+
+With the [systemd service](./run-as-a-service.md), a restart does both:
+
+```bash
+sudo systemctl restart planka
 ```
 
 ## Docker Installation
@@ -76,7 +80,7 @@ docker compose up -d
 If you've used the **PLANKA Installer**, you can re-run it to modify admin credentials:
 
 ```bash
-bash /opt/planka_installer
+bash /opt/planka_installer.sh
 ```
 
 Then select:

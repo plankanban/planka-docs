@@ -4,28 +4,34 @@ sidebar_position: 4
 
 # Backup & Restore
 
-PLANKA comes with two scripts that allow for manual backup and restore when running PLANKA with `docker-compose.yml`.
+PLANKA comes with two example scripts for the stock `docker-compose.yml`. They do not fit other setups: with S3 storage or an external database, those have to be backed up on their own.
 
-Backups can be triggered with the `docker-backup.sh` script, which exports the database, user avatars, background images, and attachments into a single `.tgz` file.
+`docker-backup.sh` exports the database and the data volume (avatars, background images, attachments) into a single archive.
+
+:::danger
+Unless you encrypt it, the archive holds password hashes, active sessions, two-factor secrets, SMTP credentials and API keys in the clear. Treat it like a copy of the database.
+:::
 
 ### Backup Example
 
 ```bash
-$ ./docker-backup.sh
+$ BACKUP_PASSPHRASE='YOUR_PASSPHRASE' ./docker-backup.sh
 Exporting postgres database ... Success!
 Exporting data volume ... Success!
-Creating final tarball 2023-01-17T15-37-22Z-backup.tgz ... Success!
-Cleaning up temporary files and folders ... Success!
+Creating encrypted archive 2026-11-05T15-37-22Z-backup.tgz.enc ... Success!
+Cleaning up temporary files and directories ... Success!
 Backup Complete!
 ```
 
-The resulting backup can be restored using the `docker-restore.sh` script.
+Without `BACKUP_PASSPHRASE`, you get a plain `.tgz` and a warning. Keep the passphrase somewhere else: without it, the archive cannot be restored.
+
+The backup runs against the live instance, so the database and the files are captured moments apart. Stop the app first if you need a backup with no such gap.
 
 ### Restore Example
 
 ```bash
-$ ./docker-restore.sh 2023-01-17T15-37-22Z-backup.tgz
-Extracting tarball 2023-01-17T11-10-54Z-backup.tgz ... Success!
+$ BACKUP_PASSPHRASE='YOUR_PASSPHRASE' ./docker-restore.sh 2026-11-05T15-37-22Z-backup.tgz.enc
+Decrypting and extracting 2026-11-05T15-37-22Z-backup.tgz.enc ... Success!
 Importing postgres database ...
 
 [Many lines of postgres output]
@@ -33,8 +39,18 @@ Importing postgres database ...
 
 Success!
 Importing data volume ... Success!
-Cleaning up temporary files and folders ... Success!
+Cleaning up temporary files and directories ... Success!
 Restore complete!
+```
+
+Errors like `current user cannot be dropped` and `role "postgres" already exists` in the postgres output are expected and harmless.
+
+### Container Names
+
+The scripts expect the containers `planka-postgres-1` and `planka-planka-1`, which is what you get when the compose file is in a folder called `planka`. For anything else, set the names:
+
+```bash
+DOCKER_CONTAINER_POSTGRES=myproject-postgres-1 DOCKER_CONTAINER_PLANKA=myproject-planka-1 ./docker-backup.sh
 ```
 
 ## Automate Backups
@@ -51,6 +67,8 @@ Restore complete!
    curl -L https://raw.githubusercontent.com/plankanban/planka/master/docker-backup.sh -o /opt/planka/backup/backup.sh
    curl -L https://raw.githubusercontent.com/plankanban/planka/master/docker-restore.sh -o /opt/planka/backup/restore.sh
    ```
+
+   The crontab holds your passphrase, so keep it readable for its owner only, which is the default.
 
 ### With Logging
 
@@ -69,19 +87,19 @@ Restore complete!
    **Create a Backup Every Night at 2 AM:**
 
    ```bash
-   0 2 * * * cd /opt/planka/backup && bash /opt/planka/backup/backup.sh > /opt/planka/backup/logs/`date +\%Y\%m\%d\%H\%M`-backup.log 2>&1
+   0 2 * * * cd /opt/planka/backup && BACKUP_PASSPHRASE='YOUR_PASSPHRASE' bash /opt/planka/backup/backup.sh > /opt/planka/backup/logs/`date +\%Y\%m\%d\%H\%M`-backup.log 2>&1
    ```
 
    **Delete Backups Older Than 14 Days:**
 
    ```bash
-   0 2 * * * find /opt/planka/backup/*.tgz -mindepth 1 -mtime +14 -delete > /opt/planka/backup/logs/`date +\%Y\%m\%d\%H\%M`-delete-backup.log 2>&1
+   0 2 * * * find /opt/planka/backup -maxdepth 1 -name '*.tgz*' -mtime +14 -delete > /opt/planka/backup/logs/`date +\%Y\%m\%d\%H\%M`-delete-backup.log 2>&1
    ```
 
    **Delete Log Files Older Than 14 Days:**
 
    ```bash
-   0 2 * * * find /opt/planka/backup/logs/*.log -mindepth 1 -mtime +14 -delete > /dev/null 2>&1
+   0 2 * * * find /opt/planka/backup/logs -name '*.log' -mtime +14 -delete > /dev/null 2>&1
    ```
 
    Your crontab should look like this:
@@ -92,9 +110,9 @@ Restore complete!
    #
    # m h  dom mon dow   command
 
-   0 2 * * * cd /opt/planka/backup && bash /opt/planka/backup/backup.sh > /opt/planka/backup/logs/`date +\%Y\%m\%d\%H\%M`-backup.log 2>&1
-   0 2 * * * find /opt/planka/backup/*.tgz -mtime +14 -delete > /opt/planka/backup/logs/`date +\%Y\%m\%d\%H\%M`-delete-backup.log 2>&1
-   0 2 * * * find /opt/planka/backup/logs/*.log -mindepth 1 -mtime +14 -delete > /dev/null 2>&1
+   0 2 * * * cd /opt/planka/backup && BACKUP_PASSPHRASE='YOUR_PASSPHRASE' bash /opt/planka/backup/backup.sh > /opt/planka/backup/logs/`date +\%Y\%m\%d\%H\%M`-backup.log 2>&1
+   0 2 * * * find /opt/planka/backup -maxdepth 1 -name '*.tgz*' -mtime +14 -delete > /opt/planka/backup/logs/`date +\%Y\%m\%d\%H\%M`-delete-backup.log 2>&1
+   0 2 * * * find /opt/planka/backup/logs -name '*.log' -mtime +14 -delete > /dev/null 2>&1
    ```
 
 ### Without Logging
@@ -108,13 +126,13 @@ Restore complete!
    **Create a Backup Every Night at 2 AM:**
 
    ```bash
-   0 2 * * * cd /opt/planka/backup && bash /opt/planka/backup/backup.sh > /dev/null 2>&1
+   0 2 * * * cd /opt/planka/backup && BACKUP_PASSPHRASE='YOUR_PASSPHRASE' bash /opt/planka/backup/backup.sh > /dev/null 2>&1
    ```
 
    **Delete Backups Older Than 14 Days:**
 
    ```bash
-   0 2 * * * find /opt/planka/backup/*.tgz -mindepth 1 -mtime +14 -delete > /dev/null 2>&1
+   0 2 * * * find /opt/planka/backup -maxdepth 1 -name '*.tgz*' -mtime +14 -delete > /dev/null 2>&1
    ```
 
    Your crontab should look like this:
@@ -125,8 +143,8 @@ Restore complete!
    #
    # m h  dom mon dow   command
 
-   0 2 * * * cd /opt/planka/backup && bash /opt/planka/backup/backup.sh > /dev/null 2>&1
-   0 2 * * * find /opt/planka/backup/*.tgz -mtime +14 -delete > /dev/null 2>&1
+   0 2 * * * cd /opt/planka/backup && BACKUP_PASSPHRASE='YOUR_PASSPHRASE' bash /opt/planka/backup/backup.sh > /dev/null 2>&1
+   0 2 * * * find /opt/planka/backup -maxdepth 1 -name '*.tgz*' -mtime +14 -delete > /dev/null 2>&1
    ```
 
 ## Restoring a Backup
@@ -146,13 +164,19 @@ Please ensure that you are restoring the correct backup.
 2. **List All Backups**
 
    ```bash
-   ls *.tgz
+   ls *.tgz*
    ```
 
 3. **Copy the Name of the Backup You Want to Restore and Run the Restore Script**
 
    ```bash
    bash restore.sh the_name_of_your_backup.tgz
+   ```
+
+   For an encrypted archive:
+
+   ```bash
+   BACKUP_PASSPHRASE='YOUR_PASSPHRASE' bash restore.sh the_name_of_your_backup.tgz.enc
    ```
 
 ---

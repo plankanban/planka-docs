@@ -4,6 +4,10 @@ sidebar_position: 1
 
 # Nginx
 
+import TrustProxy from './_trust-proxy.mdx';
+
+<TrustProxy />
+
 ## Configuration Sample
 
 Below is an example configuration for running PLANKA behind an **Nginx reverse proxy**. Replace `<domain>` with your actual domain name, and be sure to configure SSL separately (e.g., via Let's Encrypt).
@@ -29,7 +33,7 @@ server {
         client_max_body_size 50M;
         proxy_set_header Host $http_host;
         proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-For $remote_addr;
         proxy_set_header X-Forwarded-Proto $scheme;
         proxy_set_header X-Frame-Options SAMEORIGIN;
         proxy_buffers 256 16k;
@@ -48,7 +52,7 @@ server {
         proxy_set_header Connection "";
         proxy_set_header Host $http_host;
         proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-For $remote_addr;
         proxy_set_header X-Forwarded-Proto $scheme;
         proxy_set_header X-Frame-Options SAMEORIGIN;
         proxy_buffers 256 16k;
@@ -66,5 +70,6 @@ server {
 
 ## Notes
 
+- `X-Forwarded-For` is set to `$remote_addr` on purpose. PLANKA trusts this header, so forwarding what the client sent would let it fake its address and get around the sign-in limits. If there is another proxy in front of Nginx, configure [`real_ip`](https://nginx.org/en/docs/http/ngx_http_realip_module.html) to resolve the client address first.
 - SSL is **not included** in this configuration. For production, it is strongly recommended to use HTTPS.
 - Consider redirecting HTTP to HTTPS and setting up SSL with Let's Encrypt and `certbot`.
