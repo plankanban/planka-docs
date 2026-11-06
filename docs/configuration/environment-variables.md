@@ -67,10 +67,19 @@ These variables can be read from a file by adding `__FILE` to the name, which is
 | Variable | Description |
 | --- | --- |
 | `OUTGOING_PROXY` | Sends all outgoing HTTP requests (SMTP, webhooks, Apprise notifications, favicon fetching) through this proxy. |
-| `OUTGOING_BLOCKED_IPS`, `OUTGOING_BLOCKED_HOSTS` | **Docker only.** Always blocked by the built-in proxy, highest priority. |
-| `OUTGOING_ALLOWED_IPS`, `OUTGOING_ALLOWED_HOSTS` | **Docker only.** When set, only these are reachable. |
+| `OUTGOING_BLOCKED_IPS`, `OUTGOING_BLOCKED_HOSTS` | Always blocked, highest priority. |
+| `OUTGOING_ALLOWED_IPS`, `OUTGOING_ALLOWED_HOSTS` | When set, only these are reachable. |
 
-The Docker image starts its built-in proxy when `OUTGOING_PROXY` is not set.
+The Docker image enforces these rules with a built-in proxy, which it starts when `OUTGOING_PROXY` is not set. Its default is `OUTGOING_BLOCKED_HOSTS=localhost,postgres`.
+
+### Apprise Services Without HTTP
+
+Apprise notification services that do not use HTTP, such as email, syslog and IRC, do not go through a proxy. PLANKA applies the same rules to them itself and checks the address each connection resolves to. This covers Apprise only, not email configured with `SMTP_*`.
+
+Outside Docker there is no built-in proxy, so these services are all the rules cover. Everything else, such as webhooks, needs your own `OUTGOING_PROXY` or firewall rules.
+
+- Host lists are resolved once each time notifications are sent. A name that does not resolve is ignored, and subdomain rules with a leading dot (`.example.com`) have no effect here.
+- Your own `OUTGOING_PROXY` turns off the default rules. Rules you set yourself still apply to these services.
 
 ## Notifications
 
